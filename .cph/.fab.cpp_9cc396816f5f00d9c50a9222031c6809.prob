@@ -1,0 +1,1 @@
+{"name":"Local: fab","url":"c:\\Users\\sayem\\source\\fab.cpp","tests":[{"id":1658855124151,"input":"2\nsayem 20 fahim\n45","output":"fahim 45\nsayem 20"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\fab.cpp","group":"local","local":true}

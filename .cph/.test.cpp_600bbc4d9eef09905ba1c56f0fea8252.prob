@@ -1,0 +1,1 @@
+{"name":"Local: test","url":"c:\\Users\\sayem\\source\\test.cpp","tests":[{"id":1658923615113,"input":"3\n((()))\n[]\n][[]]","output":"YES\nYES\nNO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\test.cpp","group":"local","local":true}
