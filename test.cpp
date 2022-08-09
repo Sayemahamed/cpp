@@ -6,6 +6,6 @@ int main()
     cin >> n;
     while   (n--)
     {
-        
+        cout<<n;
     }
 }
