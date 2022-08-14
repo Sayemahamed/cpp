@@ -20,8 +20,9 @@ int main()
             if(arr[m]%y>0)count++;
         }
         else
-        while (n--)
+        while (true)
         {
+            if(arr[m]-y*count==0)break;
             if(l==0)break;
             if(arr[l]>0)
             {
