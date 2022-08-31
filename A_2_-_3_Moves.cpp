@@ -8,7 +8,7 @@ int main()
     {
         long long  n;
         cin>>n;
-         if(n<0){
+        if(n<0){
             n=n*(-1);
         }
         r=n%3;
@@ -20,7 +20,7 @@ int main()
         }
         else if(n%2==0 && n>0 && n<=10)
         res=n/2;
-       else  if(r==1)
+        else  if(r==1)
         {
             res=n/3+2;
 
@@ -29,6 +29,5 @@ int main()
             res=n/3+1;
         }
     cout<<res<<endl;
-     
-        }
+    }
 }
