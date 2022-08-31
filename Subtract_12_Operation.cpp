@@ -1,28 +1,24 @@
 #include<bits/stdc++.h>
+#define int long long
 using namespace std;
-int main()
-{
-    long long t;
-    cin>>t;
-    while(t--)
-    {
-        long long n,sum=0;
-        cin>>n;
-        long long arr[(int)n];
-        for(int i=0;i<n;i++)cin>>arr[i];
-        for(int i=n-1;i>1;--i)
-        {
-            long long x=arr[i]/2;
-            if(arr[i]>0)
-            {
-            arr[i-1]-=x;
-            arr[i]=arr[i]%2;
-            }
-        }
-        for(int i=0;i<n;i++)
-        {
-            sum+=abs(arr[i]);
-        }
-        cout<<  sum << endl;
+int n,a[200001],s;
+void solve() {
+  cin >> n;s=0;
+  for(int i=1;i<=n;++i) cin >> a[i];
+  for(int i=n;i>1;--i)
+    if(a[i]>0) {
+      a[i-1]-=a[i]/2;
+      a[i]=a[i]%2;
+      if(a[i]==1&&(a[i-1]%2==1||((i==2)&&a[1]>0))) {
+        a[i]=-1;
+        a[i-1]--;
+      }
     }
+  for(int i=1;i<=n;++i) s+=abs(a[i]);
+  cout << s << endl;
+}
+signed main() {
+  int T;
+  cin >> T;
+  while(T--) solve();
 }
