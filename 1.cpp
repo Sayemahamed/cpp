@@ -1,34 +1,34 @@
-#include<bits/stdC++.h>
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
-    map<int, int> ans;
-    stack<int>index;
-    vector<int>data;
-    int t;
+    map<long long,long long>Ans;
+    stack<long long>waiting_room;
+    vector<long long>data;
+    long long t;
     cin>>t;
-for(int i=0; i<t; i++)
-{
-    int x;
-    cin>>x;
-    data.push_back(x);
-}
-for(int i=0; i<t; i++)
-{
-    while(!index.empty()&&data[i]>data[index.top()])
+    for (long long i = 0; i < t; ++i)
     {
-        ans[index.top()] = data[i];
-        index.pop();
+        long long x;
+        cin>>x;
+        data.push_back(x);
     }
-    index.push(i);
-}
-while(index.size())
-{
-    ans[index.top()] = -1;
-    index.pop();
-}
-for(auto it :ans)
-{
-    cout << data[it.first] << " " << it.second << endl;
-}
+    for(long long i = 0; i < t; ++i)
+    {
+        while(!waiting_room.empty()&&data[i]>data[waiting_room.top()])
+        {
+            Ans[waiting_room.top()]=data[i];
+            waiting_room.pop();
+        }
+        waiting_room.push(i);
+    }
+    while(waiting_room.size())
+    {
+        Ans[waiting_room.top()]=-1;
+        waiting_room.pop();
+    }
+    for(auto it:Ans)
+    {
+        cout<<data[it.first]<<" "<<it.second<<endl;
+    }
 }
