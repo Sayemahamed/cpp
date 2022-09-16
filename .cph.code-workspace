@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".cph"
+		},
+		{
+			"path": ".vscode"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"numeric": "cpp",
+			"ostream": "cpp"
+		}
+	}
+}
