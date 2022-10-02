@@ -6,21 +6,31 @@ int main()
     cin>>t;
     while (t--)
     {
-        long long a;
-        cin>>a;
-        string s;
-        cin>>s;
-        for (long long i = a; i >-1; i--)
+        long long n ;
+        string num;
+        cin>>n;
+        vector<char>ans;
+        cin>>num;
+        // cout<<num<<endl;
+        for(long long i=num.length()-1; i>-1; i--)
         {
-            if(s.substr(i,s.length())=="0")
-            {
-                cout<<(s.substr(i-2,s.length()-2))<<endl;
-            s.erase(i-2,s.length());
-            i-=3;
-            }
+            if(num[i]!='0')
+            ans.push_back(num[i]-48+'a'-1);
+            // cout<<(char)(num[i]-'0'+'a');
             else
-            s.erase(i,s.length());
+            {
+                i--;
+                // cout<<(num[i]-49)+((num[i-1]-49)*10)+'a';
+                long long x=0;
+                x+=(num[i]-48);
+                x+=(num[--i]-48)*10+'a'-1;
+                ans.push_back((char)x);
+                // cout<<(char)((num[i]-'0')+(num[i-1]-'0')*10+'a');
+            }
         }
+        reverse(ans.begin(), ans.end());
+        for (auto it:ans)
+        cout<<it;
         cout<<endl;
     }
 }
