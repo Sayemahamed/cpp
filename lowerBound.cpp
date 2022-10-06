@@ -1,42 +1,42 @@
 #include<bits/stdc++.h>
 using namespace std;
-long long upper_bound(long long element,long long n,long long data[])
+const long long limit=1e5;
+long long elements[limit],number,element;
+long long lowerBound(long long element)
 {
-    long long left=0,right=n,mid;
-    while(right-left>1)
+    long long low=0,high=number,mid;
+    while(high-low>1)
     {
-        mid=(right+left)/2;
-        if(data[mid]<=element)
-        left=mid+1;
+        mid=(high+low)/2;
+        if(elements[mid]<element)
+        low=mid+1;
         else
-        right=mid;
+        high=mid;
     }
-    if(data[left]>element)return left;
-    if(data[right]>element)return right;
+    if(elements[low]>=element)return low;
+    if(elements[high]>=element)return high;
     return -1;
 }
-long long lower_bound(long long element,long long n,long long data[])
+long long upperBound(long long element)
 {
-    long long left= 0,right=n,mid;
-    while (right-left>1)
+    long long low=0,high=number,mid;
+    while(high-low>1)
     {
-        mid= (right+left)/2;
-        if(data[mid]<element)
-        left=mid+1;
-        else 
-        right=mid;
+        mid=(high+low)/2;
+        if(elements[mid]<=element)
+        low=mid+1;
+        else
+        high=mid;
     }
-    if(data[left]>=element)return left;
-    if(data[right]>=element)return right;
+    if(elements[low]>element)return low;
+    if(elements[high]>element)return high;
     return -1;
 }
 int main()
 {
-    long long n;
-    cin >> n;
-    long long data[n],element;
-    for (int i = 0; i < n; ++i)cin >> data[i];
-    cin >> element;
-    cout<<element<<"  "<<lower_bound(element,n,data)<<endl;
-    cout<<element<<"  "<<upper_bound(element,n,data)<<endl;
+    cin >>number;
+    for(long long i=0; i<number; ++i)cin >>elements[i];
+    cin >>element;
+    cout<<element<<"  "<<lowerBound(element)<<endl;
+    cout<<element<<"  "<<upperBound(element)<<endl;
 }

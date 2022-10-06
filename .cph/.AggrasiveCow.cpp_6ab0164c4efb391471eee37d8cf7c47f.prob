@@ -1,0 +1,1 @@
+{"name":"Local: AggrasiveCow","url":"c:\\Users\\sayem\\source\\cpp\\AggrasiveCow.cpp","tests":[{"id":1665066067372,"input":"1\n5 3\n1\n2\n8\n10\n18","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\cpp\\AggrasiveCow.cpp","group":"local","local":true}
