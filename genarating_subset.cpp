@@ -1,23 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector <char> datas;
-void generatingSubset(vector <char> &datas,string &s,int position)
+vector <char> dtat;
+void generatingSubset(vector <char> &dtat,string &s,int position)
 {
     if(s.length()==position)
     {
-        datas.push_back('\n');
-        for(auto &it:datas)cout<<it;
-        datas.clear();
+        dtat.push_back('\n');
+        for(auto &it:dtat)cout<<it;
+        dtat.clear();
         return;
     }
-    generatingSubset(datas,s,position+1);
-    datas.push_back(s[position]);
-    generatingSubset(datas,s,position+1);
-    datas.clear();
+    generatingSubset(dtat,s,position+1);
+    dtat.push_back(s[position]);
+    generatingSubset(dtat,s,position+1);
+    dtat.clear();
 }
 int main()
 {
     string s;
     cin >> s;
-    generatingSubset(datas,s,0);
+    generatingSubset(dtat,s,0);
 }
