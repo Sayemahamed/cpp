@@ -1,39 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-const long long limit=1e7;
-long long stalls,cow,stallPositions[limit];
+long long stallCount,cowCount,stallLocations[100000000];
 bool isPlaceAble(long long distance)
 {
-    long long initialPosition =-1,numCow=cow;
-    for (long long i=0; i<stalls; i++)
+    long long initialDistance = -1,cow=cowCount;
+    for (long long i=0; i<stallCount; i++)
     {
-        if((stallPositions[i]-initialPosition>=distance)||initialPosition==-1)
+        if (stallLocations[i] -initialDistance >=distance || initialDistance ==-1)
         {
-            numCow --;
-            initialPosition =stallPositions[i];
+            cow--;
+            initialDistance=stallLocations[i];
         }
-        if(!numCow)break;
+        if(cow<1)return true;
     }
-    return numCow<1;
+    return false;
 }
 int main()
 {
     long long test;
-    cin >> test;
+    cin>>test;
     while (test--) 
     {
-        cin >>stalls>> cow;
-        for(long long i=0; i<stalls; i++)cin >>stallPositions[i];
-        sort(stallPositions,stallPositions+stalls);
-        long long low=0,high=stalls,mid;
+        cin >>stallCount >>cowCount;
+        for (long long i = 0; i < stallCount; i++)cin>>stallLocations[i];
+        sort(stallLocations,stallLocations+stallCount);
+        long long low=0,high=1e9,mid;
         while(high-low>1)
         {
-            mid=(low+high)/2;
+            mid = (high+low)/2;
             if(isPlaceAble(mid))
-            low=mid;
+            low = mid;
             else
-            high=mid-1;
+            high = mid;
         }
-        if(isPlaceAble(high))cout<<high<<endl; else cout<<low<<endl;
+        if(isPlaceAble(high))cout <<high <<endl; else  cout<<low<<endl;
     }
 }

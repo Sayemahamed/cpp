@@ -11,5 +11,7 @@ long long Gcd(long long a, long long b)
 }
 int main()
 {
-    cout <<Gcd(4,0) <<endl;
+    long long a,b;
+    cin>>a>>b;
+    cout <<Gcd(a,b) <<endl;
 }
