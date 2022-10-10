@@ -11,7 +11,7 @@ int main()
         long long x;
         cin >> x ;
         long long low=0,high=numbers,mid;
-        while(high-low>0)ok
+        while(high-low>0)
         {
             mid=(low+high)/2;
             if(number[mid]<x)
