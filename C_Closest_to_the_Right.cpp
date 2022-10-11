@@ -10,6 +10,16 @@ int main()
     {
         long long x;
         cin >> x ;
-        cout<lower_bound(number, number+numbers, x) <<endl;
+        long long low=0,high=numbers,mid;
+        while(high-low>1)
+        {
+            mid=(low+high)>>1;
+            if(number[mid]<=x)
+            low=mid;
+            else
+            high=mid;
+            // if(number[mid]==x)break;
+        }
+        cout<<high<<endl;
     }
 }
