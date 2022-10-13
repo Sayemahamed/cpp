@@ -1,41 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
-long long number,numbers[100000],element;
+long long element,elementToFind;
+long long elements[1000000];
 long long lowerBound()
 {
-    long long low=0,high=number,mid;
-    while(high-low>1)
+    long long low = 0 ,high = element,mid;
+    while(high-low>0)
     {
-        mid=(low+high)/2;
-        if(numbers[mid]>=element)
+        mid = (high + low)>>1;
+        if(elements[mid] < elementToFind)
+        low=mid+1;
+        else
         high=mid;
-        else
-        low=mid;
     }
-    if(numbers[high]>=element)return high;
-    if(numbers[low]>=element)return low;
-    return -1;
+    if(low>=element) return -1;
+    return low;
 }
-long long upperBound()
+long long higherBound()
 {
-    long long low=0,high=number,mid;
-    while(high-low>1)
+    long long low=0,high=element,mid;
+    while(high-low>0)
     {
-        mid = (low+high)/2;
-        if(numbers[mid]>element)
-        high = mid;
+        mid=(high+low)>>1;
+        if(elements[mid] <= elementToFind)
+        low=mid+1;
         else
-        low = mid;
+        high=mid;
     }
-    if(numbers[high]>element)return high;
-    if(numbers[low]>element)return low;
-    return -1;
+    if(low>=element) return -1;
+    return low;
 }
 int main()
 {
-    cin >> number;
-    for (int i = 0; i < number; ++i) cin >> numbers[i];
     cin >> element;
-    cout<<element<<"  "<<lowerBound()<<endl;
-    cout<<element<<"  "<<upperBound()<<endl;
+    for (int i = 0; i < element; ++i)cin >> elements[i];
+    cin >> elementToFind;
+    cout<<elementToFind<<"  "<<lowerBound()<<endl; 
+    cout<<elementToFind<<"  "<<higherBound()<<endl; 
 }

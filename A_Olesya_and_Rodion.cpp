@@ -2,14 +2,25 @@
 using namespace std;
 int main()
 {
-    long long a,b;
-    cin >> a >> b;
-    if(b>(pow(10,a)-1))
-    cout<<-1<<endl;
-    else
-    {
-        long long x=pow(10,a)-1;
-        while(x%b)x--;
-        cout<<x<<endl;
+    long int x,y,n,i,t;
+    while(cin>>n>>t){
+        if(n==1&&t==10)
+            cout<<"-1\n";
+        else if(n>=2&&t==10)
+        {
+            for(i=1;i<n;i++){
+                cout<<"1";
+            }
+            cout<<"0\n";
+        }
+        else
+        {
+            for(i=1;i<=n;i++)
+            {
+                cout<<t;
+            }
+            cout<<endl;
+        }
     }
+    return 0;
 }
