@@ -1,23 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
+bool comp(pair<long long, long long> &a, pair<long long, long long> &b)
+{
+    return a.second < b.second;
+}
 int main()
 {
     long long test;
     cin >> test;
     while (test--)
     {
-        long long enemy;
+        long long enemy, ans = 0;
         cin >> enemy;
-        long long enemyHealth[enemy], enemyBlessing[enemy];
-        vector<set<long long, long long>> data;
+        vector<long long> dat(enemy);
+        vector<pair<long long, long long>> mainData;
         for (long long i = 0; i < enemy; i++)
-            cin >> enemyHealth[i];
+            cin >> dat[i];
         for (long long i = 0; i < enemy; i++)
         {
-            cin >> enemyBlessing[i];
-            data.push_back({enemyHealth[i], enemyBlessing[i]});
+            long long x;
+            cin >> x;
+            mainData.push_back({dat[i], x});
         }
-        sort(data.begin(), data.end());
-        cout << data.first << endl;
+        sort(mainData.begin(), mainData.end(), comp);
+        // for(auto&it: mainData)cout<<it.first<<" "<<it.second<<endl;
+        // cout    << endl;
+        for (long long i = 0; i < enemy; i++)
+        {
+            ans += mainData[i].first;
+            if(i!=enemy-1)
+            ans += (mainData[i].second);
+        }
+        cout << ans << endl;
     }
 }
