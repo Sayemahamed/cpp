@@ -1,29 +1,35 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
     long long test;
-    cin >> test; 
-    while(test--)
+    cin >> test;
+    while (test--)
     {
-        long long friends,food=0,ans=0,sum=0,j=0;
-        cin>> friends;
-        long long money[friends];
-        j=friends-1;
-        for(long long i=0; i<friends;i++)
+        long long friends,ans=0;
+        cin >> friends;
+        pair<long long, long long> data[friends];
+        vector<long long> credit;
+        for (auto &it : data)
+            cin >> it.first;
+        for (auto &it : data)
+            cin >> it.second;
+        for (long long i = 0; i < friends; i++)
         {
-            long long x;
-            cin >> x;
-            food += x;
+            credit.push_back( data[i].second - data[i].first);
         }
-        for (auto &&it : money)
+        sort(credit.begin(), credit.end());
+        // for (auto &it : credit)
+        //     cout << it << ' ';
+        // cout<< endl;
+        long long mid=lower_bound(credit.begin(),credit.end(),0)-credit.begin();
+        if(mid==0)
+        {cout<<(friends>>1)<<endl;continue;}
+        else if(mid==friends-1)
+        {cout<<0<<endl;continue;}
+        else 
         {
-            cin >> it;
         }
-        sort(money,money +friends);
-        for(long long i=0; i<friends;i++)
-        {
-            
-        }
+        // cout << mid << endl;
     }
 }

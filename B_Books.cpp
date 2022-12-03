@@ -2,18 +2,21 @@
 using namespace std;
 int main()
 {
-    long long books,tiMe,ans=INT64_MIN,j=0,sum=0;
-    cin>>books>>tiMe;
-    long long book[books];
-    for(auto&it:book)cin>>it;
-    for(long long i=0;i<books;i++)
+    long long books,tim,ans=0,sum=0,j=0;
+    cin>>books>>tim;
+    vector<long long>data(books);
+    for (auto &&it : data)
     {
-        while(j<books and sum+book[j]<=tiMe)
+        cin >>it;   
+    }
+    for (long i = 0; i < books; i++)
+    {
+        while (j<books and data[i]+sum<tim)
         {
-            sum+=book[j];
+            sum += data[j];
             j++;
         }
-        sum-=book[i];
+        sum-=data[i];
         ans=max(ans,j-i);
     }
     cout<<ans<<endl;
