@@ -1,31 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
-const long long MX = 1e6;
-long long card[MX], Index[MX];
 int main()
 {
     long long test;
     cin >> test;
     while (test--)
     {
-        long long numberOfCard;
-        cin >> numberOfCard;
-        for (long long i = 1; i <= numberOfCard; i++)
+        long long cardNumber;
+        cin >> cardNumber;
+        vector<long long> cards(cardNumber + 1), index(cardNumber + 1);
+        for (long long i = 1; i <= cardNumber; i++)
         {
-            cin >> card[i];
-            Index[card[i]] = i;
+            cin >> cards[i];
+            index[cards[i]] = i;
         }
-        for (long long i = numberOfCard; i > 0; i--)
+        for (long long i = cardNumber; i >= 0; i--)
         {
-            if (Index[i])
-                for (long long j = Index[i]; j <= numberOfCard; j++)
+            if (index[i])
+                for (long long j = index[i]; j <= cardNumber; j++)
                 {
-                    if (Index[card[j]])
+                    if (index[cards[j]])
                     {
-                        cout << card[j] << ' ';
-                        Index[card[j]] = false;
+                        cout << cards[j] << " ";
+                        index[cards[j]] = false;
                     }
-                    else break;
+                    else
+                        break;
                 }
         }
         cout << endl;

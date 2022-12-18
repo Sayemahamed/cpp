@@ -1,23 +1,23 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
-    long long books,tim,ans=0,sum=0,j=0;
-    cin>>books>>tim;
-    vector<long long>data(books);
-    for (auto &&it : data)
+    long long books, tiMe, ans = 0, j = 0, sum = 0;
+    cin >> books >> tiMe;
+    long long book[books];
+    for (auto &&it : book)
     {
-        cin >>it;   
+        cin >> it;
     }
-    for (long i = 0; i < books; i++)
+    for (long long i = 0; i < books; ++i)
     {
-        while (j<books and data[i]+sum<tim)
+        while (j < books and sum + book[j] <= tiMe)
         {
-            sum += data[j];
+            sum += book[j];
             j++;
         }
-        sum-=data[i];
-        ans=max(ans,j-i);
+        sum-=book[i];
+        ans= max(ans,j-i);
     }
     cout<<ans<<endl;
 }

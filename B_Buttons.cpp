@@ -1,8 +1,8 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
     long long n;
-    cin >>  n;
-    cout<<(1<<n)-1;
+    cin >> n;
+    cout << ((n * n * n - n) / 6) + n << endl;
 }

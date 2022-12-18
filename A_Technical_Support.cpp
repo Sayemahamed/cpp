@@ -1,26 +1,21 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
     long long test;
-    cin >> test;
-    while (test--)
+    cin >> test; 
+    while   (test--)
     {
-        long long a, qCount = 0;
-        cin >> a;
-        string s;
-        cin >> s;
-        // cout <<s<< endl;
-        for (auto &it : s)
+        long long size ,qCount=0;
+        cin >> size;
+        char s;
+        while (size --)
         {
-            if (it == 'Q')
-                qCount++;
-            else
-                qCount--;
+            cin >> s;
+            if (s == 'Q') qCount++;
+            else if(qCount)qCount--;
         }
-        if (qCount <= 0)
-            cout << "No" << endl;
-        else
-            cout << "Yes" << endl;
+        if(qCount)cout<<"No"<<endl;
+        else cout<<"Yes"<<endl;
     }
 }
