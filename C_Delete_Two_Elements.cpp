@@ -1,37 +1,34 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
     long long test;
-    cin >> test;
-    while (test--)
+    cin>>test;
+    while(test--)
     {
-        long long siz, tot = 0;
-        cin >> siz;
-        vector<long long> dat(siz);
-        for (auto &i : dat)
-            cin >> i, tot += i;
-        if ((tot * 2) % siz != 0)
+        long long elements,total=0;
+        cin>>elements;
+        vector<long long>dat(elements);
+        for(auto &it:dat)cin>>it,total+=it;
+        total<<=1;
+        if(total%elements!=0)
         {
-            cout << 0 << endl;
-            continue;
+            cout<<0<<endl;
         }
         else
         {
-            long long ans = 0, needed = (tot * 2) / siz;
-            map<long long, long long> datM;
-            for (auto &it : dat)
-                datM[it]++;
-            for (auto &it : dat)
+            long long ans=0,need=total/elements;
+            map<long long, long long>datM;
+            for(auto &it:dat)datM[it]++;
+            for(auto &it:dat)
             {
-                if (datM.find(needed - it) != datM.end())
+                if(datM.find(need-it)!=datM.end())
                 {
-                    ans += datM[needed - it];
-                    if (needed == it * 2)
-                        ans--;
+                    ans+=datM[need-it];
+                    if(it*2==need)ans--;
                 }
             }
-            cout << (ans >> 1) << endl;
+            cout<<(ans>>1)<<endl;
         }
     }
 }

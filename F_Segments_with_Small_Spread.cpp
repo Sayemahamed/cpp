@@ -1,37 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
-map<long long, long long> span;
-void add(long long j, vector<long long> &dat)
+map<long long, long long> dat;
+void add(long long j, vector<long long> &dta)
 {
-    span[dat[j]]++;
+    dat[dta[j]]++;
 }
-void remove(long long i, vector<long long> &dat)
+void remove(long long i, vector<long long> &dta)
 {
-    span[dat[i]]--;
-    if (span[dat[i]] <= 0)
+    dat[dta[i]]--;
+    if (dat[dta[i]] <= 0)
     {
-        span.erase(span.find(dat[i]));
+        dat.erase(dat.find(dta[i]));
     }
 }
 int main()
 {
-    long long siz, upperLimit, j = 1, ans = 0;
-    cin >> siz >> upperLimit;
-    vector<long long> dat(siz);
-    for (auto &it : dat)
-    {
+    long long size, upper, ans = 0, j = 0;
+    cin >> size >> upper;
+    vector<long long> dta(size);
+    for (auto &it : dta)
         cin >> it;
-    }
-    add(0, dat);
-    for (long long i = 0; i < siz; i++)
+    for (long long i = 0; i < size; i++)
     {
-        while (span.rbegin()->first - span.begin()->first <= upperLimit and j < siz)
-            add(j++, dat);
-        if (span.rbegin()->first - span.begin()->first > upperLimit and j < siz)
-            remove(i, dat);
-        if (span.rbegin()->first - span.begin()->first <= upperLimit)
-            ans += j - i;
-        remove(i, dat);
+        if (dat.empty() and j < size)
+            add(j++, dta);
+        while (dat.rbegin()->first - dat.begin()->first <= upper and abs(dat.rbegin()->first - dta[j]) <= upper and abs(dat.begin()->first - dta[j]) <= upper and j < size)
+            add(j++, dta);
+        ans += j - i;
+        remove(i, dta);
     }
     cout << ans << endl;
 }
