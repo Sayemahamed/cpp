@@ -5,14 +5,11 @@ int main()
     long long a, b, c, needA, needB, needC, extra = 0, need = 0;
     cin >> a >> b >> c >> needA >> needB >> needC;
     if (needA < a)
-        extra += a - needA;
-    extra >>= 1;
+        extra += (a - needA)>>1;
     if (needB < b)
-        extra += b - needB;
-    extra >>= 1;
+        extra += (b - needB)>>1;
     if (needC < c)
-        extra += c - needC;
-    extra >>= 1;
+        extra += (c - needC)>>1;
     if (needA > a)
         need += needA - a;
     if (needB > b)
@@ -20,7 +17,7 @@ int main()
     if (needC > c)
         need += needC - c;
     if (need > extra)
-        cout << "NO" << endl;
+        cout << "No" << endl;
     else
-        cout << "YES" << endl;
+        cout << "Yes" << endl;
 }

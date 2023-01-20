@@ -1,47 +1,87 @@
 #include <bits/stdc++.h>
 using namespace std;
-class chainList
+// Generic Node Class
+template <typename T>
+class Node
 {
 public:
-    long long element = 0;
-    chainList *point = NULL;
-    chainList(long long element)
+    T data;
+    Node *point;
+    Node();
+    Node(T data)
     {
-        this->element = element;
-        point = NULL;
-    }
-    chainList()
-    {
-        this->element = 0;
+        this->data = data;
         this->point = NULL;
     }
-    void pnt()
+};
+// End of Generic Node Class
+
+// Link list of nodes
+template <typename T>
+class ChainNode
+{
+public:
+    Node<T> *start = NULL;
+    void add(T data)
     {
-        chainList *tempPoint = point;
-        while (tempPoint != NULL)
-        {
-            cout << this->element << ' ';
-            tempPoint = tempPoint->point;
-        }
-            cout << tempPoint->element << ' ';
-    }
-    void add(long long element)
-    {
-        if (this->element == 0)
-            this->element = element;
+        if (start == NULL)
+            start = new Node<T>(data);
         else
         {
-            chainList *tempPoint = this->point;
-            while (tempPoint != NULL)
-                tempPoint = tempPoint->point;
-            tempPoint->element = element;
+            Node<T> *temp = start;
+            while (temp->point != NULL)
+                temp = temp->point;
+            temp->point = new Node<T>(data);
         }
     }
+    void traverse()
+    {
+        Node<T> *temp = start;
+        while (temp != NULL)
+        {
+            cout << temp->data << ' ';
+            temp = temp->point;
+        }
+    }
+    void removeElement(T dat)
+    {
+        if (start->data == dat)
+        {
+            start = start->point;
+            return;
+        }
+        Node<T> *temp = start;
+        Node<T> *nextPoint = start->point;
+        Node<T> *previousPoint;
+        while (temp != NULL and temp->data != dat)
+        {
+            previousPoint = temp;
+            temp = temp->point;
+            if (temp == NULL)
+            {
+                cout << "The Element does not exist" << endl;
+                return;
+            }
+            nextPoint = nextPoint->point;
+        }
+        previousPoint->point = nextPoint;
+    }
 };
+
 int main()
 {
-    chainList a(3);
-    a.add(1);
-    a.add(2);
-    a.pnt();
+    ChainNode<long long> chain;
+    chain.add(10);
+    // cout << chain.start->data << endl;
+    chain.add(20);
+    chain.add(20);
+    // cout << chain.start->data << endl;
+    chain.add(30);
+    // cout << chain.start->data << endl;
+    chain.traverse();
+    cout << endl;
+    chain.removeElement(10);
+    chain.traverse();
+    cout << endl;
+    chain.removeElement(40);
 }
