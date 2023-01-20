@@ -75,7 +75,7 @@ public:
             temp = temp->point;
             if (temp == NULL)
             {
-                cout << "The Element does not exist ,So inserted at last" << endl;
+                cout << "The Element does not exist , So inserted at last" << endl;
             }
         }
         New->point = temp->point;
