@@ -66,9 +66,23 @@ public:
         }
         previousPoint->point = nextPoint;
     }
+    void InsertElementAT(T data, T theElementAfter)
+    {
+        Node<T> *temp = start;
+        Node<T> *New = new Node<T>(data);
+        while (temp != NULL and temp->data != theElementAfter)
+        {
+            temp = temp->point;
+            if (temp == NULL)
+            {
+                cout << "The Element does not exist ,So inserted at last" << endl;
+            }
+        }
+        New->point = temp->point;
+        temp->point = New;
+    }
 };
 // End of Generic LinkList implementation
-
 
 int main()
 {
@@ -82,7 +96,10 @@ int main()
     // cout << chain.start->data << endl;
     chain.traverse();
     cout << endl;
-    chain.removeElement(10);
+    chain.InsertElementAT(50, 20);
+    chain.traverse();
+    cout << endl;
+    chain.removeElement(20);
     chain.traverse();
     cout << endl;
     chain.removeElement(40);
