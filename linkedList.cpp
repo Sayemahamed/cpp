@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-// Generic Node Class
+// Start Generic Node Class
 template <typename T>
 class Node
 {
@@ -16,7 +16,7 @@ public:
 };
 // End of Generic Node Class
 
-// Link list of nodes
+// Start of Generic LinkList Implementation
 template <typename T>
 class ChainNode
 {
@@ -67,6 +67,8 @@ public:
         previousPoint->point = nextPoint;
     }
 };
+// End of Generic LinkList implementation
+
 
 int main()
 {
