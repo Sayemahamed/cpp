@@ -1,19 +1,18 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
-    long long test;cin >> test;
-    while(test--)
+    long long test;
+    cin >> test;
+    while (test--)
     {
-        long long ans=0,a,b,n;
-        cin>>n>>a>>b;
+        long long siz, a, b, n;
+        cin >> siz >> a >> b;
         string s;
-        cin>>s;
-        if(b>a)
-        cout<<(a+b)*n<<endl;
-        else
-        {
-
-        }
+        cin >> s;
+        n = unique(s.begin(), s.end()) - s.begin();
+        n /= 2;
+        n++;
+        cout << siz * a + max(n * b, siz * b) << endl;
     }
 }

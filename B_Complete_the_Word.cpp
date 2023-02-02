@@ -1,30 +1,53 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+
 using namespace std;
+
+int a[27];
+
+bool check()
+{
+    for (int i = 0; i <= 25; i++)
+        if (a[i] >= 2)
+            return false;
+    return true;
+}
+
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
     string s;
     cin >> s;
-    char c='A';
-    map<char, long long> m;
-    for(auto&it:s)m[it]++;
-    if(m.size()+m['?']-1>=26)
+    if (s.size() < 26)
     {
-        for(long long i=0;i<s.length();i++)
-        {
-            if(s[i]=='?')
-            {
-                while(m.find(c)!=m.end() and m.size()<26)c++;
-                if(m.size()<26){
-                    s[i]=c;
-                    m[c]++;
-                }
-                else s[i]='Z';
-            }
-        }
-        cout<<s;
+        cout << -1;
+        exit(0);
     }
-    else cout<<-1;
+    for (int i = 25; i < s.size(); i++)
+    {
+        for (int l = 0; l < 27; l++)
+            a[l] = 0;
+        for (int j = i; j >= i - 25; j--)
+            a[s[j] - 'A']++;
+        if (check())
+        {
+            int m = 0;
+            while (a[m] > 0)
+                m++;
+            for (int j = i - 25; j <= i; j++)
+            {
+                if (s[j] == '?')
+                {
+                    s[j] = m + 'A';
+                    m++;
+                    while (a[m] > 0)
+                        m++;
+                }
+            }
+            for (int i = 0; i < s.size(); i++)
+                s[i] = (s[i] == '?' ? 'A' : s[i]);
+            cout << s;
+            exit(0);
+        }
+    }
+    cout << -1;
+    exit(0);
 }

@@ -10,6 +10,6 @@ int main()
     {
         long long x;
         cin >> x;
-        cout<<upper_bound(data.begin(),data.end(),x)-data.begin()<<endl;
+        cout<<lower_bound(data.begin(),data.end(),x)-data.begin()<<endl;
     }
 }
