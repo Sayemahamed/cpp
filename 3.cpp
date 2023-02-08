@@ -1,106 +1,34 @@
-#include <bits/stdc++.h>
-using namespace std;
-// Start Generic Node Class
-template <typename T>
-class Node
+#include<bits/stdc++.h>
+using namespace std; 
+//----------------------------------------------------------------//
+//helper functions//
+long long gcd(long long a, long long b)
 {
-public:
-    T data;
-    Node *point;
-    Node();
-    Node(T data)
-    {
-        this->data = data;
-        this->point = NULL;
-    }
-};
-// End of Generic Node Class
-
-// Start of Generic LinkList Implementation
-template <typename T>
-class ChainNode
+    if(b==0 or a==b)return abs(a);
+    return gcd(b,a%b);
+}
+auto Lcm=[](long long a, long long b){return a*(b/gcd(a,b));};
+//----------------------------------------------------------------//
+//solve function//
+void solve() 
 {
-public:
-    Node<T> *start = NULL;
-    void add(T data)
-    {
-        if (start == NULL)
-            start = new Node<T>(data);
-        else
-        {
-            Node<T> *temp = start;
-            while (temp->point != NULL)
-                temp = temp->point;
-            temp->point = new Node<T>(data);
-        }
-    }
-    void traverse()
-    {
-        Node<T> *temp = start;
-        while (temp != NULL)
-        {
-            cout << temp->data << ' ';
-            temp = temp->point;
-        }
-    }
-    void removeElement(T dat)
-    {
-        if (start->data == dat)
-        {
-            start = start->point;
-            return;
-        }
-        Node<T> *temp = start;
-        Node<T> *nextPoint = start->point;
-        Node<T> *previousPoint;
-        while (temp != NULL and temp->data != dat)
-        {
-            previousPoint = temp;
-            temp = temp->point;
-            if (temp == NULL)
-            {
-                cout << "The Element does not exist" << endl;
-                return;
-            }
-            nextPoint = nextPoint->point;
-        }
-        previousPoint->point = nextPoint;
-    }
-    void InsertElementAT(T data, T theElementAfter)
-    {
-        Node<T> *temp = start;
-        Node<T> *New = new Node<T>(data);
-        while (temp != NULL and temp->data != theElementAfter)
-        {
-            temp = temp->point;
-            if (temp == NULL)
-            {
-                cout << "The Element you want to insert after does not exist , So inserted at last" << endl;
-            }
-        }
-        New->point = temp->point;
-        temp->point = New;
-    }
-};
-// End of Generic LinkList implementation
+    long long a,b;cin >> a>>b;
+    cout<<gcd(a-b,b)<<endl;
+    cout<<Lcm(a,b)<<endl;
+}
 
+
+//----------------------------------------------------------------//
+//main function//
 int main()
 {
-    ChainNode<long long> chain;
-    chain.add(10);
-    // cout << chain.start->data << endl;
-    chain.add(20);
-    chain.add(20);
-    // cout << chain.start->data << endl;
-    chain.add(30);
-    // cout << chain.start->data << endl;
-    chain.traverse();
-    cout << endl;
-    chain.InsertElementAT(50, 20);
-    chain.traverse();
-    cout << endl;
-    chain.removeElement(20);
-    chain.traverse();
-    cout << endl;
-    chain.removeElement(40);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test=1;
+    cin>>test;
+    while (test--)
+    {
+        solve();
+    }
 }
