@@ -112,52 +112,29 @@ bool isVowel(char c)
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long n;
+char grid[2][111];
+bool depthFirstSearch(int row, int column)
+{
+    if(column==n-1  and grid[1][column]=='0')return true;
+    if (grid[0][column + 1] == '0' and column < n)
+        return (depthFirstSearch(0, column + 1));
+    if(grid[1][column + 1] == '0' and column < n)
+        return( depthFirstSearch(1, column + 1));
+    return false;
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz, qur, sum = 0, tmp = 0;
-    cin >> siz >> qur;
-    map<long long, long long> dat;
-    for (long long i = 1; i <= siz; i++)
-    {
-        long long x;
-        cin >> x;
-        sum += x;
-        dat[i] = x;
-    }
-    while (qur--)
-    {
-        long long x;
-        cin >> x;
-        if (x == 1)
-        {
-            long long i, y;
-            cin >> i >> y;
-            if (dat.count(i))
-            {
-                sum += y;
-                sum -= dat[i];
-                dat[i] = y;
-            }
-            else
-            {
-                sum -= tmp;
-                dat[i] = y;
-                sum += y;
-            }
-        }
-        else
-        {
-            long long y;
-            cin >> y;
-            dat.clear();
-            sum = siz * y;
-            tmp = y;
-        }
-        cout << sum << endl;
-    }
+    cin >> n;
+    for (long long i = 0; i < 2; i++)
+        for (long long j = 0; j < n; j++)
+            cin >> grid[i][j];
+    if (depthFirstSearch(0, 0) and grid[0][0] == '0')
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 //----------------------------------------------------------------//
@@ -168,7 +145,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

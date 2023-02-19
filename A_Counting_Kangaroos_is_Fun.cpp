@@ -5,16 +5,16 @@ int main()
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-	long long kangaroo, j = 0;
-	cin >> kangaroo;
-	vector<long long> dat(kangaroo);
-	for (auto &it : dat)
+	long long numberOfKangaroo, j = 0;
+	cin >> numberOfKangaroo;
+	vector<long long> sizeOfKangaroo(numberOfKangaroo);
+	for (auto &it : sizeOfKangaroo)
 		cin >> it;
-	sort(dat.begin(), dat.end());
-	for (long long i = 0; i < dat.size(); i++)
+	sort(sizeOfKangaroo.begin(), sizeOfKangaroo.end());
+	for (long long i = 0; i < numberOfKangaroo; i++)
 	{
-		if (dat[i] >= 2 * dat[j])
+		if (sizeOfKangaroo[i] >= 2 * sizeOfKangaroo[j])
 			j++;
 	}
-	cout << kangaroo - j << endl;
+	cout << numberOfKangaroo - min(j, numberOfKangaroo / 2) << endl;
 }

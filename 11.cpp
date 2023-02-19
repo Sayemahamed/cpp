@@ -2,7 +2,7 @@
 using namespace std;
 //----------------------------------------------------------------//
 // definitions //
-#define endl '\n'
+// #define endl '\n'
 #define PI (acos(-1.0))
 #define tan(a) tan(a)/(PI/180)
 #define sin(a) sin(a)/(PI/180)
@@ -26,7 +26,7 @@ template<typename T,typename Y>
 long long NCR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(R>1 and !(ans%R))ans/=R--; while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
 template<typename T,typename Y>
 long long NPR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
-void sieve(vector<bool>&ans){ans[0]=ans[1]=false; long long tmp=sqrt(ans.size()),till=ans.size();for(long long i=2;i<=tmp;i++)if(ans[i])for(long long j=i*i;j<till;j+=i)ans[j]=false;}
+void sieve(vector<bool>&ans){ans[0]=ans[1]=false; long long tmp=sqrt(ans.size()),till=ans.size();for(long long i=2;i<=tmp;i++)for(long long j=i*i;j<till;j+=i)ans[j]=false;}
 template<typename T>
 map<long long, long long> primeFactors(T N){map<long long, long long> ans;long long till = sqrt(N);for (long long i = 2; i <= till; i++){while (!(N % i)){ans[i]++;N /= i;}if (i >= N or i >= till)break;}if (N > 1)ans[N]++;return ans;}
 //number theory//
@@ -41,6 +41,9 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
+        std::vector<Point> givenPoints{ {2, 0},{0, 0}, {3, 1}, {-1, 1}};
+        // for(auto&it: givenPoints)cout<<getClockwiseAngle(it)<<" ";
+        cout<<atanh(-0.15);
 }
 
 //----------------------------------------------------------------//
@@ -51,7 +54,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

@@ -117,47 +117,29 @@ bool isVowel(char c)
 // solve function//
 void solve()
 {
-    long long siz, qur, sum = 0, tmp = 0;
-    cin >> siz >> qur;
-    map<long long, long long> dat;
-    for (long long i = 1; i <= siz; i++)
+    long long segments, theNumber, ans = 0, mx = 0, mxCount = 0;
+    cin >> segments >> theNumber;
+    map<long long, long long> tester;
+    while (segments--)
     {
-        long long x;
-        cin >> x;
-        sum += x;
-        dat[i] = x;
+        long long x, y;
+        cin >> x >> y;
+        if (x <= theNumber and theNumber <= y)
+            for (long long i = x; i <= y; i++)
+            {
+                tester[i]++;
+                mx = max(mx, tester[i]);
+            }
     }
-    while (qur--)
+    for (auto &it : tester)
     {
-        long long x;
-        cin >> x;
-        if (x == 1)
-        {
-            long long i, y;
-            cin >> i >> y;
-            if (dat.count(i))
-            {
-                sum += y;
-                sum -= dat[i];
-                dat[i] = y;
-            }
-            else
-            {
-                sum -= tmp;
-                dat[i] = y;
-                sum += y;
-            }
-        }
-        else
-        {
-            long long y;
-            cin >> y;
-            dat.clear();
-            sum = siz * y;
-            tmp = y;
-        }
-        cout << sum << endl;
+        if (it.second == mx)
+            mxCount++;
     }
+    if (tester[theNumber] == mx and mxCount == 1)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 //----------------------------------------------------------------//
@@ -168,7 +150,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

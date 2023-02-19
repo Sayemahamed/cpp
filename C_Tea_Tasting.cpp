@@ -41,6 +41,26 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
+    long long n;cin>>n;
+    vector<long long>tea(n),tester(n);
+    for(auto&it:tea)cin>>it;
+    for(auto&it:tester)cin>>it;
+    multiset<long long>dat;
+    long long drank=0;
+    for(long long i=0;i<n;i++)
+    {
+        long long ans=0;
+        dat.insert(tea[i]+drank);
+        while(!(dat.empty()) and (*dat.begin())-drank<=tester[i])
+        {
+            ans+=(*dat.begin()-drank);
+            dat.erase(dat.begin());
+        }
+        ans+=tester[i]*dat.size();
+        drank+=tester[i];
+        cout<<ans<<' ';
+    }
+    cout<<endl;
 }
 
 //----------------------------------------------------------------//

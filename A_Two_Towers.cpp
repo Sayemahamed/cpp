@@ -41,6 +41,14 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
+    long long x,y,cnt=0;cin>>x>>y;
+    string s1,s2;cin>>s1>>s2;
+    for(long long i = 0;i<s1.length()-1;i++)
+    if(s1[i]==s1[i+1])cnt++;
+    for(long long i = 0;i<s2.length()-1;i++)
+    if(s2[i]==s2[i+1])cnt++;
+    if(cnt>1 or(cnt==1 and s1[s1.length()-1]==s2[s2.length()-1]))cout<<"NO"<<endl;
+    else cout<<"YES"<<endl;
 }
 
 //----------------------------------------------------------------//

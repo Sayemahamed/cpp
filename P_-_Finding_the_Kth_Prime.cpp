@@ -11,6 +11,7 @@ using namespace std;
 //----------------------------------------------------------------//
 //data types//
 struct Point{float x, y;};
+vector<long long>anss;
 
 //----------------------------------------------------------------//
 // preDefined functions//
@@ -41,6 +42,8 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
+    long long n;cin>>n;
+    cout<<anss[n-1]<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -52,6 +55,9 @@ int main()
     cout.tie(NULL);
     long long test = 1;
     cin >> test;
+    vector<bool>tem(86028121+10,true);
+    sieve(tem);
+    for(long long i = 0;i<tem.size();i++)if(tem[i])anss.push_back(i);
     while (test--)
     {
         solve();
