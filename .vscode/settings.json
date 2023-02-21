@@ -6,7 +6,8 @@
         "cmath": "cpp",
         "array": "cpp",
         "string_view": "cpp",
-        "stacktrace": "cpp"
+        "stacktrace": "cpp",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

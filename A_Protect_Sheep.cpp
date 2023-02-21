@@ -1,9 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 //----------------------------------------------------------------//
-// definitions //
+// definitions //d
 #define endl '\n'
 #define PI (acos(-1.0))
+#define tan(a) tan(a)/(PI/180)
+#define sin(a) sin(a)/(PI/180)
+#define cos(a) cos(a)/(PI/180)
 
 //----------------------------------------------------------------//
 //data types//
@@ -32,29 +35,71 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-    long long n;
-inline bool isOk(long long i)
-{
-    return i >= 0 && i <n;
-}
-
+    long long row,column;
+string s[507];
+bool isVisited[507][507];
+    bool flag=false;bool isOk(int i,int j){
+        return i>=0 && j>=0 && i<row && j<column;
+    }
+    void depthFirstSearch(int i,int j){
+        if(isVisited[i][j]) return;
+        isVisited[i][j]=true;
+        if(s[i][j]=='W')
+        {
+            if(isOk(i+1,j))
+            {
+                if(s[i+1][j]=='.')
+                {s[i+1][j] = 'D';}
+                else if(s[i+1][j]=='S')flag=true;
+            }
+            if(isOk(i-1,j))
+            {
+                if(s[i-1][j]=='S')flag=true;
+                else if(s[i-1][j]=='.')
+                {
+                    s[i-1][j] ='D';
+                }
+            }
+            if(isOk(i,j+1))
+            {
+                if(s[i][j+1]=='S')flag = true;
+                else if(s[i][j+1]=='.')
+                {
+                    s[i][j+1] ='D';
+                }
+            }
+            if(isOk(i,j-1)){
+                if(s[i][j-1] == 'S')
+                flag= true;
+                else if(s[i][j-1] == '.')
+                {
+                    s[i][j-1] = 'D';
+                }
+            }
+        }
+            if(isOk(i+1,j))
+            depthFirstSearch(i+1,j);
+            if(isOk(i,j+1))
+            depthFirstSearch(i,j+1);
+    }
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long ans=0;
-    cin>>n;
-    string s1,s2;cin>>s1>>s2;
-    for(long long i = 0; i < n;i++)
-    {
-        if(s2[i]=='1')
+    cin>>row>>column;
+    for(int i=0; i<row; i++)
+    cin>>s[i];
+    depthFirstSearch(0,0);
+    if(flag)cout<<"No"<<endl;
+    else{
+        cout<<"YES"<<endl;
+        for(int i=0; i<row; i++)
         {
-            if(isOk(i-1))if(s1[i-1]=='1'){ans++;s1[i-1]='0';continue;}
-            if(isOk(i))if(s1[i]=='0'){ans++;continue;}
-            if(isOk(i+1))if(s1[i+1]=='1'){ans++;s1[i+1]='0';continue;}
+            for(int j=0; j<column; j++)
+            cout<<s[i][j];
+            cout<<endl;
         }
     }
-    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -65,7 +110,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

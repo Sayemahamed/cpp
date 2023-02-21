@@ -1,46 +1,143 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+//----------------------------------------------------------------//
+// definitions //
+#define endl '\n'
+#define PI (acos(-1.0))
+#define tan(a) tan(a) / (PI / 180)
+#define sin(a) sin(a) / (PI / 180)
+#define cos(a) cos(a) / (PI / 180)
 
-typedef long long ll;
+//----------------------------------------------------------------//
+// data types//
+struct Point
+{
+    float x, y;
+};
 
-#define forn(i, n) for (int i = 0; i < int(n); i++)
+//----------------------------------------------------------------//
+// preDefined functions//
+// geometry//
+double getClockwiseAngle(Point p)
+{
+    double angle = 0.0;
+    angle = -1 * atan2(p.x, -1 * p.y);
+    return angle;
+}
+bool comparePoints(Point p1, Point p2) { return getClockwiseAngle(p1) < getClockwiseAngle(p2); }
+double polygonArea(vector<Point> &points)
+{
+    double area = 0.0;
+    long long j = points.size() - 1;
+    for (long long i = 0; i < points.size(); i++)
+    {
+        area += (points[j].x + points[i].x) * (points[j].y - points[i].y);
+        j = i;
+    }
+    return abs(area / 2.0);
+}
+// geometry//
+// number theory //
+template <typename T>
+long long factorial(T N)
+{
+    long long ans = 1;
+    while (N > 1)
+        ans *= N--;
+    return ans;
+}
+template <typename T, typename Y>
+long long NCR(T N, Y R)
+{
+    long long ans = 1, tmp = N - R;
+    while (N > 1)
+    {
+        ans *= N--;
+        while (R > 1 and !(ans % R))
+            ans /= R--;
+        while (tmp > 1 and !(ans % tmp))
+            ans /= tmp--;
+    }
+    return ans;
+}
+template <typename T, typename Y>
+long long NPR(T N, Y R)
+{
+    long long ans = 1, tmp = N - R;
+    while (N > 1)
+    {
+        ans *= N--;
+        while (tmp > 1 and !(ans % tmp))
+            ans /= tmp--;
+    }
+    return ans;
+}
+void sieve(vector<bool> &ans)
+{
+    ans[0] = ans[1] = false;
+    long long tmp = sqrt(ans.size()), till = ans.size();
+    for (long long i = 2; i <= tmp; i++)
+        if (ans[i])
+            for (long long j = i * i; j < till; j += i)
+                ans[j] = false;
+}
+template <typename T>
+map<long long, long long> primeFactors(T N)
+{
+    map<long long, long long> ans;
+    long long till = sqrt(N);
+    for (long long i = 2; i <= till; i++)
+    {
+        while (!(N % i))
+        {
+            ans[i]++;
+            N /= i;
+        }
+        if (i >= N or i >= till)
+            break;
+    }
+    if (N > 1)
+        ans[N]++;
+    return ans;
+}
+// number theory//
+bool isVowel(char c)
+{
+    string vowel = "aeiouAEIOU";
+    for (auto &it : vowel)
+        if (it == c)
+            return true;
+    return false;
+}
 
-void solve() {
+//----------------------------------------------------------------//
+// helper functions //
 
+//----------------------------------------------------------------//
+// solve function//
+void solve()
+{
     string s;
     cin >> s;
-
-    int n = s.size();
-    map<char, vector<int>> let_to_ind;
-
-    for (int i = 0; i < n; ++i) {
-        let_to_ind[s[i]].push_back(i);
-    }
-
-    int direction = (s[0] < s[n - 1]) ? 1 : -1;
-    vector<int> ans;
-
-    for (char c = s[0]; c != s[n - 1] + direction; c += direction) {
-        for (auto now : let_to_ind[c]) {
-            ans.push_back(now);
-        }
-    }
-
-    int cost = 0;
-    for (int i = 1; i < ans.size(); i++)
-        cost += abs(s[ans[i]] - s[ans[i - 1]]);
-
-    cout << cost << " " << ans.size() << '\n';
-    for (auto now : ans) {
-        cout << now + 1 << " ";
-    }
-    cout << '\n';
+    vector<pair<char, int>> dat(s.length());
+    char start = s[0], end = s[s.length() - 1];
+    for (int i = 1; i <= s.length(); i++)
+        dat.push_back({s[i - 1], i});
+    sort(dat.begin(), dat.end());
+    for (long long)
 }
-int main() {
-    int tests;
-    cin >> tests;
-    forn(tt, tests) {
+
+//----------------------------------------------------------------//
+// main function//
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    cin >> test;
+    while (test--)
+    {
         solve();
     }
 }

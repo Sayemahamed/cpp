@@ -4,6 +4,9 @@ using namespace std;
 // definitions //
 #define endl '\n'
 #define PI (acos(-1.0))
+#define tan(a) tan(a)/(PI/180)
+#define sin(a) sin(a)/(PI/180)
+#define cos(a) cos(a)/(PI/180)
 
 //----------------------------------------------------------------//
 //data types//
@@ -32,29 +35,25 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-    long long n;
-inline bool isOk(long long i)
-{
-    return i >= 0 && i <n;
-}
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long ans=0;
-    cin>>n;
-    string s1,s2;cin>>s1>>s2;
-    for(long long i = 0; i < n;i++)
-    {
-        if(s2[i]=='1')
+    long long x;cin>>x;
+    if(x>45)cout<<-1<<endl;
+    else {
+        string s="";
+        for(long long i=9;i>0 and x>0;i--)
         {
-            if(isOk(i-1))if(s1[i-1]=='1'){ans++;s1[i-1]='0';continue;}
-            if(isOk(i))if(s1[i]=='0'){ans++;continue;}
-            if(isOk(i+1))if(s1[i+1]=='1'){ans++;s1[i+1]='0';continue;}
+            s+=(char)(min(i,x)+'0');
+            x-=i;
         }
+        for(int i=s.length()-1;i>=0;i--)
+        cout<<s[i];
+        cout<<endl;
     }
-    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
