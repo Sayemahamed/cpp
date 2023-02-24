@@ -21,6 +21,8 @@ double polygonArea(vector<Point> &points){double area = 0.0;long long j = points
 //geometry//
 //number theory //
 template<typename T>
+bool isPrime(T n){if(n<=1)return false;for (long long i=2;i*i<=n;++i){if(!(n%i))return false;}return true;}
+template<typename T>
 long long factorial(T N){ long long ans=1;while(N>1)ans*=N--;return ans;}
 template<typename T,typename Y>
 long long NCR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(R>1 and !(ans%R))ans/=R--; while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}

@@ -21,6 +21,8 @@ double polygonArea(vector<Point> &points){double area = 0.0;long long j = points
 //geometry//
 //number theory //
 template<typename T>
+bool isPrime(T n){if(n<=1)return false;for (long long i=2;i*i<=n;++i){if(!(n%i))return false;}return true;}
+template<typename T>
 long long factorial(T N){ long long ans=1;while(N>1)ans*=N--;return ans;}
 template<typename T,typename Y>
 long long NCR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(R>1 and !(ans%R))ans/=R--; while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
@@ -35,44 +37,46 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+long long n,winX,winY;
+bool board[1003][1003];
+bool isOk(int x, int y){return x>0 and y>0 and x<=n and y<=n;}
+bool dfs(int x,int y)
+{
+    if(board[x][y])return false;
+    board[x][y] = true;
+    if(x==winX && y==winY)return true;
+    for(int i =-1;i<=1;i++)
+    {
+        for(int j =-1;j<=1;j++)
+        if(isOk(x+i,y+j))
+        if(dfs(x+i,y+j))return true;
+    }
+    return false;
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,qur,sum=0,temp;cin>>siz>>qur;
-    map<long long,long long>dat;
-    for(long long i=1; i<=siz; i++)
+    cin>>n;
+    long long queenX,queenY,x,y;cin>>queenX>>queenY;
+    cin>>x>>y;
+    cin>>winX>>winY;
+    for(int i=1;i<=1000;i++)
     {
-        long long x;cin>>x;
-        dat[i]=x;sum+=x;
+        board[queenX][i]=true;
+        board[i][queenY]=true;
+        if(queenX-i>0 and queenY-i>0)
+        board[queenX-i][queenY-i]=true;
+        if(queenX+i<1001 and queenY+i<1001)
+        board[queenX+i][queenY+i]=true;
+        if(queenX-i>0 and queenY+i<1001)
+        board[queenX-i][queenY+i]=true;
+        if(queenX+i<1001 and queenY-i>0)
+        board[queenX+i][queenY-i]=true;
     }
-    while(qur--)
-    {
-        long long x;cin>>x;
-        if(x==1)
-        {
-            long long idx,num;cin>>idx>>num;
-            if(dat.count(idx)){
-            sum-=dat[idx];
-            sum+=num;
-            dat[idx]=num;
-            }
-            else{
-                dat[idx]=num;
-                sum-=temp;
-                sum+=num;
-            }
-        }
-        else {
-            long long num;cin>>num;
-            dat.clear();
-            temp=num;
-            sum=temp*siz;
-        }
-        cout<<sum<<endl;
-    }
+    if(dfs(x,y))
+    cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 
 //----------------------------------------------------------------//

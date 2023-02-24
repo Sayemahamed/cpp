@@ -45,19 +45,19 @@ void solve()
     vector<long long>tea(n),tester(n);
     for(auto&it:tea)cin>>it;
     for(auto&it:tester)cin>>it;
+    long long drn=0;
     multiset<long long>dat;
-    long long drank=0;
     for(long long i=0;i<n;i++)
     {
         long long ans=0;
-        dat.insert(tea[i]+drank);
-        while(!(dat.empty()) and (*dat.begin())-drank<=tester[i])
+        dat.insert(tea[i]+drn);
+        while (!dat.empty() and *dat.begin()-drn<=tester[i])
         {
-            ans+=(*dat.begin()-drank);
+            ans+=*dat.begin()-drn;
             dat.erase(dat.begin());
         }
-        ans+=tester[i]*dat.size();
-        drank+=tester[i];
+        ans+=dat.size()*tester[i];
+        drn+=tester[i];
         cout<<ans<<' ';
     }
     cout<<endl;
