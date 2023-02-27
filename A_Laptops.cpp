@@ -2,19 +2,23 @@
 using namespace std;
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     long long laptop;
     cin >> laptop;
-    vector<pair<long long, long long>> data(laptop);
     vector<long long>ans(laptop);
-    for (auto &it : data)
+    map<long long,long long>price;
+    while(laptop--)
     {
-        cin>>it.first>>it.second;
+        long long x,y;
+        cin >> x >> y;
+        price[x] = y;
     }
-    sort(data.begin(), data.end());
-    for(long long i = 0; i < data.size(); ++i)
+    long long i=0;
+    for(auto& p :price)
     {
-        if(data[i].first!=0)
-        ans[i]=data[i].second/data[i].first;
+        ans[i++]=p.second;
     }
     if(is_sorted(ans.begin(), ans.end()))
     cout<<"Poor Alex";

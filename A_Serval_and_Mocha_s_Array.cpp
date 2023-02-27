@@ -37,31 +37,19 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-vector<long long>listOfPeople[2002];
-    long long siz,ans=0;
-    void dfs(int i,long long len)
-    {
-        if(listOfPeople[i].size()==0) return;
-        ans=max(ans,len);
-        for(auto&it:listOfPeople[i])
-        dfs(it,len+1);
-    }
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    cin >> siz;
-    for(long long i=1;i<=siz;i++)
-    {
-        long long x;cin >> x;
-        if(x!=-1)
-        listOfPeople[x].push_back(i);
-        else listOfPeople[0].push_back(i);
-    }
-    for(long long i=0;i<2002;i++)
-    dfs(i,1);
-    cout<<ans<<endl;
+    long long n;cin>>n;
+    vector<long long>dat(n);
+    for(auto&it:dat)cin>>it;
+    sort(dat.begin(),dat.end());
+    if(dat[0] ==1)cout<<"Yes"<<endl;
+    else if(dat[n-2]>n)cout<<"No"<<endl;
+    else cout<<"Yes"<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -72,7 +60,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

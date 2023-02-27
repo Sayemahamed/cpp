@@ -37,31 +37,48 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-vector<long long>listOfPeople[2002];
-    long long siz,ans=0;
-    void dfs(int i,long long len)
+bool isTold[1000007];
+vector<long long>friendIndex[1000007];
+long long people,friends;
+void dfs(int n)
+{
+    if(friendIndex[n].empty())return;
+    if(isTold[n])return;
+    isTold[n] = true;
+    for(auto&it:friendIndex[n])
     {
-        if(listOfPeople[i].size()==0) return;
-        ans=max(ans,len);
-        for(auto&it:listOfPeople[i])
-        dfs(it,len+1);
+        dfs(it);
     }
-
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    cin >> siz;
-    for(long long i=1;i<=siz;i++)
+    long long ans=INT32_MAX;
+    cin>>people>>friends;
+    vector<pair<long long,long long>>dat(people+1);dat[0].first=INT32_MIN;dat[0].second=0;
+    for(long long i=1;i<=people;i++)
     {
-        long long x;cin >> x;
-        if(x!=-1)
-        listOfPeople[x].push_back(i);
-        else listOfPeople[0].push_back(i);
+        cin>>dat[i].first;
+        dat[i].second=i;
     }
-    for(long long i=0;i<2002;i++)
-    dfs(i,1);
-    cout<<ans<<endl;
+    sort(dat.begin(),dat.end());
+    for(long long i=0;i<friends;i++)
+    {
+        long long x,y;cin>>x>>y;
+        friendIndex[x].push_back(y);
+        friendIndex[y].push_back(x);
+    }
+    for(auto&it:dat)
+    {
+        if(isTold[it.second])continue;
+        else
+        {
+            ans+=it.first;
+            dfs(it.second);
+        }
+    }
+    cout<<ans+1;
 }
 
 //----------------------------------------------------------------//

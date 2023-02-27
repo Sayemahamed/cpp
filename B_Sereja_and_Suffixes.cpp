@@ -4,9 +4,6 @@ using namespace std;
 // definitions //
 #define endl '\n'
 #define PI (acos(-1.0))
-#define tan(a) tan(a)/(PI/180)
-#define sin(a) sin(a)/(PI/180)
-#define cos(a) cos(a)/(PI/180)
 
 //----------------------------------------------------------------//
 //data types//
@@ -37,31 +34,26 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-vector<long long>listOfPeople[2002];
-    long long siz,ans=0;
-    void dfs(int i,long long len)
-    {
-        if(listOfPeople[i].size()==0) return;
-        ans=max(ans,len);
-        for(auto&it:listOfPeople[i])
-        dfs(it,len+1);
-    }
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    cin >> siz;
-    for(long long i=1;i<=siz;i++)
+    long long siz,qur;cin>>siz>>qur;
+    vector<long long>dat(siz),ans(siz);
+    for(auto&it:dat)cin>>it;
+    set<long long >uniqueElement;
+    for(long long i=siz-1;i>=0;i--)
     {
-        long long x;cin >> x;
-        if(x!=-1)
-        listOfPeople[x].push_back(i);
-        else listOfPeople[0].push_back(i);
+        uniqueElement.insert(dat[i]);
+        ans[i]=uniqueElement.size();
     }
-    for(long long i=0;i<2002;i++)
-    dfs(i,1);
-    cout<<ans<<endl;
+    while(qur--)
+    {
+        long long x;cin>>x;
+        cout<<ans[x-1]<<endl;
+    }
 }
 
 //----------------------------------------------------------------//
