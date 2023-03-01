@@ -8,21 +8,20 @@ int main()
     long long child, mx, ans = 0;
     cin >> child >> mx;
     vector<long long> dat(child);
-    vector<bool> isTaken(child+7, 0);
     for (auto &it : dat)
         cin >> it;
     sort(dat.begin(), dat.end());
-    for (long long i = 0; i < child; i++)
+    long long i = 0, j = child - 1;
+    while (i <= j)
     {
-        if (isTaken[i])
-            continue;
-        long long j = child;
-        while (dat[--j] + dat[i] > mx and j >= i)
-            ;
-        isTaken[i] = true;
-        isTaken[j] = true;
-        if (dat[i] <= mx)
-            ans++;
+        ans++;
+        if (dat[i] + dat[j] <= mx)
+        {
+            j--;
+            i++;
+        }
+        else
+            j--;
     }
     cout << ans << endl;
 }
