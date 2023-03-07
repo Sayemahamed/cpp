@@ -40,9 +40,28 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    int arr[6][3]={0,1,2,1,0,2,1,2,0,2,1,0,2,0,1,0,2,1},row,column;
-    cin>>row>>column;
-    cout<<arr[row%6][column]<<endl;
+    long long a,t,ans=0;cin>>a>>t;
+    string s;cin>>s;
+    map<char,long long >dat;
+    for(auto&it:s)
+    {
+        if(it>'Z')
+        {
+            if(dat[(char)(it-32)]>0)
+            ans++;
+            dat[(char)(it-32)]--;
+        }
+        else{
+                        if(dat[(char)(it-32)]<0)
+            ans++;
+            dat[it]++;
+        }
+    }
+    for(auto& it :dat)
+    {
+        it.second=abs(it.second);
+    }
+    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -53,7 +72,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

@@ -40,9 +40,14 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    int arr[6][3]={0,1,2,1,0,2,1,2,0,2,1,0,2,0,1,0,2,1},row,column;
-    cin>>row>>column;
-    cout<<arr[row%6][column]<<endl;
+    long long n;cin>>n;
+    string s[]={"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+    while(n>5)
+    {
+        n-=4;
+        n>>=1;
+    }
+    cout<<s[n-1]<<endl;
 }
 
 //----------------------------------------------------------------//

@@ -34,15 +34,40 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+long long attempts,health;
+vector<long long>intervalOfAttempt;
+bool isPossible(long long poison)
+{
+    long long tmp=0,tmp2=intervalOfAttempt[0];
+    for(auto&it:intervalOfAttempt)
+    {
+        tmp+=min(it-tmp2,poison);
+        tmp2=it;
+    }
+    tmp+=poison;
+    return tmp>=health;
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    int arr[6][3]={0,1,2,1,0,2,1,2,0,2,1,0,2,0,1,0,2,1},row,column;
-    cin>>row>>column;
-    cout<<arr[row%6][column]<<endl;
+    cin>>attempts>>health;
+    for(long long i=0; i<attempts;i++)
+    {
+        long long x;cin>>x;
+        intervalOfAttempt.push_back(x);
+    }
+    sort(intervalOfAttempt.begin(),intervalOfAttempt.end());
+    long long high=1,low=-1,mid;
+    while(!isPossible(high))high<<=1;
+    while(high-low>1)
+    {
+        mid=((high + low)>>1);
+        if(isPossible(mid))high=mid;
+        else low=mid;
+    }
+    cout<<low+1<<endl;
+    intervalOfAttempt.clear();
 }
 
 //----------------------------------------------------------------//
@@ -53,7 +78,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();
