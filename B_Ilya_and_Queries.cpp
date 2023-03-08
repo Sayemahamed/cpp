@@ -40,15 +40,18 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    long long siz,qur;cin>>siz>>qur;
-    vector<long long>dat(siz);
-    for(auto&it:dat)cin>>it;
-    while(qur--)
+    string s;cin>>s;
+    long long n;cin>>n;
+    vector<long long>preComputation(s.length(),0);
+    for(long long i=1;i<s.length();i++)
     {
-        long long x,i=0;cin>>x;
-        while(dat[i]!=x)i++;
-        cout<<i+1<<' ';
-        rotate(dat.begin(),dat.begin()+i,dat.begin()+i+1);
+        if(s[i]==s[i-1])preComputation[i]++;
+        preComputation[i]+=preComputation[i-1];
+    }
+    while(n--)
+    {
+        long long x,y;cin>>x>>y;
+        cout<<preComputation[y-1]-preComputation[x-1]<<endl;
     }
 }
 

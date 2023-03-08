@@ -40,16 +40,19 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    long long siz,qur;cin>>siz>>qur;
-    vector<long long>dat(siz);
+    long long n,need;cin>>n>>need;
+    vector<long long>dat(n);
+    long long sum = 0,ans=INTMAX_MAX,idx,j=0;
     for(auto&it:dat)cin>>it;
-    while(qur--)
+    for(long long i=0;i<n;i++)
     {
-        long long x,i=0;cin>>x;
-        while(dat[i]!=x)i++;
-        cout<<i+1<<' ';
-        rotate(dat.begin(),dat.begin()+i,dat.begin()+i+1);
+        while(j-i<need and j<n)sum+=dat[j++];
+        if(sum<ans and j-i>=need){
+            ans=sum;idx=i;
+        }
+        sum-=dat[i];
     }
+    cout<<idx+1<<endl;
 }
 
 //----------------------------------------------------------------//
