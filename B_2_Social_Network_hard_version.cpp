@@ -1,41 +1,75 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+//----------------------------------------------------------------//
+// definitions //
+#define endl '\n'
+#define PI (acos(-1.0))
 
-int main() {
-#ifdef _DEBUG
-	//freopen("input.txt", "r", stdin);
-//	freopen("output.txt", "w", stdout);
-#endif
-	
-	int n, k;
-	cin >> n >> k;
-	
-	queue<int> q;
-	set<int> vals;
-	for (int i = 0; i < n; ++i) {
-		int id;
-		cin >> id;
-		if (!vals.count(id)) {
-			if (int(q.size()) >= k) {
-				int cur = q.front();
-				q.pop();
-				vals.erase(cur);
-			}
-			vals.insert(id);
-			q.push(id);
+//----------------------------------------------------------------//
+//data types//
+struct Point{float x, y;};
+
+//----------------------------------------------------------------//
+// preDefined functions//
+//geometry//
+double getClockwiseAngle(Point p) {double angle = 0.0;angle = -1 * atan2(p.x, -1 * p.y);return angle;}
+bool comparePoints(Point p1, Point p2) {return getClockwiseAngle(p1) < getClockwiseAngle(p2);}
+double polygonArea(vector<Point> &points){double area = 0.0;long long j = points.size() - 1;for (long long  i = 0; i < points.size(); i++){area += (points[j].x + points[i].x) * (points[j].y - points[i].y);j = i;}return abs(area / 2.0);}
+//geometry//
+//number theory //
+template<typename T>
+bool isPrime(T n){if(n<=1)return false;for (long long i=2;i*i<=n;++i){if(!(n%i))return false;}return true;}
+template<typename T>
+long long factorial(T N){ long long ans=1;while(N>1)ans*=N--;return ans;}
+template<typename T,typename Y>
+long long NCR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(R>1 and !(ans%R))ans/=R--; while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
+template<typename T,typename Y>
+long long NPR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
+void sieve(vector<bool>&ans){ans[0]=ans[1]=false; long long tmp=sqrt(ans.size()),till=ans.size();for(long long i=2;i<=tmp;i++)if(ans[i])for(long long j=i*i;j<till;j+=i)ans[j]=false;}
+template<typename T>
+map<long long, long long> primeFactors(T N){map<long long, long long> ans;long long till = sqrt(N);for (long long i = 2; i <= till; i++){while (!(N % i)){ans[i]++;N /= i;}if (i >= N or i >= till)break;}if (N > 1)ans[N]++;return ans;}
+//number theory//
+bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) return true; return false;}
+
+
+//----------------------------------------------------------------//
+// helper functions //
+
+
+//----------------------------------------------------------------//
+// solve function//
+void solve()
+{
+	long long siz,lim;cin>>siz>>lim;
+	deque<long long>DQ;
+	set<long long>ST;
+	for(long long i=0,x;i<siz;i++)
+	{
+		cin>>x;
+		if(ST.find(x)!=ST.end())continue;
+		ST.insert(x);
+		DQ.push_front(x);
+		if(DQ.size()>lim)
+		{
+			ST.erase(ST.find(DQ.back()));
+			DQ.pop_back();
 		}
 	}
-	
-	vector<int> res;
-	while (!q.empty()) {
-		res.push_back(q.front());
-		q.pop();
+	cout<<DQ.size()<<endl;
+	for(auto &it:DQ)cout<<it<<' ';
+}
+
+//----------------------------------------------------------------//
+// main function//
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	long long test = 1;
+	// cin >> test;
+	while (test--)
+	{
+		solve();
 	}
-	reverse(res.begin(), res.end());
-	cout << res.size() << endl;
-	for (auto it : res) cout << it << " ";
-	cout << endl;
-	
-	return 0;
 }
