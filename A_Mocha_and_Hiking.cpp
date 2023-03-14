@@ -34,31 +34,41 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-
+vector<long long>village[100087];
+void dfs(int i,vector<bool>&isVisited)
+{
+    if(isVisited[i]) return;
+    isVisited[i] = true;
+    cout<<i<<' ';
+    for(auto&it:village[i])
+    dfs(it,isVisited);
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    string s;cin>>s;
-    map<char,vector<long long >>dat;
-    for(long long i=0;i<s.length();i++)
+    long long n;cin>>n;
+    vector<bool>isVisited(n+2,0);
+    long long x;
+    for(long long i=1;i<=n;i++)
     {
-        dat[s[i]].push_back(i);
-    }
-    long long cnt=0,direction=s[0]<s[s.length()-1]?1:-1;
-    vector<long long>ans;
-    for(char ch=s[0];ch!=s[s.length()-1]+direction;ch+=direction)
-    {
-        if(dat.count(ch))
+        cin>>x;
+        if(x)
         {
-            for(auto&it:dat.find(ch)->second)ans.push_back(it);
+            village[n+1].push_back(i);
         }
+        else{
+            village[i].push_back(n+1);
+        }
+        village[i].push_back(i+1);
     }
-    for(long long i=1;i<ans.size();i++)cnt+=abs(s[ans[i]]-s[ans[i-1]]);
-    cout<<cnt<<' '<<ans.size()<<endl;
-    for(auto&it:ans)cout<<it+1<<' ';
+    for(auto&it:village)sort(it.begin(),it.end(),greater<int>());
+    long long i=1;
+    while(village[i].size()==1)i++;
+    dfs(i,isVisited);
     cout<<endl;
+    for(auto&it:village)it.clear();
 }
 
 //----------------------------------------------------------------//

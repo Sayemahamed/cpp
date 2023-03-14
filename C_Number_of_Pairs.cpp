@@ -1,73 +1,68 @@
 #include <bits/stdc++.h>
 using namespace std;
-template <typename T>
-T findFact(T num)
+//----------------------------------------------------------------//
+// definitions //
+#define endl '\n'
+#define PI (acos(-1.0))
+
+//----------------------------------------------------------------//
+//data types//
+struct Point{float x, y;};
+
+//----------------------------------------------------------------//
+// preDefined functions//
+//geometry//
+double getClockwiseAngle(Point p) {double angle = 0.0;angle = -1 * atan2(p.x, -1 * p.y);return angle;}
+bool comparePoints(Point p1, Point p2) {return getClockwiseAngle(p1) < getClockwiseAngle(p2);}
+double polygonArea(vector<Point> &points){double area = 0.0;long long j = points.size() - 1;for (long long  i = 0; i < points.size(); i++){area += (points[j].x + points[i].x) * (points[j].y - points[i].y);j = i;}return abs(area / 2.0);}
+//geometry//
+//number theory //
+template<typename T>
+bool isPrime(T n){if(n<=1)return false;for (long long i=2;i*i<=n;++i){if(!(n%i))return false;}return true;}
+template<typename T>
+long long factorial(T N){ long long ans=1;while(N>1)ans*=N--;return ans;}
+template<typename T,typename Y>
+long long NCR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(R>1 and !(ans%R))ans/=R--; while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
+template<typename T,typename Y>
+long long NPR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
+void sieve(vector<bool>&ans){ans[0]=ans[1]=false; long long tmp=sqrt(ans.size()),till=ans.size();for(long long i=2;i<=tmp;i++)if(ans[i])for(long long j=i*i;j<till;j+=i)ans[j]=false;}
+template<typename T>
+map<long long, long long> primeFactors(T N){map<long long, long long> ans;long long till = sqrt(N);for (long long i = 2; i <= till; i++){while (!(N % i)){ans[i]++;N /= i;}if (i >= N or i >= till)break;}if (N > 1)ans[N]++;return ans;}
+//number theory//
+bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) return true; return false;}
+
+
+//----------------------------------------------------------------//
+// helper functions //
+
+
+//----------------------------------------------------------------//
+// solve function//
+void solve()
 {
-    int i = 1, fact = 1;
-    while (i <= num)
+    long long num,low,high,j=0,ans=0;cin>>num>>low>>high;
+    vector<long long>dat(num);
+    for(auto&it:dat)cin>>it;
+    sort(dat.begin(),dat.end());
+    for(long long i=0;i<num;i++)
     {
-        fact = i * fact;
-        i++;
+        while(dat[i]+dat[j]<=high and j<num)j++;
+        if(dat[i]+dat[j]>low)ans++;
     }
-    return fact;
+    cout<<ans<<endl;
 }
-template <typename T>
-T findNPR(T n, T r)
-{
-    long long numerator, denominator;
-    numerator = findFact(n);
-    denominator = findFact(n - r);
-    return (numerator / denominator);
-}
-template <typename T>
-T findNCR(T n, T r)
-{
-    int npr, ncr;
-    npr = findNPR(n, r);
-    ncr = npr / findFact(r);
-    return ncr;
-}
+
+//----------------------------------------------------------------//
+// main function//
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    long long test;
+    long long test = 1;
     cin >> test;
     while (test--)
     {
-        long long numberOfElements, lowerLimit, upperLimit;
-        cin >> numberOfElements >> lowerLimit >> upperLimit;
-        long long leftIndex = 0, rightIndex = numberOfElements - 1, arr[numberOfElements], A = 1, B = 1, cnt = 0, j;
-        for (auto &it : arr)
-            cin >> it;
-        sort(arr, arr + numberOfElements);
-        while (arr[leftIndex] + arr[rightIndex] < lowerLimit)
-            leftIndex++;
-        while (arr[leftIndex] + arr[rightIndex] > upperLimit)
-            rightIndex--;
-        for (long long i = leftIndex; i < numberOfElements - 1 and (arr[leftIndex] + arr[i + 1]) < lowerLimit; i++)
-        {
-            A++;
-            j = i;
-        }
-        for (long long i = leftIndex; i <= j; i++)
-        {
-            for (long long k = i + 1; k <= j; k++)
-                if (arr[i] + arr[k] >= lowerLimit)
-                    cnt++;
-        }
-        for (long long i = rightIndex; i > 0 and (arr[rightIndex] + arr[i - 1]) > upperLimit; i--)
-        {
-            B++;
-            j = i;
-        }
-        for (long long i = j; i <= rightIndex; i++)
-        {
-            for (long long k = i + 1; k <= rightIndex; k++)
-                if (arr[i] + arr[k] <= upperLimit)
-                    cnt++;
-        }
-        cout << findNCR(rightIndex - leftIndex + 1, (long long)2) - findNCR(A, (long long)2) - findNCR(B, (long long)2)+cnt << endl;
+        solve();
     }
 }

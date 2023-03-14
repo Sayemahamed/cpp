@@ -40,25 +40,14 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    string s;cin>>s;
-    map<char,vector<long long >>dat;
-    for(long long i=0;i<s.length();i++)
-    {
-        dat[s[i]].push_back(i);
-    }
-    long long cnt=0,direction=s[0]<s[s.length()-1]?1:-1;
-    vector<long long>ans;
-    for(char ch=s[0];ch!=s[s.length()-1]+direction;ch+=direction)
-    {
-        if(dat.count(ch))
-        {
-            for(auto&it:dat.find(ch)->second)ans.push_back(it);
-        }
-    }
-    for(long long i=1;i<ans.size();i++)cnt+=abs(s[ans[i]]-s[ans[i-1]]);
-    cout<<cnt<<' '<<ans.size()<<endl;
-    for(auto&it:ans)cout<<it+1<<' ';
-    cout<<endl;
+    long long x,y,ans=0;cin>>x>>y;
+    x=abs(x);
+    y=abs(y);
+    ans+=min(x,y);
+    ans<<=1;
+    ans+=(((max(x,y)-(ans/2)))*2)-1;
+    if(x==y)ans=x*2;
+    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
