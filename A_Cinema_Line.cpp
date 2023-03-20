@@ -35,21 +35,36 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 //----------------------------------------------------------------//
 // helper functions //
 
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,mx=0;cin>>siz;
-    vector<long long >dat(siz),score(siz,0);
-    for(auto&it:dat)cin>>it;
-    for(long long i=siz-1;i>=0;i--)
+    long long people,flag=true;cin>>people;
+    map<long long ,long long>task;
+    task[50];task[25];
+    while(people--)
     {
-        score[i]=dat[i];
-        long long j=i+dat[i];
-        if(j<siz)
-        score[i]+=score[j];
+        long long x;cin>>x;
+        if(x==25)task[25]++;
+        if(x==50){
+            task[50]++;
+            task[25]--;
+        }
+        if(x==100)
+        {
+            if(task[50]>0)
+            {
+                task[50]--;
+                task[25]--;
+            }else{
+                task[25]-=3;
+            }
+        }
+        for(auto&it:task)if(it.second<0)flag=false;
     }
-    cout<<*max_element(score.begin(),score.end())<<endl;
+    if(flag)cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -60,7 +75,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();
