@@ -17,21 +17,22 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
+    long long candies,questions;cin>>candies>>questions;
+    vector<long long>dat(candies),preCompute(candies);
     for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    sort(dat.rbegin(),dat.rend());
+    for(long long i=0;i<candies;i++)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+        preCompute[i] = dat[i];
+        if(i)preCompute[i]+=preCompute[i-1];
     }
-    cout<<ans<<endl;
+    while(questions--)
+    {
+        long long n;cin>>n;
+        auto it =lower_bound(preCompute.begin(),preCompute.end(),n);
+        if(it==preCompute.end())cout<<-1<<endl;
+        else cout<<(it-preCompute.begin())+1<<endl;
+    }
 }
 
 //----------------------------------------------------------------//
@@ -42,7 +43,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

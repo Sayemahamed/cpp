@@ -7,31 +7,31 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
-
+// data types//
 //----------------------------------------------------------------//
 // helper functions //
-
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long siz, ans = 0;
+    cin >> siz;
+    map<long long, long long> customerIndex;
+    while (siz--)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+        long long x, y;
+        cin >> x >> y;
+        customerIndex[x]++;
+        customerIndex[y]--;
     }
-    cout<<ans<<endl;
+    long long tmp = 0;
+    for (auto &it : customerIndex)
+    {
+        tmp += it.second;
+        ans = max(ans, tmp);
+    }
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//

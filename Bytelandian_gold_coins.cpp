@@ -8,30 +8,28 @@ using namespace std;
 
 //----------------------------------------------------------------//
 //data types//
+map<long long ,long long>preCompute;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long bankExchange(long long n)
+{
+    if(n<12)return n;
+    if(preCompute[n])return preCompute[n];
+    long long ans=bankExchange(n/2)+bankExchange(n/3)+ bankExchange(n/4);
+    preCompute[n]=ans;
+    return ans;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long n;
+    while(cin>>n)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+        cout<<bankExchange(n)<<endl;
     }
-    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//

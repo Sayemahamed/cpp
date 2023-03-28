@@ -1,27 +1,69 @@
 #include <bits/stdc++.h>
 using namespace std;
-int k, n, x, y;
+//----------------------------------------------------------------//
+// definitions //
+#define endl '\n'
+//----------------------------------------------------------------//
+// preDefined functions//
 
-void sol(int n)
+//----------------------------------------------------------------//
+//data types//
+
+//----------------------------------------------------------------//
+// helper functions //
+int diff(long long a, long long b)
 {
-    if (n >= 10)
-        sol(n / 10);
-    x *= 10;
-    y *= 10;
-    x += (n % 10) / 2;
-    y += (n % 10 + 1) / 2;
-    if (n & 1)
-        swap(x, y);
+    long long c=max(a,b),x=0,y=0;
+    while(c>0)
+    {
+        x+=a%10;
+        a/=10;
+        y+=b%10;
+        b/=10;
+        c/=10;
+    }
+    return abs(x-y);
 }
 
+//----------------------------------------------------------------//
+// solve function//
+void solve()
+{
+    long long n;cin>>n;
+    if(n==1){cout<<1<<" "<<0<<endl;return;}
+    if(n&1)
+    {
+        long long i=1,di=1;
+        long long x=n/2,y=n/2;y++;
+        for(;i<n;i++)
+        {
+            if(diff(x,y)<2)
+            {
+                cout<<x<<" "<<y<<endl;
+                return;
+            }
+            else {
+                x-=di;y+=di;
+            }
+            if(i%100==0)di*=10;
+        }
+    }
+    else{
+        cout<<n/2<<" "<<n/2<<endl;
+    }
+}
+
+//----------------------------------------------------------------//
+// main function//
 int main()
 {
-    cin >> k;
-    while (k--)
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    cin >> test;
+    while (test--)
     {
-        cin >> n;
-        x = y = 0;
-        sol(n);
-        cout << x << ' ' << y << endl;
+        solve();
     }
 }

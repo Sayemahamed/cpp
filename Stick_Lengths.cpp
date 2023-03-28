@@ -17,19 +17,13 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long siz,accu=0,ans=0;cin>> siz;
+    vector<long long>dat(siz);
+    for(auto&it:dat)cin>>it,accu+=it;
+    accu/=siz;
+    for(auto&it:dat)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+        ans+=abs(accu-it);
     }
     cout<<ans<<endl;
 }

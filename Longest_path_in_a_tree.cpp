@@ -7,31 +7,47 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+long long numberOfNodes, ans = 0, mxNode;
+vector<long long> Edges[10007];
+bool isVisited[10007];
+void DFS(long long idx, long long length)
+{
+    if (isVisited[idx])
+        return;
+    isVisited[idx] = true;
+    if (ans < length)
+    {
+        ans = length;
+        mxNode = idx;
+    }
+    for (auto &child : Edges[idx])
+        DFS(child, length + 1);
+}
+void clear()
+{
+    for (long long i = 1; i < numberOfNodes; i++)
+        isVisited[i] = false;
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    cin >> numberOfNodes;
+    for (long long i = 1; i < numberOfNodes; i++)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+        long long u, v;
+        cin >> u >> v;
+        Edges[u].push_back(v);
+        Edges[v].push_back(u);
     }
-    cout<<ans<<endl;
+    DFS(1, 0);
+    clear();
+    DFS(mxNode, 0);
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//

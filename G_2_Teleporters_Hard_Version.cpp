@@ -17,19 +17,21 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long siz,money,ans=0;
+    cin >> siz >> money;
+    vector<long long>dat(siz);
+    for (long long i = 1; i <=siz;i++)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
+        cin >> dat[i-1];
+        dat[i-1]+=min(i,siz-i);
+    }
+    sort(dat.begin(),dat.end());
+    for(long i = 0;i<siz;i++){
+        if(money>=dat[i]){
+            money-=dat[i];
+            ans++;
         }
-        else{
-            j--;ans++;
-        }
+        else break;
     }
     cout<<ans<<endl;
 }
@@ -42,7 +44,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

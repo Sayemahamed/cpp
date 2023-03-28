@@ -34,41 +34,20 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-vector<long long>village[100087];
-void dfs(int i,vector<bool>&isVisited)
-{
-    if(isVisited[i]) return;
-    isVisited[i] = true;
-    cout<<i<<' ';
-    for(auto&it:village[i])
-    dfs(it,isVisited);
-}
+long long siz;
 
+    vector<long long>dat[10099];
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;cin>>n;
-    vector<bool>isVisited(n+2,0);
-    long long x;
-    for(long long i=1;i<=n;i++)
+    cin>>siz;
+    siz++;
+    for(long long i=1; i<siz; i++)
     {
-        cin>>x;
+        long long x;cin>>x;
         if(x)
-        {
-            village[n+1].push_back(i);
-        }
-        else{
-            village[i].push_back(n+1);
-        }
-        village[i].push_back(i+1);
     }
-    for(auto&it:village)sort(it.begin(),it.end(),greater<int>());
-    long long i=1;
-    while(village[i].size()==1)i++;
-    dfs(i,isVisited);
-    cout<<endl;
-    for(auto&it:village)it.clear();
 }
 
 //----------------------------------------------------------------//

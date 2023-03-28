@@ -17,20 +17,18 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
-    {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+    string s;cin>>s;
+    long long ans=0;
+    vector<bool>a(s.length()+1,false);
+    vector<bool>b(s.length()+1,false);
+    a[0]=b[s.length()]=true;
+    for(int i=1;i<s.length();i++){
+        a[i]=(a[i-1] and (s[i-1]=='1' or s[i-1]=='?'));
     }
+    for(int i=s.length()-1;i>0;i--){
+        b[i]=(b[i+1] and (s[i]=='?' or s[i]=='0'));
+    }
+    for(int i=0;i<s.length();i++)if(a[i]&&b[i])ans++;
     cout<<ans<<endl;
 }
 
@@ -42,7 +40,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

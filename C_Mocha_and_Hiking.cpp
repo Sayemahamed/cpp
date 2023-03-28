@@ -34,29 +34,41 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+vector<long long>dat[100009];
+long long siz;
+bool flag=false,sizeFlag=false;
+void dfs(long long i,long long length)
+{
+    if(sizeFlag)return;
+    if(i==siz+1)sizeFlag=true;
+    if(flag)return;
+    if(length>=siz)flag=true;
+    for(auto&it:dat[i])dfs(it,length+1);
+    if(i==siz+1)sizeFlag=false;
+    if(flag)cout<<i<<' ';
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,qur;cin>>siz>>qur;
-    vector<long long>freq(siz+1,0);
-    for(long long i=1;i<=siz;i++)
+    cin>>siz;
+    for(long long i=1; i<=siz; i++)
     {
         long long x;cin>>x;
-        if(x&1)freq[i]++;
-        if(i)freq[i]+=freq[i-1];
+        if(x)
+        dat[i].push_back(siz+1);
+        else
+        dat[siz+1].push_back(i);
+        if(i<siz)
+        dat[i].push_back(i+1);
     }
-    while(qur--)
-    {
-        long long a,b,c,tmp=0;cin>>a>>b>>c;
-        tmp+=freq[siz];
-        tmp-=freq[b];
-        tmp+=freq[a-1];
-        if(((a-b+1)&1)and (c&1))tmp++;
-        if(tmp&1)cout<<"YES"<<endl; else cout<<"NO"<<endl;
-    }
+    for(long long i=1;i<=siz+1;i++)sort(dat[i].begin(),dat[i].end());
+    for(long long i=1;i<=siz+1;i++)
+    {dfs(i,1);if(flag)break;}
+    if(flag)cout<<endl;else cout<<-1<<endl;
+    for(long long i=1;i<=siz+1;i++)
+    dat[i].clear();
+    flag=false;
 }
 
 //----------------------------------------------------------------//

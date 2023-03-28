@@ -7,31 +7,45 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
+struct tree
+{
+    long long root, height;
+    bool right = false;
+};
 
 //----------------------------------------------------------------//
 // helper functions //
-
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long totalTrees, ans = 1;
+    cin >> totalTrees;
+    vector<tree> dat(totalTrees);
+    dat[0].right = false;
+    for (auto &it : dat)
+        cin >> it.root >> it.height;
+    for (long long i = 1; i < totalTrees; i++)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
+        long long prePosition = dat[i - 1].root;
+        if (dat[i - 1].right)
+            prePosition += dat[i - 1].height;
+        if (i == totalTrees - 1)
+            ans++;
+        else if (dat[i].root > prePosition + dat[i].height)
+        {
+            ans++;
+            dat[i].right = false;
         }
-        else{
-            j--;ans++;
+        else if (i < totalTrees - 1 and dat[i].root + dat[i].height < dat[i + 1].root)
+        {
+            dat[i].right = true;
+            ans++;
         }
     }
-    cout<<ans<<endl;
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//

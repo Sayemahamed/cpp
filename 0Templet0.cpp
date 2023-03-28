@@ -3,8 +3,6 @@ using namespace std;
 //----------------------------------------------------------------//
 // definitions //
 #define endl '\n'
-#define PI (acos(-1.0))
-
 //----------------------------------------------------------------//
 //data types//
 struct Point{float x, y;};
@@ -29,7 +27,9 @@ void sieve(vector<bool>&ans){ans[0]=ans[1]=false; long long tmp=sqrt(ans.size())
 template<typename T>
 map<long long, long long> primeFactors(T N){map<long long, long long> ans;long long till = sqrt(N);for (long long i = 2; i <= till; i++){while (!(N % i)){ans[i]++;N /= i;}if (i >= N or i >= till)break;}if (N > 1)ans[N]++;return ans;}
 //number theory//
+//useful Staff//
 bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) return true; return false;}
+//useful Staff//
 
 
 //----------------------------------------------------------------//
@@ -40,23 +40,6 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    long long siz,qur;cin>>siz>>qur;
-    vector<long long>freq(siz+1,0);
-    for(long long i=1;i<=siz;i++)
-    {
-        long long x;cin>>x;
-        if(x&1)freq[i]++;
-        if(i)freq[i]+=freq[i-1];
-    }
-    while(qur--)
-    {
-        long long a,b,c,tmp=0;cin>>a>>b>>c;
-        tmp+=freq[siz];
-        tmp-=freq[b];
-        tmp+=freq[a-1];
-        if(((a-b+1)&1)and (c&1))tmp++;
-        if(tmp&1)cout<<"YES"<<endl; else cout<<"NO"<<endl;
-    }
 }
 
 //----------------------------------------------------------------//

@@ -11,24 +11,25 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+bool cmp(pair<long long, long long>&a, pair<long long,long long>&b)
+{
+    return a.second < b.second;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long siz;cin>>siz;
+    vector<pair<long long,long long> >dat(siz);
+    for(auto&it:dat)cin>>it.first>>it.second;
+    sort(dat.begin(),dat.end(),cmp);
+    // for(auto&it:dat)cout<<it.first<<' '<<it.second<<endl;
+    long long ans=1,end=dat[0].second;
+    for(long long i=1;i<dat.size();i++)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
+        if(dat[i].first>=end){
+            end=dat[i].second;ans++;
         }
     }
     cout<<ans<<endl;

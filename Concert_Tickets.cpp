@@ -7,31 +7,47 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long numberOfTicket, numberOfCustomer;
+    cin >> numberOfTicket >> numberOfCustomer;
+    multiset<long long> ticket;
+    while (numberOfTicket--)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
+        long long x;
+        cin >> x;
+        ticket.insert(x);
+    }
+    while (numberOfCustomer--)
+    {
+        long long y;
+        cin >> y;
+        if (ticket.empty())
+            cout << -1 << endl;
+        else if (ticket.count(y))
+        {
+            cout << y << endl;
+            ticket.erase(ticket.find(y));
         }
-        else{
-            j--;ans++;
+        else if (*ticket.begin() > y)
+        {
+            cout << -1 << endl;
+        }
+        else
+        {
+            auto a = ticket.upper_bound(y);
+            a--;
+            cout << *a << endl;
+            ticket.erase(a);
         }
     }
-    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//

@@ -17,21 +17,12 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
-    {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
-        }
+    long long a,b;cin>>a>>b;
+    if(a>=b)cout<<"YES"<<endl;
+    else{
+        if((a-a/2)>=(b+a/2)/(a/2 +1))cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
     }
-    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -42,7 +33,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

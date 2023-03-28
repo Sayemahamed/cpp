@@ -1,44 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
-void improve(string& str,long long size)
+struct uint{
+    long long value,maxValue;
+};
+bool compare(uint& a, uint& b)
 {
-    for(long long i=0; i<str.length(); i++)
-    {
-        if(str[i] == 'R'&&i>size)
-        {
-            str[i] = 'L';
-            return;
-        }
-        if(str[i] == 'L'&&i<size)
-        {
-            str[i] = 'R';
-            return;
-        }
-    }
+    return (a.maxValue-a.value)>(b.maxValue-b.value);
 }
-int main()
+int main ()
 {
-    long long t;
-    cin>>t;
-    while(t--)
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test;cin>>test;
+    while(test--)
     {
-        long long n;
-        cin>>n;
-        string arr;
-        cin>>arr;
-        while(n--)
+        string s;
+        long long n;cin>>n;
+        long long cnt=0;
+        cin>>s;
+        vector<uint>dat(s.length());
+        for(long long i=0;i<s.length();i++)
         {
-            improve(arr, arr.length()/2);
-           // cout<<arr<<" ";
-        long long count = 0;
-        for(int i=0; i<arr.length(); i++)
-        {
-            if(arr[i]=='L')count+=i;
-            else
-            count+=arr.length()-i-1;
+            if(s[i]=='L')
+            dat[i].value=i;
+            else 
+            dat[i].value=s.length()-i-1;
+            dat[i].maxValue=max(i,(long long)(s.length()-i-1));
+            cnt+=dat[i].value;
         }
-        cout<<count<<" ";
-        }
+        sort(dat.begin(),dat.end(),compare);
+        for(auto&it:dat){cnt+=it.maxValue-it.value;cout<<cnt<<' ';}
         cout<<endl;
     }
 }

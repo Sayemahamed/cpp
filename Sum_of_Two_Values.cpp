@@ -17,21 +17,22 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long child,gondalaLimit;cin>>child>>gondalaLimit;
-    vector<long long>dat(child);
-    long long j=child-1,ans=0,i=0;
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    while(j>=i)
+    long long numbers,theNumber;cin>>numbers>>theNumber;
+    multimap<long long,long long>dat;
+    for (long long i=1;i<=numbers;i++)
     {
-        if(dat[i]+dat[j]<=gondalaLimit){
-            ans++;j--;i++;
-        }
-        else{
-            j--;ans++;
+        long long x;cin>>x;
+        dat.insert({x,i});
+    }
+    for(auto&it:dat)
+    {
+        if(dat.count(theNumber-it.first) and it.second!=dat.find(theNumber-it.first)->second)
+        {
+            cout<<it.second<<" "<<dat.find(theNumber-it.first)->second<<endl;
+            return;
         }
     }
-    cout<<ans<<endl;
+    cout<<"IMPOSSIBLE"<<endl;
 }
 
 //----------------------------------------------------------------//

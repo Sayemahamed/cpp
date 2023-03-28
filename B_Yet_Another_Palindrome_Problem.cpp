@@ -34,29 +34,37 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+map<int,int>dat;
+void add (int i)
+{
+    dat[i]++;
+}
+void remove (int i)
+{
+    dat[i]--;
+    if(dat[i] == 0) dat.erase(dat.find(i));
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,qur;cin>>siz>>qur;
-    vector<long long>freq(siz+1,0);
-    for(long long i=1;i<=siz;i++)
+    long long siz;cin>>siz;
+    bool flag=false;
+    vector<long long>numDat(siz);
+    for(auto&it:numDat)cin>>it;
+    for(long long i=1;i<siz;i++)
     {
-        long long x;cin>>x;
-        if(x&1)freq[i]++;
-        if(i)freq[i]+=freq[i-1];
+        add(numDat[i]);
     }
-    while(qur--)
+    for(long long i=0;i<siz-1;i++)
     {
-        long long a,b,c,tmp=0;cin>>a>>b>>c;
-        tmp+=freq[siz];
-        tmp-=freq[b];
-        tmp+=freq[a-1];
-        if(((a-b+1)&1)and (c&1))tmp++;
-        if(tmp&1)cout<<"YES"<<endl; else cout<<"NO"<<endl;
+        remove(numDat[i+1]);
+        if(dat.count(numDat[i]))flag=true;
+        if(flag)break;
     }
+    if(flag)cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+    dat.clear();
 }
 
 //----------------------------------------------------------------//

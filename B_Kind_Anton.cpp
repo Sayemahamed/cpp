@@ -40,23 +40,22 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
-    long long siz,qur;cin>>siz>>qur;
-    vector<long long>freq(siz+1,0);
-    for(long long i=1;i<=siz;i++)
+    long long siz;cin>>siz;
+    vector<long long>dat(siz),need(siz);
+    for(auto&it:dat)cin>>it;
+    for(auto&it:need)cin>>it;
+    bool oneFound = false,minOneFound = false,flag=true;
+    for(long long i=0;i<siz;i++)
     {
-        long long x;cin>>x;
-        if(x&1)freq[i]++;
-        if(i)freq[i]+=freq[i-1];
+        if((dat[i]<need[i] && !oneFound) or (dat[i]>need[i] && !minOneFound))
+        {
+            flag=false;
+        }
+        oneFound|= dat[i]==1;
+        minOneFound|= dat[i]==-1;
     }
-    while(qur--)
-    {
-        long long a,b,c,tmp=0;cin>>a>>b>>c;
-        tmp+=freq[siz];
-        tmp-=freq[b];
-        tmp+=freq[a-1];
-        if(((a-b+1)&1)and (c&1))tmp++;
-        if(tmp&1)cout<<"YES"<<endl; else cout<<"NO"<<endl;
-    }
+    if(flag)cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 
 //----------------------------------------------------------------//

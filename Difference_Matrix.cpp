@@ -4,9 +4,6 @@ using namespace std;
 // definitions //
 #define endl '\n'
 #define PI (acos(-1.0))
-#define tan(a) tan(a)/(PI/180)
-#define sin(a) sin(a)/(PI/180)
-#define cos(a) cos(a)/(PI/180)
 
 //----------------------------------------------------------------//
 //data types//
@@ -43,6 +40,25 @@ bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) r
 // solve function//
 void solve()
 {
+    long long n,j=0;cin >> n;
+    for(long long i = 2; i <= n*n;i+=2)
+    {
+        cout<<i<<' ';
+        j++;
+        if(j==n){
+            cout<<endl;
+            j=0;
+        }
+    }
+        for(long long i = 1; i <= n*n;i+=2)
+    {
+        cout<<i<<' ';
+        j++;
+        if(j==n){
+            cout<<endl;
+            j=0;
+        }
+    }
 }
 
 //----------------------------------------------------------------//
