@@ -7,23 +7,21 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,total=0;cin>>siz;
-    vector<long long>dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    for(long long i=1;i<=siz/2;i++){
-        cout<<dat[i]<<" "<<dat[0]<<endl;
-    }
+    long long n, m, laserX, laserY, laserPower;
+    cin >> n >> m >> laserX >> laserY >> laserPower;
+    if ((laserX + laserPower >= n || laserY - laserPower <= 1) and (laserY + laserPower >= m || laserX - laserPower <= 1))
+        cout << -1 << endl;
+    else
+        cout << n + m - 2 << endl;
 }
 
 //----------------------------------------------------------------//

@@ -7,22 +7,41 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,total=0;cin>>siz;
-    vector<long long>dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    for(long long i=1;i<=siz/2;i++){
-        cout<<dat[i]<<" "<<dat[0]<<endl;
+    long long all, alice, bob, none;
+    cin >> all >> alice >> bob >> none;
+    long long ans = all;
+    if (all == 0 and (alice != 0 or bob != 0 or none != 0))
+        cout << 1 << endl;
+    else
+    {
+        if (abs(alice - bob) <= all)
+        {
+            ans += alice;
+            ans += bob;
+            all -= abs(alice - bob);
+        }
+        else
+        {
+            ans += min(alice, bob) * 2 + all + 1;
+            all = -1;
+        }
+        if (all >= 0)
+        {
+            if (all >= none)
+                ans += none;
+            else
+                ans += all + 1;
+        }
+        cout << ans << endl;
     }
 }
 
