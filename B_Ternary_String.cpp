@@ -7,26 +7,39 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
+void add(map<char, long long> &dat, char c)
+{
+    dat[c]++;
 }
+void remove(map<char, long long> &dat, char c)
+{
+    dat[c]--;
+    if (dat[c] == 0)
+        dat.erase(dat.find(c));
+}
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    string s;
+    cin >> s;
+    long long ans=s.length()+1, j = 0;
+    map<char, long long> dat;
+    for(long long i=0;i<s.length();i++){
+        while(dat.size()<3 and j<=s.length()){
+            add(dat,s[j++]);
+        }
+        remove(dat,s[i]);
+        if(j>s.length())break;
+        ans=min(ans,j-i);
+    }
+    if(ans==s.length()+1)cout<<0<<endl;
+    else cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//

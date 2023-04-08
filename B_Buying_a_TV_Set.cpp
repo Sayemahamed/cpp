@@ -11,22 +11,17 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
-}
+
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long height,width,aspectA,aspectB,gcd;cin>>height>>width>>aspectA>>aspectB;
+    gcd=__gcd(aspectA,aspectB);
+    aspectA/=gcd;
+    aspectB/=gcd;
+    cout<<min(height/aspectA,width/aspectB)<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -37,7 +32,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

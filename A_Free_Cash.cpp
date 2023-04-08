@@ -11,22 +11,20 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
-}
+
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long clients,ans=0;cin>>clients;
+    map<pair<long long,long long>,long long>dat;
+    while(clients--){
+        long long x,y;cin >> x>>y;
+        dat[{x,y}]++;
+    }
+    for(auto&it:dat)ans=max(ans,it.second);
+    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -37,7 +35,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

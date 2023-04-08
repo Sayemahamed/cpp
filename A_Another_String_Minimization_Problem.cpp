@@ -11,22 +11,28 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
+string getString(long long n){
+    string ans = "";
+    while(n--)ans+='B';
+    return ans;
 }
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long qur,siz;cin >> qur>>siz;
+    string str=getString(siz);
+    while(qur--){
+        long long x;cin >> x;
+        x=min(x,siz-x+1);
+        if(str[x-1]=='B')str[x-1]='A';
+        else{
+            x=max(x,siz-x+1);
+            str[x-1]='A';
+        }
+    }
+    cout<<str<<endl;
 }
 
 //----------------------------------------------------------------//

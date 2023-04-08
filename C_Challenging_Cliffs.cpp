@@ -7,26 +7,28 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
-}
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long siz, i = 0, j;
+    cin >> siz;
+    j = siz - 1;
+    vector<long long> dat(siz);
+    for (auto &it : dat)
+        cin >> it;
+    sort(dat.begin(), dat.end());
+    while(i<=j){
+        cout<<dat[i++]<<' ';
+        if(i<j)
+        cout<<dat[j--]<<' ';
+    }
+    cout<<endl;
 }
 
 //----------------------------------------------------------------//

@@ -11,22 +11,26 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
-}
+
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long siz,letters;cin>>siz>>letters;
+    string firstStr,secondStr;
+    map<string,string>dat;
+    while(letters--){
+        cin>>firstStr>>secondStr;
+        if(secondStr.length()<firstStr.length()){
+            dat[firstStr]=secondStr;
+        }
+        else dat[firstStr]=firstStr;
+    }
+    while(siz--){
+        cin>>firstStr;
+        cout<<dat[firstStr]<<' ';
+    }
 }
 
 //----------------------------------------------------------------//
@@ -37,7 +41,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

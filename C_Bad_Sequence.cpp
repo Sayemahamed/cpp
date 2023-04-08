@@ -16,31 +16,37 @@ using namespace std;
 // solve function//
 void solve()
 {
-    int a, b, c, d;
-    cin >> a >> b >> c >> d;
-    if (abs(a - c) == abs(b - d) or a == c or b == d)
+    long long siz, ans = 0;
+    cin >> siz;
+    string str;
+    cin >> str;
+    for (auto &it : str)
     {
-        if (a == c)
-        {
-            if (abs(a + abs(b - d)) <= 100)
-                cout << a + abs(b - d) << " " << b << " " << c + abs(b - d) << " " << d << endl;
-            else
-                cout << a - abs(b - d) << " " << b << " " << c - abs(b - d) << " " << d << endl;
-        }
-        else if (b == d)
-        {
-            if (abs(b + abs(a - c)) < abs(b - abs(a - c)))
-                cout << a << " " << b + abs(a - c) << " " << c << " " << d + abs(a - c) << endl;
-            else
-                cout << a << " " << b - abs(a - c) << " " << c << " " << d - abs(a - c) << endl;
-        }
+        if (it == '(')
+            ans++;
         else
+            ans--;
+        if (ans < 0)
         {
-            cout << a << ' ' << d << ' ' << c << ' ' << b << endl;
+            it = '$';
+            str += ')';
+            break;
         }
     }
+    ans = 0;
+    for (auto &it : str)
+    {
+        if (it == '(')
+            ans++;
+        else if (it == ')')
+            ans--;
+        if (ans < 0)
+            break;
+    }
+    if (ans != 0)
+        cout << "No" << endl;
     else
-        cout << -1 << endl;
+        cout << "Yes" << endl;
 }
 
 //----------------------------------------------------------------//

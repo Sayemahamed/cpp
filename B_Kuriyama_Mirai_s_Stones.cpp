@@ -11,22 +11,42 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long bitCount(long long value){
-    long long ans=0;
-    while(value){
-        if(value&1)ans++;
-        value >>= 1;
-    }
-    return(ans);
-}
+
+
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long n;
-    cin>>n;
-    if(bitCount(n)>1)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long siz;cin>>siz;
+    multiset<long long>dat;
+    vector<long long>ans1(siz+1,0),ans2(siz+1,0);
+    int i=1;
+    while(siz--){
+        cin>>ans1[i];
+        dat.insert(ans1[i]);
+        ans1[i]+=ans1[i-1];
+        i++;
+    }
+    i=1;
+    for(auto&it:dat){
+        ans2[i]=it;
+        ans2[i]+=ans2[i-1];
+        i++;
+    }
+    cin>>i;
+    while(i--){
+        long long x,l,r;cin>>x>>l>>r;
+        if(x==1){
+            long long tmp=ans1[r];
+            tmp-=ans1[l-1];
+            cout<<tmp<<endl;
+        }
+        else{
+            long long tmp=ans2[r];
+            tmp-=ans2[l-1];
+            cout<<tmp<<endl;
+        }
+    }
 }
 
 //----------------------------------------------------------------//
@@ -37,7 +57,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();
