@@ -17,22 +17,12 @@ using namespace std;
 // solve function//
 void solve()
 {
-    string str;cin>>str;
-    long long one=0 ,zero=0 ,flag=false;
-    for(auto&it:str){
-        if(zero>=7 or one>=7) flag=true;
-        if(it=='0'){
-            zero++;
-            one=0;
-        }
-        else{
-            one++;
-            zero=0;
-        }
+    double balls,sum=0,ans=0;cin>>balls;
+    for(long i=1;i<=balls;i++){
+        long long x;cin>>x;sum+=x;
+        if(sum/i==1)ans++;
     }
-    if(zero>=7 or one>=7) flag=true;
-    if(flag)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -43,7 +33,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

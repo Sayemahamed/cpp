@@ -17,22 +17,23 @@ using namespace std;
 // solve function//
 void solve()
 {
-    string str;cin>>str;
-    long long one=0 ,zero=0 ,flag=false;
-    for(auto&it:str){
-        if(zero>=7 or one>=7) flag=true;
-        if(it=='0'){
-            zero++;
-            one=0;
-        }
-        else{
-            one++;
-            zero=0;
-        }
+    long long siz;cin>>siz;
+    vector<long long>dat(siz);
+    for(auto&it:dat)cin>>it;
+    if(is_sorted(dat.begin(),dat.end())){
+        cout<<"YES"<<endl;
+    }else if(siz<3){
+        cout<<"NO"<<endl;
     }
-    if(zero>=7 or one>=7) flag=true;
-    if(flag)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    else if(is_sorted(dat.rbegin(),dat.rend())){
+        cout<<"YES"<<endl;
+    }
+    else{
+        long long n=is_sorted_until(dat.begin(),dat.end())-dat.begin();
+        n=is_sorted_until(dat.begin()+n,dat.end())-dat.begin();
+        if(n>=siz)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
 }
 
 //----------------------------------------------------------------//
@@ -43,7 +44,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

@@ -17,22 +17,19 @@ using namespace std;
 // solve function//
 void solve()
 {
-    string str;cin>>str;
-    long long one=0 ,zero=0 ,flag=false;
-    for(auto&it:str){
-        if(zero>=7 or one>=7) flag=true;
-        if(it=='0'){
-            zero++;
-            one=0;
-        }
-        else{
-            one++;
-            zero=0;
-        }
+    long long total,need;cin>>total>>need;
+    long long oddCount=0,evenCount=0;
+    while(total--){
+        long long x;cin>>x;
+        if(x&1)oddCount++;
+        else evenCount++;
+    }bool flag=false;
+    for(long long i=1; i<=oddCount;i+=2){
+        if(i>need)break;
+        if(need-i<=evenCount)flag=true;
     }
-    if(zero>=7 or one>=7) flag=true;
-    if(flag)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    if(flag)cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -43,7 +40,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

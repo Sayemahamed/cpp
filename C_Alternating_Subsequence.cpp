@@ -7,33 +7,44 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+inline long long getMaxValue(long long &idx, vector<long long> &dat)
+{
+    set<long long> tmp;
+    while (dat[idx] > 0 and idx < dat.size())
+        tmp.insert(dat[idx++]);
+    if (tmp.empty())
+        return 0;
+    return *tmp.rbegin();
+}
+inline long long getMinValue(long long &idx, vector<long long> &dat)
+{
+    set<long long> tmp;
+    while (dat[idx] < 0 and idx < dat.size())
+        tmp.insert(dat[idx++]);
+    if (tmp.empty())
+        return 0;
+    return *tmp.rbegin();
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz,num;cin>>siz;
-    long long mat[2][siz];
-    num=siz<<1;
-    for(long long i=0;i<siz;i+=2){
-        mat[0][i]=num--;
-        mat[1][siz-i-1]=num--;
+    long long siz;
+    cin >> siz;
+    vector<long long> dat(siz);
+    for (auto &it : dat)
+        cin >> it;
+    long long idx = 0, ans = 0;
+    while (idx < siz)
+    {
+        ans += getMaxValue(idx, dat);
+        ans += getMinValue(idx, dat);
     }
-        for(long long i=siz-1;i>=0;i-=2){
-        mat[0][i]=num--;
-        mat[1][siz-i-1]=num--;
-    }
-    for(long long i=0;i<2;i++){
-        for(long long j=0;j<siz;j++){
-            cout<<mat[i][j]<<" ";
-        }
-    cout<<endl;
-    }
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//

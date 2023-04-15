@@ -17,22 +17,8 @@ using namespace std;
 // solve function//
 void solve()
 {
-    string str;cin>>str;
-    long long one=0 ,zero=0 ,flag=false;
-    for(auto&it:str){
-        if(zero>=7 or one>=7) flag=true;
-        if(it=='0'){
-            zero++;
-            one=0;
-        }
-        else{
-            one++;
-            zero=0;
-        }
-    }
-    if(zero>=7 or one>=7) flag=true;
-    if(flag)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    long long siz;cin>>siz;
+    cout<<max((long long)0,(long long)(siz + (siz+1)/2 -3))<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -43,7 +29,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

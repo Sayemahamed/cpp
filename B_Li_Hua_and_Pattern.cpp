@@ -16,7 +16,7 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long siz, power, fucked = 0;
+    long long siz, power, cnt = 0;
     cin >> siz >> power;
     bool mat[siz][siz];
     for (long long i = 0; i < siz; i++)
@@ -31,14 +31,17 @@ void solve()
         for (long long j = 0; j < siz; j++)
         {
             if (mat[i][j] != mat[siz - i - 1][siz - j - 1])
-                fucked++;
+                cnt++;
         }
     }
-    fucked >>= 1;
-    if (power < fucked)
+    cnt >>= 1;
+    if (power < cnt)
         cout << "NO" << endl;
-    else
-        cout << "YES" << endl;
+    else {
+        if((siz&1) or !((power-cnt)&1))
+        cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
 }
 
 //----------------------------------------------------------------//
