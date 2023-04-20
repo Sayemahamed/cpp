@@ -11,34 +11,30 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long log(unsigned long long value){
+    if(value<2)return 0;
+    return 1+log(value/2);
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
-	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
-	}
-	long long limit=(*dat.rbegin())*2;
-	
-	cout<<ans<<endl;
+    unsigned long long num;cin>>num;
+    cout<<log(num)<<endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	long long test = 1;
-	cin >> test;
-	while (test--)
-	{
-		solve();
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    // cin >> test;
+    while (test--)
+    {
+        solve();
+    }
 }

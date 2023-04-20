@@ -11,34 +11,32 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long NCR(long long N,long long R){
+    long long res=0;
+    if(R==0)return 1;
+    res=NCR(N,R-1)*(N-R+1)/R;
+    return res;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
-	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
-	}
-	long long limit=(*dat.rbegin())*2;
-	
-	cout<<ans<<endl;
+    long long N ,R ;cin>>N>>R;
+    cout<<NCR(N,R)<<endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	long long test = 1;
-	cin >> test;
-	while (test--)
-	{
-		solve();
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    // cin >> test;
+    while (test--)
+    {
+        solve();
+    }
 }

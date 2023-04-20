@@ -11,34 +11,31 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long magicSequence(unsigned long long value){
+    if(value==1)return 1;
+    if(value&1)return 1+magicSequence(3*value +1);
+    return 1+magicSequence(value/2);
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
-	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
-	}
-	long long limit=(*dat.rbegin())*2;
-	
-	cout<<ans<<endl;
+    unsigned long long value;cin>>value;
+    cout<<magicSequence(value)<<endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	long long test = 1;
-	cin >> test;
-	while (test--)
-	{
-		solve();
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    // cin >> test;
+    while (test--)
+    {
+        solve();
+    }
 }

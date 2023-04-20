@@ -11,34 +11,34 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long memory[100];
+long long fib(long long n){
+    if(memory[n])return memory[n];
+    if(n<=1)return 0;
+    if(n==2)return 1;
+    memory[n]=fib(n-1)+fib(n-2);
+    return memory[n];
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
-	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
-	}
-	long long limit=(*dat.rbegin())*2;
-	
-	cout<<ans<<endl;
+    long long n;cin>>n;
+    cout<<fib(n)<<endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	long long test = 1;
-	cin >> test;
-	while (test--)
-	{
-		solve();
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    // cin >> test;
+    while (test--)
+    {
+        solve();
+    }
 }

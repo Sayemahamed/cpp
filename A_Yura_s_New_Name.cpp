@@ -17,28 +17,27 @@ using namespace std;
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
-	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
-	}
-	long long limit=(*dat.rbegin())*2;
-	
-	cout<<ans<<endl;
+    string s;cin >> s;
+    long long ans = 0;
+    if(s[s.length()-1]!='^'){ans++;s=s+'^';}
+    if(s[0]!='^' or s.length()==1){ans++;s='^'+s;}
+    for(long long i=1;i<s.length();i++){
+        if(s[i]!='^' and s[i]==s[i-1] ) ans++;
+    }
+    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	long long test = 1;
-	cin >> test;
-	while (test--)
-	{
-		solve();
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    cin >> test;
+    while (test--)
+    {
+        solve();
+    }
 }

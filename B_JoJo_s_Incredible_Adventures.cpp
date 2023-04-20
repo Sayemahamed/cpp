@@ -7,38 +7,46 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-//data types//
+// data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
-	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
-	}
-	long long limit=(*dat.rbegin())*2;
-	
-	cout<<ans<<endl;
+    string s;
+    cin >> s;
+
+    long long  n = s.length();
+    s = s + s;
+    long long  m = 0, cnt = 0;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == '1')
+            cnt++;
+        else
+            cnt = 0;
+        m = max(m, cnt);
+    }
+    if (n < m)
+        cout << n * n << '\n';
+    else
+        cout << ((m + 1) / 2) * ((m + 2) / 2) << '\n';
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	long long test = 1;
-	cin >> test;
-	while (test--)
-	{
-		solve();
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    long long test = 1;
+    cin >> test;
+    while (test--)
+    {
+        solve();
+    }
 }
