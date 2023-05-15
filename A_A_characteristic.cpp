@@ -7,30 +7,36 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+inline long long sum(long long n){
+    return (n*(n-1))/2;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
+    long long upperLimit,need;cin>>upperLimit>>need;
+    bool isPossible = false;
+    long long one,One;
+    for(long long i=0;i<=(upperLimit+1)/2;i++){
+        if(sum(i)+sum(upperLimit-i)==need){
+            isPossible=true;
+            one=i;
+            One=upperLimit-i;
+            break;
+        }
     }
-    cout<<endl;
+    if(isPossible){
+        cout<<"YES"<<endl;
+        while(one--)cout<<-1<<' ';
+        while(One--)cout<<1<<' ';
+        cout<<endl;
+    }
+    else cout<<"NO"<<endl;
 }
 
 //----------------------------------------------------------------//

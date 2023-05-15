@@ -1,0 +1,1 @@
+{"name":"Local: longestIncresingSubsequent","url":"c:\\Users\\sayem\\source\\cpp\\longestIncresingSubsequent.cpp","tests":[{"id":1682073772553,"input":"8\n10 9 2 5 3 7 101 18","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\cpp\\longestIncresingSubsequent.cpp","group":"local","local":true}

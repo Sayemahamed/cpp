@@ -7,30 +7,27 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+auto get(){
+    map<long long,long long >dat;
+    dat[1]++;
+    dat[1]++;
+    dat[1]++;
+    dat[2]++;
+    dat[3]++;
+    auto ref = make_shared<map<long long,long long >>(dat);
+    return ref;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
-    }
-    cout<<endl;
+    auto a = get();
+    for(auto&it:*a)cout<<it.first<<" "<<it.second<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -41,7 +38,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

@@ -7,30 +7,25 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
+    long long siz,dis,cnt=0;cin>>siz>>dis;
+    vector<long long>dat(siz);
     for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
+    for(long long i=0;i<siz;i++){
+        if(dat[i]%dis!=((i+1)%dis))cnt++;
     }
-    cout<<endl;
+    if(cnt==0)cout<<0<<endl;
+    else if(cnt==2)cout<<1<<endl;
+    else cout<<-1<<endl;
 }
 
 //----------------------------------------------------------------//

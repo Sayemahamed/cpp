@@ -1,0 +1,1 @@
+{"name":"Local: rodCutting","url":"c:\\Users\\sayem\\source\\cpp\\rodCutting.cpp","tests":[{"id":1682259652495,"input":"8\n1 5 8 9 10 17 17 20\n8","output":"22"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\cpp\\rodCutting.cpp","group":"local","local":true}

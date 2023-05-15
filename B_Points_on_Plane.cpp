@@ -7,30 +7,18 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
-    }
-    cout<<endl;
+    long long n;cin>>n;
+    cout<<(long long)sqrt(n-1)<<endl;
 }
 
 //----------------------------------------------------------------//

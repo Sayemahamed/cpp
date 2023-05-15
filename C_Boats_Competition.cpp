@@ -17,14 +17,22 @@ using namespace std;
 // solve function//
 void solve()
 {
-	long long siz,ans=0;cin>>siz;
-	multiset<long long>dat;
+	long long siz,x,ans=0;cin>>siz;
+	map<long long, long long>dat;
 	for(long long i=0;i<siz;i++){
-		long long x;cin>>x;
-		dat.insert(x);
+		cin>>x;
+		dat[x]++;
 	}
-	long long limit=(*dat.rbegin())*2;
-	
+	for(long long sum=0;sum<=siz*2;sum++){
+		long long res=0;
+		for(long long first=0;first*2<=sum;first++){
+			if(dat.count(first) and dat.count(sum-first)){
+				if(first==sum-first)res+=dat[first]/2;
+				else res+=min(dat[first],dat[sum-first]);
+			}
+		}
+		ans=max(ans,res);
+	}
 	cout<<ans<<endl;
 }
 

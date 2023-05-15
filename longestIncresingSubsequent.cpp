@@ -7,30 +7,32 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long lis(vector<long long>&dat,vector<long long>&tmp,long long idx){
+    if(tmp[idx])return tmp[idx];
+    long long ans=1;
+    for(long long i=0;i<idx;i++){
+        if(dat[idx]>dat[i]){
+            ans=max(ans,lis(dat,tmp,i)+1);
+        }
+    }
+    tmp[idx]=ans;
+    return tmp[idx];
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
+    long long siz,ans=0;cin>>siz;
+    vector<long long>dat(siz),tmp(siz,0);
     for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
+    for(long long i=1;i<siz;i++){
+        ans=max(lis(dat,tmp,i),ans);
     }
-    cout<<endl;
+    cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -41,7 +43,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

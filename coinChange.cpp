@@ -11,26 +11,39 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
+long long dp(vector<int> &coin, vector<long long> &tmp, long long amount)
+{
+    if (amount == 0)
+        return 0;
+    if (tmp[amount] != -1)
+        return tmp[amount];
+    long long ans = INT_MAX;
+    for (auto &it : coin)
+    {
+        if (amount >= it)
+            ans = min(ans, dp(coin, tmp, amount - it) + 1);
+    }
+    tmp[amount] = ans;
+    return ans;
+}
+int coinChange(vector<int> &coins, int amount)
+{
+    vector<long long> tmp(amount+7, -1);
+    int ans = dp(coins, tmp, amount);
+    return (ans == INT_MAX ? -1 : ans);
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
-    }
-    cout<<endl;
+    long long coins, amount;
+    cin >> coins;
+    vector<int> coin(coins);
+    for (auto &it : coin)
+        cin >> it;
+    cin >> amount;
+    cout << coinChange(coin, amount) << endl;
 }
 
 //----------------------------------------------------------------//
@@ -41,7 +54,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

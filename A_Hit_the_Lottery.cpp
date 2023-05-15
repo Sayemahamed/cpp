@@ -7,30 +7,27 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+long long dp(vector<long long>&dat,long long num){
+    long long ans=0;
+    for(auto&it:dat)
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
-    }
-    cout<<endl;
+    long long num;cin>>num;
+    vector<long long>dat;
+    dat.push_back(100);
+    dat.push_back(20);
+    dat.push_back(10);
+    dat.push_back(5);
+    dat.push_back(1);
+    cout<<dp(dat,num)<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -41,7 +38,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

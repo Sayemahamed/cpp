@@ -7,30 +7,33 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+long long dp(vector<int>&dat,string str,long long idx){
+    if(idx==0)return 0;
+    if(dat[idx])return dat[idx];
+    long long ans=dp(dat,str,idx-1);
+    if(str[idx]=='Q'){
+        for(long long i=0;i<idx;i++){
+            if(str[i]=='Q')
+            for(long long j=i+1;j<idx;j++)
+            if(str[j]=='A')
+            ans++;
+        }
+    }
+    dat[idx]=ans;
+    return dat[idx];
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
-    }
-    cout<<endl;
+    string str;cin>>str;
+    vector<int>dat(str.length(),0);
+    cout<<dp(dat,str,str.length()-1)<<endl;
 }
 
 //----------------------------------------------------------------//
@@ -41,7 +44,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

@@ -7,30 +7,33 @@ using namespace std;
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
+int cut(vector<long long>&memoise,int price[],int n){
+    if(memoise[n]!=-1)return memoise[n];
+    int ans=0;
+    for(int i=0; i<n; i++){
+        if(i<n)
+        ans=max(ans,cut(memoise,price,n-i-1)+price[i]);
+    }
+    return memoise[n] = ans;
+}
+int cutRod(int price[], int n){
+    vector<long long >memoise(1007,-1);
+    return cut(memoise,price,n);
+}
 
 //----------------------------------------------------------------//
 // solve function//
-void solve()
-{
-    long long siz;cin>>siz;
-    vector<long long >dat(siz);
-    for(auto&it:dat)cin>>it;
-    sort(dat.begin(),dat.end());
-    deque<long long >ans;
-    for(auto&it:dat)ans.push_back(it);
-
-    while(!ans.empty()){
-        cout<<ans.back()<<' ';
-        ans.pop_back();
-        if(!ans.empty())
-        cout<<ans.front()<<' ';
-        ans.pop_front();
-    }
-    cout<<endl;
+void solve(){
+    int siz,len,i=0;
+    cin>>siz;
+    int dat[siz];
+    while(i<siz)cin>>dat[i++];
+    cin>>len;
+    cout<<cutRod(dat,len);
 }
 
 //----------------------------------------------------------------//
@@ -41,7 +44,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--)
     {
         solve();

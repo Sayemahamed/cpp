@@ -11,13 +11,32 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long gc(long long a, long long b){return b?gcd(b,a%b):a;}
+long long dp(vector<pair<long long,long long>>&dat,vector<vector<long long >>&Ans,long long idx,long long limit){
+    if(idx<0 or limit==0)return 0;
+    if(Ans[limit][idx])return Ans[limit][idx];
+    long long ans=dp(dat,Ans,idx-1,limit);
+    if(limit>=dat[idx].first)
+    ans=max(ans,dp(dat,Ans,idx-1,limit-dat[idx].first)+dat[idx].second);
+    Ans[limit][idx]=ans;
+    return Ans[limit][idx];
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    cout<<gc(540,1024);
+    long long items,limit;cin>>items>>limit;
+    vector<pair<long long,long long>>item(items);
+    for(auto&it:item)cin>>it.first>>it.second;
+    vector<vector<long long >>ans;
+    for(long long i=0;i<=limit;i++){
+        vector<long long>tmp;
+        for(long long j=0;j<=items;j++){
+            tmp.push_back(0);
+        }
+        ans.push_back(tmp);
+    }
+    cout<<dp(item,ans,items-1,limit);
 }
 
 //----------------------------------------------------------------//
