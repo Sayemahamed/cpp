@@ -1,60 +1,40 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-#define endl '\n'
+
+const int M = 2e5 + 239;
+
+int n, p[M], x;
+
+void solve()
+{
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> x;
+        p[x - 1] = i;
+    }
+    int l = n;
+    int r = 0;
+    string ans = "";
+    for (int i = 0; i < n; i++)
+    {
+        l = min(l, p[i]);
+        r = max(r, p[i]);
+        if (r - l == i)
+            ans += '1';
+        else
+            ans += '0';
+    }
+    cout << ans << "\n";
+}
+
 int main()
 {
-    long long test;
-    cin >> test;
-    while (test--)
-    {
-        long long numbers, firstIdx, lastIdx;
-        cin >> numbers;
-        vector<long long> num(numbers);
-        for (long long i = 0; i < numbers; i++)
-        {
-            cin >> num[i];
-            if (num[i] == 1)
-            {
-                firstIdx = i - 1;
-                lastIdx = i + 1;
-            }
-        }
-        set<long long> dat;
-        if (lastIdx <= numbers)
-            dat.insert(num[lastIdx - 1]);
-        else
-            dat.insert(num[firstIdx + 1]);
-        while (firstIdx >= 0 || lastIdx < numbers)
-        {
-            if (lastIdx < numbers)
-            {
-                dat.insert(num[lastIdx]);
-                long long siz = 0;
-                for (auto it = dat.begin(); it != dat.lower_bound(num[lastIdx]); it++)
-                    siz++;
-                // cout<<siz<<' ';
-                if (siz != num[lastIdx] - 1)
-                    num[lastIdx] = 0;
-                else
-                    num[lastIdx] = 1;
-                lastIdx++;
-            }
-            if (firstIdx >= 0)
-            {
-                dat.insert(num[firstIdx]);
-                long long siz = 0;
-                for (auto it = dat.begin(); it != dat.lower_bound(num[firstIdx]); it++)
-                    siz++;
-                // cout<<siz<<' ';
-                if (siz != num[firstIdx] - 1)
-                    num[firstIdx] = 0;
-                else
-                    num[firstIdx] = 1;
-                firstIdx--;
-            }
-        }
-        for (auto &it : num)
-            cout << it;
-        cout << endl;
-    }
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
+    return 0;
 }

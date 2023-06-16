@@ -9,5 +9,6 @@
         "stacktrace": "cpp",
         "random": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "cph.general.onceMaintainerMessage": false
 }

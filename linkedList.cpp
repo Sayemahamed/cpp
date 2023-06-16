@@ -7,7 +7,11 @@ class Node
 public:
     T data;
     Node *point;
-    Node();
+    Node()
+    {
+        data = NULL;
+        point = NULL;
+    };
     Node(T data)
     {
         this->data = data;
@@ -20,8 +24,11 @@ public:
 template <typename T>
 class ChainNode
 {
-public:
+private:
     Node<T> *start = NULL;
+    long long siz = 0;
+
+public:
     void add(T data)
     {
         if (start == NULL)
@@ -34,14 +41,16 @@ public:
             temp->point = new Node<T>(data);
         }
     }
-    void traverse()
+    vector<T> traverse()
     {
+        vector<T> result;
         Node<T> *temp = start;
         while (temp != NULL)
         {
-            cout << temp->data << ' ';
+            result.push_back(temp->data);
             temp = temp->point;
         }
+        return result;
     }
     void removeElement(T dat)
     {
@@ -66,21 +75,21 @@ public:
         }
         previousPoint->point = nextPoint;
     }
-    void InsertElementAT(T data, T theElementAfter)
+    T find(T dat)
     {
         Node<T> *temp = start;
-        Node<T> *New = new Node<T>(data);
-        while (temp != NULL and temp->data != theElementAfter)
+        while (temp != NULL and temp->data != dat)
         {
             temp = temp->point;
-            if (temp == NULL)
-            {
-                cout << "The Element does not exist , So inserted at last" << endl;
-            }
         }
-        New->point = temp->point;
-        temp->point = New;
+        if (temp == NULL)
+        {
+            cout << "The Element does not exist" << endl;
+            return T(0);
+        }
+        return temp->data;
     }
+    long long size() { return siz; }
 };
 // End of Generic LinkList implementation
 
@@ -94,13 +103,16 @@ int main()
     // cout << chain.start->data << endl;
     chain.add(30);
     // cout << chain.start->data << endl;
-    chain.traverse();
+    for (auto &it : chain.traverse())
+        cout << it << ' ';
     cout << endl;
-    chain.InsertElementAT(50, 20);
-    chain.traverse();
+    cout<<chain.find(40);
     cout << endl;
     chain.removeElement(20);
-    chain.traverse();
+    for (auto &it : chain.traverse())
+        cout << it << ' ';
     cout << endl;
     chain.removeElement(40);
+    for (auto &it : chain.traverse())
+        cout << it << ' ';
 }
