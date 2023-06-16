@@ -17,14 +17,16 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long siz,x,odd;cin>>siz;
-    vector<long long> even,odd;
+    long long siz,x,oddCount=0,ans=0;cin>>siz;
+    vector<long long> odd;
     for(long long i=0;i<siz;i++){
         cin>>x;
-        if(x&1)odd.push_back(x);
-        else even.push_back(x);
+        if(x&1){
+            odd.push_back(x);
+            
+        }
+        else ans+=x;
     }
-    sort(even.begin(),even.end());
     sort(odd.begin(),odd.end());
 }
 
