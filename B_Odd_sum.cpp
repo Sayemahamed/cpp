@@ -23,11 +23,26 @@ void solve()
         cin>>x;
         if(x&1){
             odd.push_back(x);
-            
+            oddCount++;
         }
-        else ans+=x;
+        else if(x>0) ans+=x;
     }
-    sort(odd.begin(),odd.end());
+    if(oddCount==0){
+        cout<<-1<<endl;
+    }else{
+        sort(odd.rbegin(),odd.rend());
+        ans+=odd[0];
+        long long i=1;
+        while(i<odd.size()-1 and odd[i]>0){
+            ans+=odd[i++];
+        }
+        if(!(i&1) and i!=odd.size()){
+            if(odd[i]+odd[i-1]>0)
+            ans+=odd[i];
+            else ans-=odd[i-1];
+        }
+        cout<<ans<<endl;
+    }
 }
 
 //----------------------------------------------------------------//
