@@ -9,23 +9,22 @@ using namespace std;
 //----------------------------------------------------------------//
 // data types//
 string str1, str2;
-string matrix[3000][3000];
 
 //----------------------------------------------------------------//
 // helper functions //
-string dp(long long i, long long j)
+string dp(long long i, long long j,vector<vector<string>>&matrix)
 {
     if (i < 0 || j < 0)
         return "";
     if(matrix[i][j]!="")return matrix[i][j];
     if (str1[i]==str2[j]){
-        matrix[i][j] =str1[i] + dp(i-1, j-1);
+        matrix[i][j] =str1[i] + dp(i-1, j-1,matrix);
         return matrix[i][j];
     }
     else{
-        matrix[i][j] =dp(i-1,j);
-        if(matrix[i][j].length()<dp(i,j-1).length()){
-            matrix[i][j] =dp(i,j-1);
+        matrix[i][j] =dp(i-1,j,matrix);
+        if(matrix[i][j].length()<dp(i,j-1,matrix).length()){
+            matrix[i][j] =dp(i,j-1,matrix);
         }
         return matrix[i][j];
     }
@@ -35,7 +34,8 @@ string dp(long long i, long long j)
 void solve()
 {
     cin >> str1 >> str2;
-    string ans = dp(str1.length() - 1, str2.length() - 1);
+    vector<vector<string>> grid(str1.length()+1,vector<string>(str2.length()+1));
+    string ans = dp(str1.length() - 1, str2.length() - 1,grid);
     for (int i = ans.length() - 1; i >= 0; i--)
         cout << ans[i];
 }

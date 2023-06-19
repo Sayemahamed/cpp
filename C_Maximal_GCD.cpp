@@ -21,12 +21,15 @@ void solve()
     cin>>theSum>>num;
     if((num*(num+1))/2>theSum)cout<<-1<<endl;
     else {
-        long long multiplier=theSum/((num*(num+1))/2),i=1;
-        // while((num*multiplier*(num+1))/2<theSum)multiplier++;
-        while (num-->1){
-            cout<<multiplier*i<<" ";
-            theSum-=multiplier*i;
+        long long ans=0,i=1;
+        while((i*num*(num+1))/2<=theSum){
+            if((theSum-(i*num*(num-1))/2)%i==0)
+            ans=i;
             i++;
+        }
+        for(long long j=1; j<num; j++){
+            cout<<ans*j<<' ';
+            theSum-=ans*j;
         }
         cout<<theSum<<endl;
     }
