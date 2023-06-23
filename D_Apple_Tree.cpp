@@ -11,28 +11,35 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long dfs(vector<long long>dat[], vector<long long>&ans,vector<bool>&isVisited,long long x){
+    if(dat[x].size()==1 and x!=1)ans[x]=1;
+    isVisited[x]=true;
+    for(auto&it:dat[x]){
+        if(isVisited[it])continue;
+        ans[x]+=dfs(dat,ans,isVisited,it);
+    }
+    return ans[x];
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long theSum,num;
-    cin>>theSum>>num;
-    if((num*(num+1))/2>theSum)cout<<-1<<endl;
-    else {
-        long long ans=1;
-        for(long long i=2;i*i<=theSum;i++){
-            if(theSum%i)continue;
-            if(num*(num+1)*(i)/2>theSum)break;
-            ans=max(ans,i);
-            if(num*(num+1)*(theSum/i)/2<=theSum)ans=max(ans,theSum/i);
-        }
-        for(long long i=1;i<num;i++){
-            cout<<ans*i<<' ';
-            theSum-=ans*i;
-        }
-        cout<<theSum<<endl;
+    long long siz;cin>>siz;
+    vector<long long>dat[siz+1],ans(siz+1,0);
+    vector<bool> isVisited(siz+1,false);
+    long long x,y;
+    for(long long i=1;i<siz;i++){
+        cin>>x>>y;
+        dat[y].push_back(x);
+        dat[x].push_back(y);
+    }
+    long long assumption;cin >> assumption;
+    dfs(dat,ans,isVisited,1);
+    if(ans[1]==0)ans[1]=1;
+    while(assumption--){
+        cin>>x>>y;
+        cout<<ans[x]*ans[y]<<endl;
     }
 }
 
@@ -44,7 +51,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--)
     {
         solve();

@@ -11,29 +11,27 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
-
+long long getSum(vector<long long>&sleepPerDay,long long index,long long days){
+    if(index==0)return sleepPerDay[index+days-1];
+    return sleepPerDay[index+days-1] - sleepPerDay[index-1];
+}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long theSum,num;
-    cin>>theSum>>num;
-    if((num*(num+1))/2>theSum)cout<<-1<<endl;
-    else {
-        long long ans=1;
-        for(long long i=2;i*i<=theSum;i++){
-            if(theSum%i)continue;
-            if(num*(num+1)*(i)/2>theSum)break;
-            ans=max(ans,i);
-            if(num*(num+1)*(theSum/i)/2<=theSum)ans=max(ans,theSum/i);
-        }
-        for(long long i=1;i<num;i++){
-            cout<<ans*i<<' ';
-            theSum-=ans*i;
-        }
-        cout<<theSum<<endl;
+    long long days ,daysPerWeek,weeks;
+    cin>>days>>daysPerWeek;
+    weeks=days-daysPerWeek+1;
+    double ans=0;
+    vector<long long>sleepPerDay(days,0);
+    for(long long i=0;i<days;i++){
+        cin>>sleepPerDay[i];
+        if(i)sleepPerDay[i]+=sleepPerDay[i-1];
     }
+    for(long long i=0; i<weeks; i++){
+        ans+=getSum(sleepPerDay,i,daysPerWeek);
+    }
+    cout<<fixed<<setprecision(7)<<ans/weeks<<endl;
 }
 
 //----------------------------------------------------------------//

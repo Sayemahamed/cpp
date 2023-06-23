@@ -8,31 +8,39 @@ using namespace std;
 
 //----------------------------------------------------------------//
 //data types//
-
+struct Node{
+    int cup,tea,index;
+    Node(){};
+};
 //----------------------------------------------------------------//
 // helper functions //
-
-
+bool compSize(Node&a,Node&b){return a.cup>b.cup;}
+bool compIndex(Node&a,Node&b){return a.index<b.index;}
 //----------------------------------------------------------------//
 // solve function//
 void solve()
 {
-    long long theSum,num;
-    cin>>theSum>>num;
-    if((num*(num+1))/2>theSum)cout<<-1<<endl;
-    else {
-        long long ans=1;
-        for(long long i=2;i*i<=theSum;i++){
-            if(theSum%i)continue;
-            if(num*(num+1)*(i)/2>theSum)break;
-            ans=max(ans,i);
-            if(num*(num+1)*(theSum/i)/2<=theSum)ans=max(ans,theSum/i);
+    long long cups,tea;cin>>cups>>tea;
+    vector<Node>friends(cups);
+    for(long long i=0;i<cups;i++){
+        cin>>friends[i].cup;
+        friends[i].tea=(friends[i].cup+1)/2;
+        friends[i].index=i;
+        tea-=friends[i].tea;
+    }
+    if(tea<0){
+        cout<<-1<<endl;
+    }
+    else{
+        sort(friends.begin(), friends.end(),compSize);
+        for(long long i=0; i<friends.size(); i++){
+            long long tmp=min(tea,(long long)friends[i].cup-friends[i].tea);
+            friends[i].tea+=tmp;
+            tea-=tmp;
         }
-        for(long long i=1;i<num;i++){
-            cout<<ans*i<<' ';
-            theSum-=ans*i;
-        }
-        cout<<theSum<<endl;
+        sort(friends.begin(),friends.end(),compIndex);
+        for(auto&it:friends)cout<<it.tea<<" ";
+        cout<<endl;
     }
 }
 

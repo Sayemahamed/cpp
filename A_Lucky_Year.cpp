@@ -17,23 +17,18 @@ using namespace std;
 // solve function//
 void solve()
 {
-    long long theSum,num;
-    cin>>theSum>>num;
-    if((num*(num+1))/2>theSum)cout<<-1<<endl;
-    else {
-        long long ans=1;
-        for(long long i=2;i*i<=theSum;i++){
-            if(theSum%i)continue;
-            if(num*(num+1)*(i)/2>theSum)break;
-            ans=max(ans,i);
-            if(num*(num+1)*(theSum/i)/2<=theSum)ans=max(ans,theSum/i);
-        }
-        for(long long i=1;i<num;i++){
-            cout<<ans*i<<' ';
-            theSum-=ans*i;
-        }
-        cout<<theSum<<endl;
+    long long num,zeroCount=0;
+    unsigned long long firstDigit;
+    cin>>num;
+    long long temp=num;
+    while(temp){
+        if(temp<10 and temp>0)firstDigit=(unsigned long long)temp;
+        temp/=10;
+        zeroCount++;
     }
+    firstDigit++;
+    while(--zeroCount)firstDigit*=10;
+    cout<<firstDigit-num<<endl;
 }
 
 //----------------------------------------------------------------//
