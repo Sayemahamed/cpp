@@ -10,17 +10,18 @@ using namespace std;
 
 //----------------------------------------------------------------//
 //data types//
-long long diff, Bob;
+
 //----------------------------------------------------------------//
 // helper functions //
-void dfs( vector<long long>list[], vector<long long>& ans, vector<long long>& parent, long long position, long long distance ) {
-	if (position == Bob and !ans[ position ])diff = distance;
-	ans[ position ] = distance;
+void dfs( vector<int>list[], vector<int>& distance, vector<int>& parent, vector<int>& ans, int position, int dis ) {
 	for (auto& child : list[ position ]) {
-		parent[ child ] = position;
-		if (!ans[ child ])
-			dfs( list, ans, parent, child, distance + 1 );
-		ans[ position ] = max( distance, ans[ child ] );
+		if (child != parent[ position ]) {
+			distance[ child ] = dis + 1;
+			ans[ child ] = distance[ child ];
+			parent[ child ] = position;
+			dfs( list, distance, parent, ans, child, dis + 1 );
+			ans[ position ] = max( ans[ child ], ans[ position ] );
+		}
 	}
 }
 
@@ -28,21 +29,20 @@ void dfs( vector<long long>list[], vector<long long>& ans, vector<long long>& pa
 // solve function//
 void solve()
 {
-	long long siz, x, y;
+	long long siz, Bob, x, y;
 	cin >> siz >> Bob;
-	vector<long long>list[ siz + 1 ], ans( siz + 1, 0 ), parent( siz + 1, 0 );
+	vector<int>list[ siz + 1 ], distance( siz + 1, 0 ), ans( siz + 1, 0 ), parent( siz + 1, 0 );
 	for (long long i = 1;i < siz;i++) {
 		cin >> x >> y;
 		list[ x ].push_back( y );
 		list[ y ].push_back( x );
 	}
-	dfs( list, ans, parent, 1, 1 );
-	diff++;
-	diff /= 2;
-	while (diff--)Bob = parent[ Bob ];
-	cout << (ans[ Bob ] - 1) * 2 << endl;
+	dfs( list, distance, parent, ans, 1, 0 );
+	long long jump = distance[ Bob ] + 1;
+	jump /= 2;
+	while (jump-- > 1)Bob = parent[ Bob ];
+	cout << ans[ Bob ] * 2 << endl;
 }
-
 
 //----------------------------------------------------------------//
 // main function//
