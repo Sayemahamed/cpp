@@ -18,30 +18,20 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    string dataBase, strL, strM;
-    cin >> dataBase;
-    long long limit, pointer = 0;cin >> limit;
-    cin >> strL >> strM;
-    for (long long i = 0;i < limit;i++) {
-        long long workDoneTill = pointer;
-        for (char j = strL[ i ];j <= strM[ i ];j++) {
-            if (dataBase.find( j, pointer ) == -1) {
-                cout << "YES" << endl;
-                return;
-            }
-            workDoneTill = max( (long long)dataBase.find( j, pointer ) + 1, workDoneTill );
-        }
-        pointer = workDoneTill;
-    }
-    cout << "NO" << endl;
+    long long numberOfBranches,base,height;
+    cin>>numberOfBranches>>base>>height;
+    vector<long long>branchHeights(numberOfBranches);
+    for(auto&it:branchHeights)cin>>it;
+    double ans=0;
+    for(long long i=0;i<numberOfBranches;i++) 
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main() {
-    ios_base::sync_with_stdio( false );
-    cin.tie( NULL );
-    cout.tie( NULL );
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     long long test = 1;
     cin >> test;
     while (test--) {
