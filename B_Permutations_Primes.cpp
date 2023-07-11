@@ -18,30 +18,25 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long theNumber, limit, forbidden;
-    cin >> theNumber >> limit >> forbidden;
-    if (forbidden != 1) {
-        cout << "YES" << endl;
-        cout << theNumber << endl;
-        while (theNumber--)cout << 1 << ' ';
-        cout << endl;
+    long long n;cin >> n;
+    if (n == 1)cout << 1 << endl;
+    else if (n == 2)cout << 1 << ' ' << 2 << endl;
+    else {
+        cout << 2 << ' ';
+        long long i = 2;
+        while (i <= n) {
+            if(i!=2)
+            cout << i << ' ';
+            i += 2;
+        }
+        i = 1;
+        while (i <= n) {
+            if(i!=3)
+            cout << i << ' ';
+            i += 2;
+        }
+        cout << 3 << endl;
     }
-    else if (theNumber & 1 and limit > 2 and forbidden != 3) {
-        cout << "YES" << endl;
-        cout << theNumber / 2 << endl;
-        cout << 3 << ' ';
-        theNumber /= 2;
-        while (theNumber-- > 1)cout << 2 << ' ';
-        cout << endl;
-    }
-    else if (!(theNumber & 1) and limit > 1) {
-        cout << "YES" << endl;
-        cout << theNumber / 2 << endl;
-        theNumber/= 2;
-        while (theNumber --)cout << 2 << ' ';
-        cout << endl;
-    }
-    else cout << "NO" << endl;
 }
 
 //----------------------------------------------------------------//
