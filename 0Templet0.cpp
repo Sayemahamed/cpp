@@ -20,10 +20,9 @@ bool isPrime( T n ) { if (n <= 1)return false;for (long long i = 2;i * i <= n;++
 template<typename T>
 long long factorial( T N ) { long long ans = 1;while (N > 1)ans *= N--;return ans; }
 template<typename T, typename Y>
-long long NCR( T N, Y R ) { if (R > N)return 0;  long long ans = 1;Y i = 2, tmp = N - R;while (N > max( tmp, R )) { ans *= N--;}while (min( tmp, R ) >= i)ans /= i++; return ans; }
-
+long long NCR( T N, Y R ) { if (R > N)return 0;long long ans = 1, MN = min( R, N - R ), MX = max( R, N - R );while (N > MX) { ans *= N--; }while (MN > 1)ans /= MN--;return ans; }
 template<typename T, typename Y>
-long long NPR( T N, Y R ) { long long ans = 1, tmp = N - R;while (N > 1) { ans *= N--;while (tmp > 1 and !(ans % tmp))ans /= tmp--; }return ans; }
+long long NPR( T N, Y R ) { long long ans = 1, tmp = N - R;while (N > tmp) { ans *= N--; }return ans; }
 void sieve( vector<bool>& ans ) { ans[ 0 ] = ans[ 1 ] = false; long long tmp = sqrt( ans.size() ), till = ans.size();for (long long i = 2;i <= tmp;i++)if (ans[ i ])for (long long j = i * i;j < till;j += i)ans[ j ] = false; }
 template<typename T>
 map<long long, long long> primeFactors( T N ) { map<long long, long long> ans;long long till = sqrt( N );for (long long i = 2; i <= till; i++) { while (!(N % i)) { ans[ i ]++;N /= i; }if (i >= N or i >= till)break; }if (N > 1)ans[ N ]++;return ans; }
