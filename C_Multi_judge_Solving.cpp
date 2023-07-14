@@ -18,26 +18,23 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long numberOfMountains, index, difference;cin >> numberOfMountains;
-    vector<long long>mountainsHeights( numberOfMountains );
-    for (auto& it : mountainsHeights)cin >> it;
-    sort( mountainsHeights.begin(), mountainsHeights.end() );
-    difference = mountainsHeights.back();
-    // cout<<difference<<endl;
-    for (long long i = 0; i < numberOfMountains - 1; i++) {
-        if (mountainsHeights[ i + 1 ] - mountainsHeights[ i ] < difference) {
-            difference = mountainsHeights[ i + 1 ] - mountainsHeights[ i ];
-            index = i;
+    long long numberOfProblems, maxLimit, ans = 0;
+    cin >> numberOfProblems >> maxLimit;
+    vector<long long >dat( numberOfProblems );
+    for (auto& it : dat)cin >> it;
+    sort( dat.begin(), dat.end() );
+    maxLimit *= 2;
+    for (long long i = 0;i < numberOfProblems;i++) {
+        if (dat[ i ] > maxLimit) {
+            while (maxLimit < dat[ i ])
+            {
+                ans++;
+                maxLimit *= 2;
+            }
         }
+        maxLimit = max( maxLimit, dat[ i ] * 2 );
     }
-    if (numberOfMountains == 2)index = 1;
-    for (long long i = index + 1; i < numberOfMountains;i++) {
-        cout << mountainsHeights[ i ] << " ";
-    }
-    for (long long i = 0; i <= index;i++) {
-        cout << mountainsHeights[ i ] << " ";
-    }
-    cout << endl;
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//
@@ -47,7 +44,7 @@ int main() {
     cin.tie( NULL );
     cout.tie( NULL );
     long long test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--) {
         solve();
     }
