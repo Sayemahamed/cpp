@@ -2,51 +2,47 @@
 using namespace std;
 //----------------------------------------------------------------//
 // definitions //
+#define all(x)  x.begin(), x.end()
+#define rall(x)  x.rbegin(), x.rend()
 #define endl '\n'
 //----------------------------------------------------------------//
 // preDefined functions//
 
 //----------------------------------------------------------------//
-// data types//
+//data types//
 
 //----------------------------------------------------------------//
 // helper functions //
 
+
 //----------------------------------------------------------------//
 // solve function//
-void solve()
-{
-    string s;
-    cin >> s;
-
-    long long  n = s.length();
-    s = s + s;
-    long long  m = 0, cnt = 0;
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (s[i] == '1')
-            cnt++;
-        else
-            cnt = 0;
-        m = max(m, cnt);
+void solve() {
+    string str;
+    cin >> str;
+    str += str;
+    long long oneCount = 0, tmp = 0;
+    for (auto& it : str) {
+        tmp = it == '1' ? tmp + 1 : 0;
+        oneCount = max( oneCount, tmp );
     }
-    if (n < m)
-        cout << n * n << '\n';
-    else
-        cout << ((m + 1) / 2) * ((m + 2) / 2) << '\n';
+    if (oneCount > str.length() / 2) {
+        cout << (long long)(str.length() / 2) * (str.length() / 2) << endl;
+    }
+    else {
+        cout << (((oneCount + 1) / 2) * ((oneCount + 2) / 2)) << endl;
+    }
 }
 
 //----------------------------------------------------------------//
 // main function//
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+int main() {
+    ios_base::sync_with_stdio( false );
+    cin.tie( NULL );
+    cout.tie( NULL );
     long long test = 1;
     cin >> test;
-    while (test--)
-    {
+    while (test--) {
         solve();
     }
 }
