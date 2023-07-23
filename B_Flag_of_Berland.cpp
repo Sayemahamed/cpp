@@ -23,7 +23,9 @@ bool testOne( string str[], long long size ) {
             if (str[ i ][ j ] != str[ i ][ j + 1 ])return false;
         }
     }
-    return rCount == bCount and bCount == gCount;
+    long long cnt = 0;
+    for (long long i = 0;i < size - 1;i++)if (str[ i ] != str[ i + 1 ])cnt++;
+    return rCount == bCount and bCount == gCount and cnt == 2;
 }
 bool testTwo( string str[], long long sizeX, long long sizeY ) {
     long long rCount = 0, bCount = 0, gCount = 0;
@@ -35,7 +37,9 @@ bool testTwo( string str[], long long sizeX, long long sizeY ) {
             if (str[ j ][ i ] != str[ j + 1 ][ i ])return false;
         }
     }
-    return rCount == bCount and bCount == gCount;
+    long long cnt = 0;
+    for (long long i = 0;i < sizeX - 1;i++)if (str[ 0 ][ i ] != str[ 0 ][ i + 1 ])cnt++;
+    return rCount == bCount and bCount == gCount and cnt == 2;
 }
 //----------------------------------------------------------------//
 // solve function//
