@@ -18,33 +18,36 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long siz, colors;
-    cin >> siz >> colors;
-    vector<long long> index( siz );
-    for (auto& it : index)cin >> it;
-    for (long long i = 0; i < siz; i++) {
-        bool hasALife = true;
-        long long tmp = index[ i ];
-        for (long long j = i;true;j += i + 1) {
-            if (j >= siz) {
-                cout << i << endl;
-                return;
+    long long length, numberOfColors, x, ans = INT64_MAX;cin >> length >> numberOfColors;
+    map<long long, vector<long long> > colors;
+    for (long long i = 0; i < length; i++) {
+        cin >> x;
+        colors[ x ].push_back( i );
+    }
+    for (auto& it : colors) {
+        map< long long, long long>tempAns;
+        for (long long i = 0;i < it.second.size();i++) {
+            if (i == 0) {
+                tempAns[ it.second[ i ] ]++;
             }
-            if (index[ j ] != tmp) {
-                if (hasALife) {
-                    long long x=j;
-                    while(x<=j+i){
-                        if(index[++x]==tmp){
-                            j=x;
-                            break;
-                        }
-                    }
-                    hasALife = false;
-                }
-                else break;
+            if (i == it.second.size() - 1) {
+                tempAns[ length - (it.second[ i ] + 1) ]++;
+            }
+            if (i >= 0 and i < it.second.size() - 1) {
+                tempAns[ (it.second[ i + 1 ] - it.second[ i ]) - 1 ]++;
             }
         }
+        long long temp = 0;
+        if (tempAns.rbegin()->second == 1) {
+            tempAns[ (tempAns.rbegin()->first) / 2 ]++;
+            tempAns.erase( tempAns.find( tempAns.rbegin()->first ) );
+        }
+        for (auto& it1 : tempAns) {
+            temp = max( temp, it1.first );
+        }
+        ans = min( ans, temp );
     }
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//
