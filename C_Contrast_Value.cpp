@@ -13,21 +13,38 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long getContrast( vector<long long>& data ) {
-    long long ans = 0;
-    for (long long i = 0;i < data.size() - 1;i++) {
-        ans += abs( data[ i ] - data[ i + 1 ] );
+
+bool isIncreasingSubsequence( vector<long long >& data, long long start ) {
+    return data[ start ] <= data[ start + 1 ] and data[ start + 1 ] <= data[ start + 2 ];
+}
+bool isDecreasingSubsequence( vector<long long >& data, long long start ) {
+    return data[ start ] >= data[ start + 1 ] and data[ start + 1 ] >= data[ start + 2 ];
+}
+vector<long long > getUniqueElements( vector<long long >& data ) {
+    vector<long long >ans;
+    long long pre = -1;
+    for (auto& it : data) {
+        if (it != pre) {
+            ans.push_back( it );
+            pre = it;
+        }
     }
     return ans;
 }
-
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
     long long siz;cin >> siz;
     vector<long long>data( siz );
     for (auto& it : data)cin >> it;
-    cout << getContrast( data ) << endl;
+    vector<long long>uni = getUniqueElements( data );
+    long long ans = uni.size();
+    if (ans > 2)
+        for (long long i = 0;i < uni.size() - 2;i++) {
+            ans -= isDecreasingSubsequence( uni, i );
+            ans -= isIncreasingSubsequence( uni, i );
+        }
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//
