@@ -1,87 +1,48 @@
 #include <bits/stdc++.h>
-using namespace std;
-//----------------------------------------------------------------//
-// definitions //
-#define endl '\n'
-#define PI (acos(-1.0))
 
-//----------------------------------------------------------------//
-//data types//
-struct Point{float x, y;};
+using i64 = long long;
 
-//----------------------------------------------------------------//
-// preDefined functions//
-//geometry//
-double getClockwiseAngle(Point p) {double angle = 0.0;angle = -1 * atan2(p.x, -1 * p.y);return angle;}
-bool comparePoints(Point p1, Point p2) {return getClockwiseAngle(p1) < getClockwiseAngle(p2);}
-double polygonArea(vector<Point> &points){double area = 0.0;long long j = points.size() - 1;for (long long  i = 0; i < points.size(); i++){area += (points[j].x + points[i].x) * (points[j].y - points[i].y);j = i;}return abs(area / 2.0);}
-//geometry//
-//number theory //
-template<typename T>
-bool isPrime(T n){if(n<=1)return false;for (long long i=2;i*i<=n;++i){if(!(n%i))return false;}return true;}
-template<typename T>
-long long factorial(T N){ long long ans=1;while(N>1)ans*=N--;return ans;}
-template<typename T,typename Y>
-long long NCR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(R>1 and !(ans%R))ans/=R--; while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
-template<typename T,typename Y>
-long long NPR(T N,Y R){ long long ans=1,tmp=N-R;while(N>1){ans*=N--;while(tmp>1 and !(ans%tmp))ans/=tmp--;}return ans;}
-void sieve(vector<bool>&ans){ans[0]=ans[1]=false; long long tmp=sqrt(ans.size()),till=ans.size();for(long long i=2;i<=tmp;i++)if(ans[i])for(long long j=i*i;j<till;j+=i)ans[j]=false;}
-template<typename T>
-map<long long, long long> primeFactors(T N){map<long long, long long> ans;long long till = sqrt(N);for (long long i = 2; i <= till; i++){while (!(N % i)){ans[i]++;N /= i;}if (i >= N or i >= till)break;}if (N > 1)ans[N]++;return ans;}
-//number theory//
-bool isVowel(char c){string vowel = "aeiouAEIOU";for(auto&it:vowel)if(it == c) return true; return false;}
-
-
-//----------------------------------------------------------------//
-// helper functions //
-vector<long long>dat[100009];
-long long siz;
-bool flag=false,sizeFlag=false;
-void dfs(long long i,long long length)
-{
-    if(sizeFlag)return;
-    if(i==siz+1)sizeFlag=true;
-    if(flag)return;
-    if(length>=siz)flag=true;
-    for(auto&it:dat[i])dfs(it,length+1);
-    if(i==siz+1)sizeFlag=false;
-    if(flag)cout<<i<<' ';
-}
-//----------------------------------------------------------------//
-// solve function//
-void solve()
-{
-    cin>>siz;
-    for(long long i=1; i<=siz; i++)
-    {
-        long long x;cin>>x;
-        if(x)
-        dat[i].push_back(siz+1);
-        else
-        dat[siz+1].push_back(i);
-        if(i<siz)
-        dat[i].push_back(i+1);
+void solve() {
+    int n;
+    std::cin >> n;
+    
+    int a[n + 2];
+    for (int i = 1; i <= n; i++) {
+        std::cin >> a[i];
     }
-    for(long long i=1;i<=siz+1;i++)sort(dat[i].begin(),dat[i].end());
-    for(long long i=1;i<=siz+1;i++)
-    {dfs(i,1);if(flag)break;}
-    if(flag)cout<<endl;else cout<<-1<<endl;
-    for(long long i=1;i<=siz+1;i++)
-    dat[i].clear();
-    flag=false;
+    a[0] = 0;
+    a[n + 1] = 1;
+    
+    int x = 0;
+    
+    while (a[x] != 0 || a[x + 1] != 1) {
+        x++;
+    }
+    
+    std::vector<int> res;
+    for (int i = 1; i <= x; i++) {
+        res.push_back(i);
+    }
+    res.push_back(n + 1);
+    for (int i = x + 1; i <= n; i++) {
+        res.push_back(i);
+    }
+    
+    for (int i = 0; i <= n; i++) {
+        std::cout << res[i] << " \n"[i == n];
+    }
 }
 
-//----------------------------------------------------------------//
-// main function//
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    long long test = 1;
-    cin >> test;
-    while (test--)
-    {
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    
+    int t;
+    std::cin >> t;
+    
+    while (t--) {
         solve();
     }
+    
+    return 0;
 }
