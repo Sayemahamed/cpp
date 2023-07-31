@@ -29,10 +29,10 @@ void solve() {
     }
     vector<pair<long long, long long>>ans;
     for (long long i = 1; i < siz;i++) {
-        while (data[ i + 1 ] < data[ i ]) {
+        while (data[ i ] > data[ i + 1 ]) {
             pair<long long, long long> tmp;
-            if (index.lower_bound( { data[ i ] - data[ i + 1 ],siz } ) != index.end())
-                tmp = *index.lower_bound( { data[ i ] - data[ i + 1 ],siz } );
+            if (index.lower_bound( { data[ i ] - data[ i + 1 ],0 } ) != index.end())
+                tmp = *index.lower_bound( { data[ i ] - data[ i + 1 ],0 } );
             else  tmp = *index.rbegin();
             data[ i + 1 ] += tmp.first;
             ans.push_back( { i + 1,tmp.second } );
