@@ -22,6 +22,20 @@ long long sortIt( long long turn, string& str ) {
         if (str[ i ] != '0' + i and (str[ i ] - str[ index ]) == 1) swap( str1[ i ], str1[ index ] );
         if (str[ i ] != '0' + i and (str[ i ] - str[ index ]) == 2)swap( str3[ i ], str3[ index ] );
     }
+    if (str1 == str and str == str3) {
+        bool f1 = false, f2 = false;
+        for (long long i = 1;i < index;i++) {
+            if (f1 and f2)break;
+            if (abs( str[ i ] - str[ index ] ) == 1) {
+                swap( str1[ i ], str1[ index ] );
+                f1 = true;
+            }
+            if (abs( str[ i ] - str[ index ] ) == 2) {
+                swap( str3[ i ], str3[ index ] );
+                f2 = true;
+            }
+        }
+    }
     if (str1 == str)return sortIt( turn + 1, str3 );
     if (str3 == str)return sortIt( turn + 1, str1 );
     if (str1 == str3)return sortIt( turn + 1, str1 );
@@ -30,8 +44,7 @@ long long sortIt( long long turn, string& str ) {
 
 //----------------------------------------------------------------//
 // solve function//
-void solve() {
-    long long siz;cin >> siz;
+void solve( long long siz ) {
     string str = "0";
     for (int i = 0;i < siz;i++) {
         char a;
@@ -39,6 +52,9 @@ void solve() {
         str += a;
     }
     // cout << str << endl;
+    // if (is_sorted( str.rbegin(), str.rend() - 1 ))
+    //     cout << siz - 1 << endl;
+    // else
     cout << sortIt( 0, str ) << endl;
 }
 
@@ -48,9 +64,9 @@ int main() {
     ios_base::sync_with_stdio( false );
     cin.tie( NULL );
     cout.tie( NULL );
-    long long test = 1;
-    // cin >> test;
+    long long test, siz;
+    cin >> siz >> test;
     while (test--) {
-        solve();
+        solve( siz );
     }
 }
