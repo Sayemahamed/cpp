@@ -23,17 +23,11 @@ long long sortIt( long long turn, string& str ) {
         if (str[ i ] != '0' + i and (str[ i ] - str[ index ]) == 2)swap( str3[ i ], str3[ index ] );
     }
     if (str1 == str and str == str3) {
-        bool f1 = false, f2 = false;
         for (long long i = 1;i < index;i++) {
-            if (f1 and f2)break;
-            if (abs( str[ i ] - str[ index ] ) == 1) {
+            if (str[ i ] - str[ index ] == 1)
                 swap( str1[ i ], str1[ index ] );
-                f1 = true;
-            }
-            if (abs( str[ i ] - str[ index ] ) == 2) {
+            if (str[ i ] - str[ index ] == 2)
                 swap( str3[ i ], str3[ index ] );
-                f2 = true;
-            }
         }
     }
     if (str1 == str)return sortIt( turn + 1, str3 );
