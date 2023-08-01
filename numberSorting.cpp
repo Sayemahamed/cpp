@@ -13,14 +13,14 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long sortIt( long long turn, string str ) {
+long long sortIt( long long turn, string& str ) {
     if (is_sorted( str.begin(), str.end() ))return turn;
     string str1 = str, str3 = str;
     long long index = str.length() - 1;
     while (index > 0 and str[ index ] == '0' + (index))index--;
     for (long long i = 1;i < index;i++) {
-        if (str[ i ] != '0' + i and ( str[ i ] - str[ index ] ) == 1) swap( str1[ i ], str1[ index ] );
-        if (str[ i ] != '0' + i and ( str[ i ] - str[ index ] ) == 2)swap( str3[ i ], str3[ index ] );
+        if (str[ i ] != '0' + i and (str[ i ] - str[ index ]) == 1) swap( str1[ i ], str1[ index ] );
+        if (str[ i ] != '0' + i and (str[ i ] - str[ index ]) == 2)swap( str3[ i ], str3[ index ] );
     }
     if (str1 == str)return sortIt( turn + 1, str3 );
     if (str3 == str)return sortIt( turn + 1, str1 );
