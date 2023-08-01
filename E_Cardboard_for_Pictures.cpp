@@ -13,40 +13,36 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+long long isPossible( vector<long long>& data, long long board, long long target )
+{
+    unsigned long long ans = 0;
+    for (auto& it : data)
+    {
+        ans += (it + board) * (it + board);
+        if (ans > target)
+            break;
+    }
+    return ans;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long node, edges, x, y;
-    cin >> node >> edges;
-    vector<long long >index[ node + 1 ];
-    for (long long i = 0;i < edges;i++) {
-        cin >> x >> y;
-        index[ x ].push_back( y );
-        index[ y ].push_back( x );
+    long long numberOfPictures, target;
+    cin >> numberOfPictures >> target;
+    vector<long long >data( numberOfPictures );
+    for (auto& it : data)
+        cin >> it;
+    long long low = 0, high = 10e9, mid;
+    while (high - low > 1)
+    {
+        mid = (low + high) / 2;
+        if (isPossible( data, mid, target ) <= target)
+            low = mid;
+        else
+            high = mid;
     }
-    map<long long, long long >ans;
-    for (long long i = 1;i <= node;i++) {
-        if (index[ i ].size() != 1)
-            ans[ index[ i ].size() ]++;
-    }
-    long long a, b;
-    if (ans.size() == 1) {
-        a = ans.begin()->first;
-        b = a;
-    }
-    else {
-        for (auto& it : ans) {
-            if (it.second == 1) {
-                a = it.first;
-            }
-            else {
-                b = it.first;
-            }
-        }
-    }
-    cout << a << ' ' << b - 1 << endl;
+    cout << low / 2 << endl;
 }
 
 //----------------------------------------------------------------//

@@ -18,35 +18,24 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long node, edges, x, y;
-    cin >> node >> edges;
-    vector<long long >index[ node + 1 ];
-    for (long long i = 0;i < edges;i++) {
-        cin >> x >> y;
-        index[ x ].push_back( y );
-        index[ y ].push_back( x );
-    }
-    map<long long, long long >ans;
-    for (long long i = 1;i <= node;i++) {
-        if (index[ i ].size() != 1)
-            ans[ index[ i ].size() ]++;
-    }
-    long long a, b;
-    if (ans.size() == 1) {
-        a = ans.begin()->first;
-        b = a;
-    }
-    else {
-        for (auto& it : ans) {
-            if (it.second == 1) {
-                a = it.first;
-            }
-            else {
-                b = it.first;
-            }
+    long long siz;cin >> siz;
+    vector<long long>data( siz );
+    set<long long>tmp;
+    for (auto& it : data) { cin >> it;tmp.insert( it ); }
+    long long left = 0, right = siz - 1;
+    while (left < right) {
+        if (data[ left ] == *tmp.begin() or data[ left ] == *tmp.rbegin()) {
+            tmp.erase( data[ left ] );
+            left++;
         }
+        else if (data[ right ] == *tmp.begin() or data[ right ] == *tmp.rbegin()) {
+            tmp.erase( data[ right ] );
+            right--;
+        }
+        else break;
     }
-    cout << a << ' ' << b - 1 << endl;
+    if (left >= right)cout << -1 << endl;
+    else cout << left + 1 << ' ' << right + 1 << endl;
 }
 
 //----------------------------------------------------------------//
