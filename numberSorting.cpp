@@ -32,7 +32,6 @@ long long sortIt( long long turn, string& str ) {
     }
     if (str1 == str)return sortIt( turn + 1, str3 );
     if (str3 == str)return sortIt( turn + 1, str1 );
-    if (str1 == str3)return sortIt( turn + 1, str1 );
     return min( sortIt( turn + 1, str1 ), sortIt( turn + 1, str3 ) );
 }
 
