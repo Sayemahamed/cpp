@@ -18,23 +18,27 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    char S[ 4 ];
-    scanf( "%s", S );
-    if (S[ 0 ] == 'A' && S[ 1 ] == 'C' && S[ 2 ] == 'E')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'B' && S[ 1 ] == 'D' && S[ 2 ] == 'F')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'C' && S[ 1 ] == 'E' && S[ 2 ] == 'G')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'D' && S[ 1 ] == 'F' && S[ 2 ] == 'A')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'E' && S[ 1 ] == 'G' && S[ 2 ] == 'B')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'F' && S[ 1 ] == 'A' && S[ 2 ] == 'C')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'G' && S[ 1 ] == 'B' && S[ 2 ] == 'D')
-        printf( "Yes" );
-    else printf( "No" );
+    long long siz, x;cin >> siz;
+    map<long long, long long>data;
+    for(long long i=0;i<siz;i++) {
+        cin >> x;
+        data[ x ]++;
+    }
+    long long tmp = data.rbegin()->first;
+    if (data.size() == 1)cout << -1 << endl;
+    else {
+        cout << siz - data.rbegin()->second << ' ' << data.rbegin()->second << endl;
+        for (auto& it : data) {
+            if (it.first != tmp) {
+                while (it.second--)cout << it.first << " ";
+            }
+            else {
+                cout << endl;
+                while (it.second--)cout << it.first << " ";
+                cout << endl;
+            }
+        }
+    }
 }
 
 //----------------------------------------------------------------//
@@ -44,7 +48,7 @@ int main() {
     cin.tie( NULL );
     cout.tie( NULL );
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--) {
         solve();
     }

@@ -18,23 +18,20 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    char S[ 4 ];
-    scanf( "%s", S );
-    if (S[ 0 ] == 'A' && S[ 1 ] == 'C' && S[ 2 ] == 'E')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'B' && S[ 1 ] == 'D' && S[ 2 ] == 'F')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'C' && S[ 1 ] == 'E' && S[ 2 ] == 'G')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'D' && S[ 1 ] == 'F' && S[ 2 ] == 'A')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'E' && S[ 1 ] == 'G' && S[ 2 ] == 'B')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'F' && S[ 1 ] == 'A' && S[ 2 ] == 'C')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'G' && S[ 1 ] == 'B' && S[ 2 ] == 'D')
-        printf( "Yes" );
-    else printf( "No" );
+    long long numberOfArrays, ans = 0;cin >> numberOfArrays;
+    vector<long long>data1, data2;
+    for (long long i = 0;i < numberOfArrays;i++) {
+        long long siz;cin >> siz;
+        vector<long long >tmp( siz );
+        for (auto& it : tmp)cin >> it;
+        sort( tmp.begin(), tmp.end() );
+        data1.push_back( tmp[ 0 ] );
+        data2.push_back( tmp[ 1 ] );
+    }
+    sort( data1.begin(), data1.end() );
+    sort( data2.begin(), data2.end() );
+    for (long long i = 1;i < data2.size();i++)ans += data2[ i ];
+    cout << ans + data1[ 0 ] << endl;
 }
 
 //----------------------------------------------------------------//
@@ -44,7 +41,7 @@ int main() {
     cin.tie( NULL );
     cout.tie( NULL );
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--) {
         solve();
     }

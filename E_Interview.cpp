@@ -4,7 +4,7 @@ using namespace std;
 // definitions //
 #define all(x)  x.begin(), x.end()
 #define rall(x)  x.rbegin(), x.rend()
-#define endl '\n'
+// #define endl '\n'
 //----------------------------------------------------------------//
 // preDefined functions//
 
@@ -18,23 +18,23 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    char S[ 4 ];
-    scanf( "%s", S );
-    if (S[ 0 ] == 'A' && S[ 1 ] == 'C' && S[ 2 ] == 'E')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'B' && S[ 1 ] == 'D' && S[ 2 ] == 'F')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'C' && S[ 1 ] == 'E' && S[ 2 ] == 'G')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'D' && S[ 1 ] == 'F' && S[ 2 ] == 'A')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'E' && S[ 1 ] == 'G' && S[ 2 ] == 'B')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'F' && S[ 1 ] == 'A' && S[ 2 ] == 'C')
-        printf( "Yes" );
-    else if (S[ 0 ] == 'G' && S[ 1 ] == 'B' && S[ 2 ] == 'D')
-        printf( "Yes" );
-    else printf( "No" );
+    long long siz;cin >> siz;
+    vector<long long>data( siz + 1, 0 );
+    for (long long i = 1;i <= siz;i++) cin >> data[ i ];
+    long long low = 1, heigh = siz, mid;
+    while (heigh - low > 0) {
+        mid = (heigh + low - 1) >> 1;
+        long long sum = 0;
+        cout << "? " << mid - low + 1 << ' ';
+        for (long long i = low;i <= mid;i++) {
+            cout << i << ' ';
+            sum += data[ i ];
+        }
+        cout << endl;
+        long long tmp;cin >> tmp;
+        if (sum == tmp)low = mid + 1;else heigh = mid;
+    }
+    cout << "! " << low << endl;
 }
 
 //----------------------------------------------------------------//
@@ -44,7 +44,7 @@ int main() {
     cin.tie( NULL );
     cout.tie( NULL );
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--) {
         solve();
     }
