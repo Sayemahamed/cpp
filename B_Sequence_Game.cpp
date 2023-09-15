@@ -18,23 +18,21 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long yAxis, xAxis;cin >> yAxis >> xAxis;
-    vector<vector<char>>carpet( yAxis, vector<char>( xAxis ) );
-    for (auto& it : carpet)for (auto& it2 : it)cin >> it2;
-    auto lambda = [ &carpet, yAxis, xAxis ]( long long index, char c ) {
-        for (long long i = 0; i < yAxis;i++) {
-            if (carpet[ i ][ index ] == c)return true;
+    long long siz, x;cin >> siz;
+    vector<long long>data( siz );
+    for (auto& it : data)cin >> it;
+    deque<long long>ans;
+    ans.push_back( data[ 0 ] );
+    for (long long i = 1; i < siz;i++) {
+        if (data[ i ] < data[ i - 1 ]) {
+            ans.push_back( 1 );
+            ans.push_back( data[ i ] );
         }
-        return false;
-        };
-    string str = "vika";
-    long long index = 0;
-    for (long long i = 0; i < xAxis;i++) {
-        if (lambda( i, str[ index ] ))index++;
-        if (index == 4)break;
+        else ans.push_back( data[ i ] );
     }
-    if (index == 4)cout << "YES" << endl;
-    else cout << "NO" << endl;
+    cout << ans.size() << endl;
+    for (auto& it : ans)cout << it << ' ';
+    cout << endl;
 }
 
 //----------------------------------------------------------------//
