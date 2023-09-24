@@ -9,7 +9,7 @@ int main()
     cin>>t;
     for (long long i = 0; i < t; ++i)
     {
-        long long x;
+        long long int x;
         cin>>x;
         data.push_back(x);
     }
