@@ -13,29 +13,20 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-bool isPossible( vector<long long>& dat, long long maxWater, long long height ) {
-    long long sum = 0;
-    for (auto& it : dat) {
-        sum += max( height - it, (long long)0 );
-    }
-    return sum <= maxWater;
-}
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long numberOfCorals, maxWater;
-    cin >> numberOfCorals >> maxWater;
-    vector<long long>dat( numberOfCorals );
-    for (auto& it : dat)cin >> it;
-    long long low = 0, high = 1, mid;
-    while (isPossible( dat, maxWater, high ))high <<= 1;
-    while (high - low > 0) {
-        mid = (high + low + 1) >> 1;
-        if (isPossible( dat, maxWater, mid ))low = mid;
-        else high = mid - 1;
+    long long persons;cin >> persons;
+    long long a, b, c = true;cin >> a >> b;
+    long long x, y;
+    for (long long i = 1;i < persons;i++) {
+        cin >> x >> y;
+        if (x >= a and y >= b)c = false;
     }
-    cout << low << endl;
+    if (c)cout << a << endl;
+    else cout << -1 << endl;
 }
 
 //----------------------------------------------------------------//
