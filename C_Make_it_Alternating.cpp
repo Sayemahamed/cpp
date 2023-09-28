@@ -10,11 +10,7 @@ using namespace std;
 
 //----------------------------------------------------------------//
 //data types//
-struct Trees {
-    long long height, fruits;
-    Trees() { height = 0; fruits = 0; }
-};
-
+long long mod = 998244353;
 //----------------------------------------------------------------//
 // helper functions //
 
@@ -22,21 +18,19 @@ struct Trees {
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long numberOfTrees, maxStealing, ans = 0, j = 0, sum = 0;
-    cin >> numberOfTrees >> maxStealing;
-    vector <Trees>dat( numberOfTrees );
-    for (auto& it : dat)cin >> it.fruits;
-    for (auto& it : dat)cin >> it.height;
-    for (long long i = 0;i < numberOfTrees;i++) {
-        while (j < numberOfTrees and sum <= maxStealing and ((j == numberOfTrees - 1 and j != 0) or dat[ j ].height % dat[ j + 1 ].height == 0))sum += dat[ j++ ].fruits;
-        if (sum <= maxStealing and sum > 0)
-            ans = max( ans, j - i + 1 );
-        else
-            ans = max( ans, j - i );
-        sum = 0;
+    string str;cin >> str;
+    long long remove = 0, ans = 1, j = 0;
+    for (long long i = 0; i < str.length();)
+    {
         j = i + 1;
+        while (j < str.length() && str[ i ] == str[ j ])j++;
+        remove += (j - i) - 1;
+        ans *= j - i;
+        i = j;
+        ans %= mod;
     }
-    cout << ans << endl;
+    for (long long i = 2;i <= remove;i++) { ans *= i;ans %= mod; }
+    cout << remove << " " << ans << endl;
 }
 
 //----------------------------------------------------------------//
