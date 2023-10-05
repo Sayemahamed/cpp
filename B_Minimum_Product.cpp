@@ -15,21 +15,24 @@ using namespace std;
 // helper functions //
 
 
-
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long ans = 0, apples, peoples;cin >> apples >> peoples;
-    apples %= peoples;
-    for (long long i = 0;i < 30 and apples;i++) {
-        while (apples < peoples and apples) {
-            ans += apples;
-            apples <<= 1;
-        }
-        apples %= peoples;
+    long long a, b, x, y, n, remaining;cin >> a >> b >> x >> y >> n;
+    if (max( a - n, x ) < max( b - n, y )) {
+        a -= n;
+        remaining = max( x - a, (long long)0 );
+        a = max( a, x );
+        b -= min( remaining, b - y );
+        cout << a * b << endl;
     }
-    if (apples)cout << -1 << endl;
-    else cout << ans << endl;
+    else {
+        b -= n;
+        remaining = max( y - b, (long long)0 );
+        b = max( b, y );
+        a -= min( remaining, a - x );
+        cout << a * b << endl;
+    }
 }
 
 //----------------------------------------------------------------//
