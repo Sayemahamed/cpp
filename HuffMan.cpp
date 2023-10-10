@@ -4,65 +4,48 @@ class node {
 public:
     long long frequency;
     char character;
-    node* left, * right, * small, * large;
+    node* small, * large;
+    node() {}
     node( long long frequency, char character ) {
         this->frequency = frequency;
         this->character = character;
-        left = NULL;
-        right = NULL;
         small = NULL;
         large = NULL;
     }
     node( const node& temp ) {
         this->frequency = temp.frequency;
         this->character = temp.character;
-        this->left = temp.left;
-        this->right = temp.right;
         this->large = temp.large;
         this->small = temp.small;
     }
 };
-class huffmanTree {
-public:
-    long long count;
-    node* root;
-    huffmanTree() { count = 0;root = NULL; }
-    void insert( node& Node ) {
-        count++;
-        if (root == NULL) {
-            root = new node( Node );
-            return;
-        }
-        if (root->frequency > Node.frequency) {
-            node* tmp = new node( Node );
-            tmp->right = root;
-            root = tmp;
-            return;
-        }
-        node* temp = root, * temp1;
-        while (temp->right != NULL and temp->frequency > Node.frequency) {
-            temp = temp->right;
-        }
-        temp1 = temp->right;
-        temp->right = new node( Node );
-        temp->right->right = temp1;
+void print( node* ans, string str ) {
+    if (ans->character != '1') {
+        cout << ans->character << ' ' << str << endl;
+        return;
     }
-    void Traverse() {
-        node* temp = root;
-        while (temp != NULL) {
-            cout << temp->character << ' ' << temp->frequency << endl;
-            temp = temp->right;
-        }
-    }
-};
+    // cout << ans->frequency << ' ' << ans->character << endl;
+    print( ans->small, str + '0' );
+    print( ans->large, str + '1' );
+}
 int main() {
     string inputString;cin >> inputString;
-    huffmanTree Tree;
     map<char, long long>frequencyArray;
+    multimap<long long, node>dat;
     for (auto& it : inputString)frequencyArray[ it ]++;
     for (auto& it : frequencyArray) {
         node temp( it.second, it.first );
-        Tree.insert( temp );
+        dat.insert( pair<long long, node >( it.second, temp ) );
     }
-    Tree.Traverse();
+    // for (auto& it : dat)cout << it.first <<' '<<it.second.character<< endl;
+    while (dat.size() > 1) {
+        node temp = dat.begin()->second;
+        dat.erase( dat.begin() );
+        node ans( dat.begin()->second.frequency + temp.frequency, '1' );
+        ans.small = new node( temp );
+        ans.large = new node( dat.begin()->second );
+        dat.insert( pair<long long, node >( dat.begin()->second.frequency + temp.frequency, ans ) );
+        dat.erase( dat.begin() );
+    }
+    print( &dat.begin()->second, "" );
 }
