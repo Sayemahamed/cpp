@@ -40,7 +40,7 @@ public:
             return;
         }
         node* temp = root, * temp1;
-        while (temp->right != NULL and temp->frequency < Node.frequency) {
+        while (temp->right != NULL and temp->frequency > Node.frequency) {
             temp = temp->right;
         }
         temp1 = temp->right;
