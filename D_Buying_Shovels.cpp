@@ -23,10 +23,11 @@ void solve() {
         cout << 1 << endl;return;
     }
     long long ans = 1;
-    for (long long i = 1;i <= type;i++) {
+    for (long long i = 2;i <= type;i++) {
         if (i * i > want)break;
         if (want % i == 0) {
-            ans = max( ans, want / i );
+            if (want / i <= type)
+                ans = max( ans, want / i );
             ans = max( ans, i );
         }
     }
