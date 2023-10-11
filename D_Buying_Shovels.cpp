@@ -25,6 +25,7 @@ void solve() {
     long long ans = 1;
     for (long long i = 2;i <= type;i++) {
         if (i * i > want)break;
+        if (ans > i or ans > want / i)break;
         if (want % i == 0) {
             if (want / i <= type)
                 ans = max( ans, want / i );
