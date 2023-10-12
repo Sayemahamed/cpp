@@ -22,8 +22,9 @@ void solve() {
     string str1, str2;
     cin >> str1 >> str2;
     long long i = 0;
-    for (;i < 20;i++) {
+    for (;str1.length() <= 25;) {
         if (str1.find( str2 ) != string::npos)break;
+        i++;
         str1 = str1 + str1;
     }
     if (str1.find( str2 ) != string::npos)cout << i << endl;
