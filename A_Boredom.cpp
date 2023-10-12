@@ -22,7 +22,7 @@ long long select( map<long long, long long>& dp, vector<value>& data, long long 
     if (data[ index ].number == reject) {
         return select( dp, data, index + 1, reject );
     }
-    return dp[ index ] = max( select( dp, data, index + 1, reject ), data[ index ].total + select( dp, data, index + 1, data[ index ].number + 1 ) );
+    return dp[ index ] = max( data[ index ].total + select( dp, data, index + 1, data[ index ].number + 1 ), select( dp, data, index + 1, reject ) );
 }
 
 //----------------------------------------------------------------//
