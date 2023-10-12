@@ -94,6 +94,6 @@
   },
   "C_Cpp.errorSquiggles": "disabled",
   "cph.general.onceMaintainerMessage": false,
-  "editor.fontFamily": "Consolas, 'Courier New', monospace",
-  "terminal.integrated.fontFamily": "'CaskaydiaCove Nerd Font Mono'"
+  "editor.fontFamily": "'Hack Nerd Font Mono'",
+  "terminal.integrated.fontFamily": "'Hack Nerd Font Mono'"
 }
