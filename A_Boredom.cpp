@@ -16,13 +16,13 @@ struct value {
 };
 //----------------------------------------------------------------//
 // helper functions //
-long long select( vector<value>& data, long long index, long long reject ) {
+long long select( map<long long, long long>& dp, vector<value>& data, long long index, long long reject ) {
     if (index == data.size())return 0;
+    if (dp[ index ] and data[ index ].number != reject)return dp[ index ];
     if (data[ index ].number == reject) {
-        return select( data, index + 1, reject );
+        return select( dp, data, index + 1, reject );
     }
-    long long take = data[ index ].total;
-    return max( take + select( data, index + 1, data[ index ].number + 1 ), select( data, index + 1, reject ) );
+    return dp[ index ] = max( select( dp, data, index + 1, reject ), data[ index ].total + select( dp, data, index + 1, data[ index ].number + 1 ) );
 }
 
 //----------------------------------------------------------------//
@@ -30,6 +30,7 @@ long long select( vector<value>& data, long long index, long long reject ) {
 void solve() {
     long long x, numbers;cin >> numbers;
     map<long long, long long>frequency;
+    map<long long, long long>dp;
     for (long long i = 0; i < numbers;i++) {
         cin >> x;
         frequency[ x ]++;
@@ -41,7 +42,7 @@ void solve() {
         dat[ i++ ].total = it.second * it.first;
     }
     // for (auto& it : dat)cout << it.total << endl;
-    cout << select( dat, 0, -1 ) << endl;
+    cout << select( dp, dat, 0, -1 ) << endl;
 }
 
 //----------------------------------------------------------------//
