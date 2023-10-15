@@ -13,22 +13,20 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long choose( vector<long long>& dat, map<long long, long long>& ans, long long index ) {
+long long choose( vector<long long>& dat, vector<long long>& ans, long long index ) {
     long long a = 0, b = 0;
-    if (ans.find( index ) != ans.end()) return ans[ index ];
+    if (ans[ index ] != -1) return ans[ index ];
     if (index + 1 < dat.size())a = choose( dat, ans, index + 1 );
     if (index + dat[ index ] < dat.size())
         b = dat[ index ] + 1 + choose( dat, ans, index + dat[ index ] + 1 );
     return ans[ index ] = max( a, b );
-    return 0;
 }
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
     long long siz;cin >> siz;
-    vector<long long >dat( siz );
-    map<long long, long long>ans;
+    vector<long long >dat( siz ), ans( siz + 7, -1 );
     for (auto& it : dat)cin >> it;
     cout << siz - choose( dat, ans, 0 ) << endl;
 }
