@@ -13,30 +13,28 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-void dp( vector<long long>& colors, map<long long, vector<long long>>& index, vector<long long>& memoise, long long i ) {
-	if (i - 1) dp( colors, index, memoise, i - 1 );
-	long long ans ;
-	for (auto& it : index[ colors[ i ] ]) {
-		if (it >= i)break;
-		ans = i - it + 1;
-		memoise[ i ] = max( ans + memoise[ it - 1 ], memoise[ i ] );
+long long dp( map<long long, vector<long long>>& location, vector<long long >& memoise, vector<long long >& colors, long long index ) {
+	if (index == colors.size()) return 0;
+	if (memoise[ index ] != -1)return memoise[ index ];
+	long long ans = dp( location, memoise, colors, index + 1 );
+	for (long long i = lower_bound( location[ colors[ index ] ].begin(), location[ colors[ index ] ].end(), index + 1 ) - location[ colors[ index ] ].begin();i < location[ colors[ index ] ].size();i++) {
+		ans = max( ans, location[ colors[ index ] ][ i ] - index + 1 + dp( location, memoise, colors, location[ colors[ index ] ][ i ] + 1 ) );
 	}
-	if (!memoise[ i ])memoise[ i ] = memoise[ i - 1 ];
+	memoise[ index ] = ans;
+	return memoise[ index ];
 }
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
 	long long siz;cin >> siz;
-	vector<long long>colors( siz + 1, 0 ), memoise( siz + 1, 0 );
-	map<long long, vector<long long>>index;
-	for (long long i = 1;i <= siz;i++) {
+	vector<long long>colors( siz ), memoise( siz, -1 );
+	map<long long, vector<long long>>location;
+	for (long long i = 0;i < siz;i++) {
 		cin >> colors[ i ];
-		index[ colors[ i ] ].push_back( i );
+		location[ colors[ i ] ].push_back( i );
 	}
-	dp( colors, index, memoise, siz );
-	auto ans = max_element( memoise.begin(), memoise.end() );
-	cout << *ans << endl;
+	cout << dp( location, memoise, colors, 0 ) << endl;
 }
 
 //----------------------------------------------------------------//
