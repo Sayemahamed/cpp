@@ -18,19 +18,13 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long x, siz;cin >> siz;
-    vector<long long >data( siz + 1, false );
-    for (long long i = 1;i <= siz;i++) {
+    long long x, numbers, divisor;cin >> numbers >> divisor;
+    long long ans = INT64_MAX;
+    while (numbers--) {
         cin >> x;
-        data[ x ] = i;
+        ans = min( ans, divisor * ((x + divisor - 1) / divisor) - x );
     }
-    long long mn = siz, mx = 0;
-    for (long long i = 1;i <= siz;i++) {
-        mx = max( mx, data[ i ] );
-        mn = min( mn, data[ i ] );
-        cout << (i == mx - mn + 1);
-    }
-    cout << endl;
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//
