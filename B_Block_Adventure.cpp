@@ -1,38 +1,50 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main()
-{
-    long long test;
-    cin>>test;
-    while(test--)
+//----------------------------------------------------------------//
+// definitions //
+#define all(x)  x.begin(), x.end()
+#define rall(x)  x.rbegin(), x.rend()
+#define endl '\n'
+//----------------------------------------------------------------//
+// preDefined functions//
+
+//----------------------------------------------------------------//
+//data types//
+
+//----------------------------------------------------------------//
+// helper functions //
+
+
+//----------------------------------------------------------------//
+// solve function//
+void solve() {
+    long long columns, beginning, limit;
+    bool isPossible = true;
+    cin >> columns >> beginning >> limit;
+    vector<long long>data( columns );
+    for (auto& it : data)cin >> it;
+    for (long long i = 0; i < columns; i++)
     {
-        unsigned long long colums,beginging,limit;
-        bool isPossible=true;
-        cin>>colums>>beginging>>limit;
-        vector<unsigned long long>data(colums);
-        for(auto&it:data)cin>>it;
-        for(long long i=0; i<colums; i++)
+        if (i != columns - 1)
         {
-            if(i!=colums-1)
-            {
-                if(data[i]>data[i+1])
-                {
-                    beginging+=data[i]-data[i+1];
-                    data[i]=data[i+1];
-                }
-                if(data[i]==data[i+1])
-                {
-                    beginging +=min(data[i],limit);
-                }
-                if(data[i]<data[i+1])
-                {
-                    if(data[i+1]>data[i]+limit +beginging)isPossible=false;
-                    beginging-=data[i+1];
-                    beginging+=limit+data[i];
-                }
-            }
+            beginning += data[ i ];
+            beginning -= max( data[ i + 1 ] - limit, 0LL );
+            if (beginning < 0)isPossible = false;
         }
-        if(isPossible)cout<<"YES"<<endl;
-        else cout<<"NO"<<endl;
+    }
+    if (isPossible)cout << "YES" << endl;
+    else cout << "NO" << endl;
+}
+
+//----------------------------------------------------------------//
+// main function//
+int main() {
+    ios_base::sync_with_stdio( false );
+    cin.tie( NULL );
+    cout.tie( NULL );
+    long long test = 1;
+    cin >> test;
+    while (test--) {
+        solve();
     }
 }
