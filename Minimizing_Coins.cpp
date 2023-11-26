@@ -33,7 +33,7 @@ void solve() {
     ans[ 0 ] = 0;
     for (auto& coin : coins)cin >> coin;
     long long out = getAns( coins, ans, toGet );
-    cout << (out != INT32_MAX ? out : -1) << endl;
+    cout << (out >= INT32_MAX ? -1 : out) << endl;
 }
 
 //----------------------------------------------------------------//
