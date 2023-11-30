@@ -29,7 +29,7 @@ void print( node* ans, string str ) {
     print( ans->large, str + '1' );
 }
 int main() {
-    string inputString;getline(cin,inputString);
+    string inputString;getline( cin, inputString );
     map<char, long long>frequencyArray;
     multimap<long long, node>dat;
     for (auto& it : inputString)frequencyArray[ it ]++;
