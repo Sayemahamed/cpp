@@ -63,8 +63,10 @@ void solve() {
         }
     }
     vector<node > parent( numberOfNodes + 1 );
-    dijkstra( graph, parent, 1 );
-    for (auto& it : parent)cout << it.connectedNode << " " << it.weight << endl;
+    dijkstra( graph, parent, 5 );
+    for (long long i = 1;i <= numberOfNodes;i++) {
+        cout << "Parent of " << i << " is " << parent[ i ].connectedNode << " distance from starting node is :" << parent[ i ].weight << endl;
+    }
 }
 
 //----------------------------------------------------------------//
