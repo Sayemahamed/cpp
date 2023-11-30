@@ -1,1 +1,1 @@
-{"name":"Local: temp","url":"c:\\Users\\sayem\\source\\cpp\\temp.cpp","tests":[{"id":1701325484290,"input":"","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\cpp\\temp.cpp","group":"local","local":true}
+{"name":"Local: temp","url":"c:\\Users\\sayem\\source\\cpp\\temp.cpp","tests":[{"id":1701325484290,"input":"the more you learn, the more you know","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\sayem\\source\\cpp\\temp.cpp","group":"local","local":true}
