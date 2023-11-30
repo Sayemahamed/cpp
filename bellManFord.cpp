@@ -29,22 +29,14 @@ struct node
 void dijkstra( vector<node>graph[], vector<node>& parent, long long startingNode ) {
     parent[ startingNode ].weight = 0;
     parent[ startingNode ].connectedNode = -1;
-    multimap<long long, node > pq;
-    node first( startingNode, 0 );
-    pq.insert( { 0, first } );
-    while (pq.size()) {
-        for (auto& it : graph[ pq.begin()->second.connectedNode ]) {
-            if (parent[ it.connectedNode ].weight > it.weight + pq.begin()->second.weight) {
-                parent[ it.connectedNode ].weight = it.weight + pq.begin()->second.weight;
-                parent[ it.connectedNode ].connectedNode = pq.begin()->second.connectedNode;
-                pq.insert( { parent[ it.connectedNode ].weight,node( it.connectedNode,parent[ it.connectedNode ].weight ) } );
+    for (long long i = 1;i < parent.size();i++) {
+        for (auto& it : graph[ i ]) {
+            if (parent[ it.connectedNode ].weight > parent[ i ].weight + it.weight) {
+                parent[ it.connectedNode ].weight = parent[ i ].weight + it.weight;
             }
         }
-        pq.erase( pq.begin() );
     }
-    return;
 }
-
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
