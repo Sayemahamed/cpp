@@ -20,7 +20,7 @@ struct node
     }
     node() {
         connectedNode = -1;
-        weight = -1;
+        weight = INT_MAX;
     }
 };
 
@@ -32,7 +32,17 @@ void dijkstra( vector<node>graph[], vector<node>& parent, long long startingNode
     multimap<long long, node > pq;
     node first( startingNode, 0 );
     pq.insert( { 0, first } );
-    return 0;
+    while (pq.size()) {
+        for (auto& it : graph[ pq.begin()->second.connectedNode ]) {
+            if (parent[ it.connectedNode ].weight > it.weight + pq.begin()->second.weight) {
+                parent[ it.connectedNode ].weight = it.weight + pq.begin()->second.weight;
+                parent[ it.connectedNode ].connectedNode = pq.begin()->second.connectedNode;
+                pq.insert( { parent[ it.connectedNode ].weight,node( it.connectedNode,parent[ it.connectedNode ].weight ) } );
+            }
+        }
+        pq.erase( pq.begin() );
+    }
+    return;
 }
 
 //----------------------------------------------------------------//
@@ -53,7 +63,8 @@ void solve() {
         }
     }
     vector<node > parent( numberOfNodes + 1 );
-    dijkstra( graph, parent, numberOfNodes );
+    dijkstra( graph, parent, 1 );
+    for (auto& it : parent)cout << it.connectedNode << " " << it.weight << endl;
 }
 
 //----------------------------------------------------------------//
