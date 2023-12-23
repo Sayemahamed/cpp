@@ -19,17 +19,18 @@ using namespace std;
 // solve function//
 void solve() {
     long long size, x;cin >> size;
+    vector<long long >dat( size );
     bool oneExist = false, zeroExist = false;
     for (long long i = 0;i < size;i++) {
-        cin >> x;
+        cin >> dat[ i ];
     }
     for (long long i = 0;i < size;i++) {
         cin >> x;
-        if(x)oneExist=true;
-        else zeroExist=true;
+        if (x)oneExist = true;
+        else zeroExist = true;
     }
-    if(oneExist and zeroExist)cout<<"Yes"<<endl;
-    else cout<<"No"<<endl;
+    if ((oneExist and zeroExist) or is_sorted( all( dat ) ))cout << "Yes" << endl;
+    else cout << "No" << endl;
 }
 
 //----------------------------------------------------------------//
