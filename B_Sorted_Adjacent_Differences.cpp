@@ -31,7 +31,7 @@ void solve() {
         j--;
     }
     reverse( all( ans ) );
-    for (auto& it : ans)cout << it << ' ';
+    for (auto& it : ans)cout << it << ' ';ok
     cout << endl;
 }
 
