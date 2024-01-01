@@ -18,16 +18,11 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long x, y, z, ans;cin >> x >> y >> ans;
-    for (long long i = 2;i < ans;i++) {
-        z = y - x;
-        x = y;
-        y = z;
-    }
-    if (ans > 2)
-        cout << (z + 1000000007) % 1000000007 << endl;
-    else if (ans == 2)cout << (y + 1000000007) % 1000000007 << endl;
-    else cout << (x + 1000000007) % 1000000007 << endl;
+    long long x, y;cin >> x >> y;
+    long long arr[] = { x - y,x,y,y - x,-x,-y };
+    long long ans;
+    cin >> ans;
+    cout << (arr[ ans % 6 ] % 1000000007 + 1000000007) % 1000000007 << endl;
 }
 
 //----------------------------------------------------------------//
