@@ -28,8 +28,8 @@ void infixToPostFix( vector<string>& postFix, string str ) {
         else postFix.push_back( it );
     }
 }
-double stringToNumber( string str ) {
-    double ans = 0;
+long long stringToNumber( string str ) {
+    long long ans = 0;
     for (auto it : str) {
         if (it >= '0' and it <= '9')
             ans = ans * 10 + it - '0';
@@ -40,12 +40,15 @@ double stringToNumber( string str ) {
 }
 string numberToString( long long num ) {
     string ans = "";
-    if (num < 0)ans = "-";
+    bool min = false;
+    if (num < 0)min = true;
+    num = abs( num );
     while (num) {
         ans += (num % 10) + '0';
         num /= 10;
     }
     reverse( ans.begin(), ans.end() );
+    if (min)return "-" + ans;
     return ans;
 }
 int main() {
