@@ -13,18 +13,39 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-inline int isPossible( string str, long long distance, long long curLocation ) {
-    for (long long i = curLocation;i <= distance + curLocation and i < str.length();i++)
-        if (str[ i ] == '1')return i+1;
-    return curLocation + distance +1;
-}
+
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long size, distance;cin >> size >> distance;
+    long long size, ans = 0, distance;cin >> size >> distance;
     string str;cin >> str;
-    long long ans = 0;
+    if (str.length() == 1 and str[ 0 ] == '0') {
+        cout << 1 << endl;
+        return;
+    }
+    if (distance == 0) {
+        for (auto& it : str)if (it == '0')ans++;
+        cout << ans << endl;
+        return;
+    }
+    for (long long i = 0;i < size;) {
+        if (str[ i ] == '1')
+            i += distance + 1;
+        else {
+            long long  j = i + 1;
+            while (j < str.length() and j <= i + distance + 1) {
+                if (str[ j ] == '1') {
+                    i = j + 1;
+                    continue;
+                }
+                j++;
+            }
+            ans++;
+            i = j;
+        }
+    }
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//
