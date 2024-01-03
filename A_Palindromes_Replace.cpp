@@ -13,13 +13,18 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-
+bool isPalindrome( string str ) {
+    for (long long i = 0;i <= str.length() / 2;i++) {
+        if (str[ i ] != str[ str.length() - 1 - i ])return false;
+    }
+    return true;
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
     string str;cin >> str;
-    for (long long i = 0;i <= str.length() / 2;i++) {
+    for (long long i = 0;i <= (str.length() / 2) + 1;i++) {
         if (str[ i ] == '?' and str[ str.length() - 1 - i ] == '?') {
             str[ i ] = 'a';str[ str.length() - 1 - i ] = 'a';
         }
@@ -28,7 +33,9 @@ void solve() {
             else str[ str.length() - 1 - i ] = str[ i ];
         }
     }
-    cout << str << endl;
+    if (isPalindrome( str ))
+        cout << str << endl;
+    else cout << -1 << endl;
 }
 
 //----------------------------------------------------------------//
