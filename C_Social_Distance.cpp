@@ -10,39 +10,42 @@ using namespace std;
 
 //----------------------------------------------------------------//
 //data types//
+struct report
+{
+    bool possible;
+    long long location;
+    report( bool possible, long long location ) {
+        this->possible = possible;
+        this->location = location;
+    }
+};
 
 //----------------------------------------------------------------//
 // helper functions //
-
+report isPossible( string str, long long distance, long long location ) {
+    for (long long i = location; i < str.length() and i <= location + distance; i++) {
+        if (str[ i ] == '1')return report( false, i );
+    }
+    return report( true, location + distance + 1 );
+}
 
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long size, ans = 0, distance;cin >> size >> distance;
+    long long size, distance;cin >> size >> distance;
     string str;cin >> str;
-    if (str.length() == 1 and str[ 0 ] == '0') {
-        cout << 1 << endl;
-        return;
-    }
-    if (distance == 0) {
-        for (auto& it : str)if (it == '0')ans++;
-        cout << ans << endl;
-        return;
-    }
-    for (long long i = 0;i < size;) {
-        if (str[ i ] == '1')
-            i += distance + 1;
+    long long ans = 0;
+    for (long long i = 0; i < size;) {
+        if (str[ i ] == '1')i += distance + 1;
         else {
-            long long  j = i + 1;
-            while (j < str.length() and j <= i + distance + 1) {
-                if (str[ j ] == '1') {
-                    i = j + 1;
-                    continue;
-                }
-                j++;
+            auto data = isPossible( str, distance, i );
+            if (data.possible) {
+                ans++;
+                i = data.location;
             }
-            ans++;
-            i = j;
+            else {
+                i = data.location;
+            }
         }
     }
     cout << ans << endl;
