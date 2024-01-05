@@ -20,14 +20,11 @@ using namespace std;
 void solve() {
     unsigned long long vanilla, chocolate, hasBrain, dontHave;
     cin >> vanilla >> chocolate >> hasBrain >> dontHave;
-    if (vanilla == chocolate and dontHave) {
-        dontHave--;
-        vanilla--;
-    }
-    vanilla -= dontHave / 2;
-    chocolate -= (dontHave + 1) / 2;
-    if (hasBrain + dontHave < vanilla + chocolate)cout << "No" << endl;
-    else cout << "Yes" << endl;
+    bool isPossible = true;
+    if (vanilla + chocolate < hasBrain + dontHave)isPossible = false;
+    if (min( vanilla, chocolate ) < dontHave)isPossible = false;
+    if (isPossible)cout << "Yes" << endl;
+    else cout << "No" << endl;
 }
 
 //----------------------------------------------------------------//
