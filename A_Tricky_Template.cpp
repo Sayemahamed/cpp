@@ -19,14 +19,19 @@ using namespace std;
 // solve function//
 void solve() {
     long long length; cin >> length;
-    string a, b, c;cin >> a >> b >> c;
-    for (long long i = 0;i < length;i++) {
-        if (a[ i ] != b[ i ] && (a[ i ] == c[ i ] || b[ i ] == c[ i ])) {
-            cout << "NO" << endl;
-            return;
+    string a, b, c;
+    cin >> a >> b >> c;
+    bool possible = 0;
+    for (int i = 0; i < length; i++)
+    {
+        if (a[ i ] != c[ i ] && b[ i ] != c[ i ])
+        {
+            possible = 1;
+            break;
         }
     }
-    cout << "YES" << endl;
+    if (possible) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 //----------------------------------------------------------------//
