@@ -18,16 +18,30 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    int n;cin>>n;
-    
+    int n;cin >> n;
+    string str;cin >> str;
+    vector<int>dat( 2 * n, 0 );
+    int cnt = 0;
+    for (int i = 0;i < 2 * n;i++) {
+        if (str[ i ] == '(')cnt++;
+        dat[ i ] = cnt;
+        if (str[ i ] == ')')cnt--;
+    }
+    long long ans = 1;
+    for (int i = 0;i < 2 * n - 1;i++) {
+        if (dat[ i ] < dat[ i + 1 ]) {
+            ans++;
+        }
+    }
+    cout << ans << endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios_base::sync_with_stdio( false );
+    cin.tie( NULL );
+    cout.tie( NULL );
     long long test = 1;
     cin >> test;
     while (test--) {
