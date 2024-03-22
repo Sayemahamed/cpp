@@ -23,19 +23,19 @@ bool isSorted( vector<long long >& data ) {
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long siz, mn = INT64_MAX;cin >> siz;
-    vector<long long>data( siz );
-    for (auto& it : data)cin >> it, mn = min( mn, it );
-    if (siz & 1) {
-        cout << "YES" << endl;
-        return;
+    long long size;cin >> size;
+    vector<long long >data( size );
+    for (auto& it : data)cin >> it;
+    long long temp = 0;
+    for (long long i = 0;i < size - 2;i++) {
+        temp = max( data[ i ] - data[ i + 1 ], (long long)0 );
+        data[ i + 1 ] += temp;
+        data[ i + 2 ] += temp;
     }
-    long long x = data[ 0 ] + 1 - mn;
-    data[ 0 ] -= x;data[ 1 ] -= x;
-    for (long long i = 1;i < siz - 1;i++) {
-        x = data[ i - 1 ] - data[ i ];
-        data[ i ] += x;
-        data[ i + 1 ] += x;
+    for (long long i = size - 1;i > 1;i--) {
+        temp = max( data[ i - 1 ] - data[ i ], (long long)0 );
+        data[ i - 1 ] -= temp;
+        data[ i - 2 ] -= temp;
     }
     if (isSorted( data ))cout << "YES" << endl;
     else cout << "NO" << endl;
