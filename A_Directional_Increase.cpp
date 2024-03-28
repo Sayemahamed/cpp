@@ -13,39 +13,28 @@ using namespace std;
 
 //----------------------------------------------------------------//
 // helper functions //
-long long decrementalCount( vector<long long>& data, long long index ) {
-    long long ans = 0;
-    long long pre = 0, y;
-    index--;
-    for (;index >= 0;index--) {
-        y = pre / data[ index ] + 1;
-        ans += y;
-        pre = data[ index ] * y;
-    }
-    return ans;
-}
-long long incrementalCount( vector<long long>& data, long long index ) {
-    long long ans = 0;
-    long long pre = 0, y;
-    index++;
-    
-    for (;index < data.size();index++) {
-        y = pre / data[ index ] + 1;
-        ans += y;
-        pre = data[ index ] * y;
-    }
-    return ans;
-}
+
+
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
-    long long size, ans = INT64_MAX, x, y, pre = 0;cin >> size;
+    long long size;cin >> size;
     vector<long long>data( size );
     for (auto& it : data)cin >> it;
-    for (long long i = 0;i < size;i++) {
-        ans = min( ans, decrementalCount( data, i ) + incrementalCount( data, i ) );
+    if (all_of( all( data ), []( long long x ) { return x == 0; } )) { cout << "Yes" << endl;return; }
+    long long actualLastIndex = size - 1;
+    while (data[ actualLastIndex ] == 0)actualLastIndex--;
+    long long sum = 0;
+    for (long long i = 0;i < actualLastIndex;i++) {
+        sum += data[ i ];
+        if (sum <= 0) {
+            cout << "No" << endl;
+            return;
+        }
     }
-    cout << ans << endl;
+    if (sum + data[ actualLastIndex ] == 0)
+        cout << "Yes" << endl;
+    else cout << "No" << endl;
 }
 
 //----------------------------------------------------------------//
@@ -55,7 +44,7 @@ int main() {
     cin.tie( NULL );
     cout.tie( NULL );
     long long test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--) {
         solve();
     }
