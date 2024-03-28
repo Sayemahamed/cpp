@@ -15,7 +15,7 @@ using namespace std;
 // helper functions //
 long long decrementalCount( vector<long long>& data, long long index ) {
     long long ans = 0;
-    int pre = 0, y;
+    long long pre = 0, y;
     index--;
     for (;index >= 0;index--) {
         y = pre / data[ index ] + 1;
@@ -26,7 +26,7 @@ long long decrementalCount( vector<long long>& data, long long index ) {
 }
 long long incrementalCount( vector<long long>& data, long long index ) {
     long long ans = 0;
-    int pre = 0, y;
+    long long pre = 0, y;
     index++;
     for (;index < data.size();index++) {
         y = pre / data[ index ] + 1;
