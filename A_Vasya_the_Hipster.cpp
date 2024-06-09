@@ -18,16 +18,19 @@ using namespace std;
 //----------------------------------------------------------------//
 // solve function//
 void solve() {
+    long long x, y;cin >> x >> y;
+    cout << min( x, y ) << ' ';
+    cout << (x + y - 2*min( x, y )) / 2 << endl;
 }
 
 //----------------------------------------------------------------//
 // main function//
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios_base::sync_with_stdio( false );
+    cin.tie( NULL );
+    cout.tie( NULL );
     int test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--) {
         solve();
     }
