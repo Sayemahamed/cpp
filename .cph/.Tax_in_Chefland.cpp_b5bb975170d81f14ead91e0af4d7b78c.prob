@@ -1,0 +1,1 @@
+{"name":"Local: Tax_in_Chefland","url":"/home/sayem/source/cpp/Tax_in_Chefland.cpp","tests":[{"id":1717948241846,"input":"5\n100\n110\n90\n105\n110","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/sayem/source/cpp/Tax_in_Chefland.cpp","group":"local","local":true}

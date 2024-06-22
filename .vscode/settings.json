@@ -92,8 +92,8 @@
     "valarray": "cpp",
     "variant": "cpp"
   },
-  "C_Cpp.errorSquiggles": "disabled",
-  "cph.general.onceMaintainerMessage": false,
+  "C_Cpp.errorSquiggles": "enabled",
+  "cph.general.onceMaintainerMessage": "true",
   "editor.fontFamily": "'Hack Nerd Font Mono'",
   "terminal.integrated.fontFamily": "'Hack Nerd Font Mono'"
 }
