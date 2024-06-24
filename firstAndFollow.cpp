@@ -4,7 +4,9 @@ void getFirst( map<char, vector<string>>& rules, map<char, string>& first, char 
     if (first.find( left ) != first.end())return;
     first[ left ] = "";
     for (auto& it : rules[ left ]) {
-        if (islower( it[ 0 ] ) or it[ 0 ] == '&')
+        if (islower( it[ 0 ] ) or it[ 0 ] == '&' or it[ 0 ] == '+' or it[ 0 ] == '*' or it[ 0 ] == '-'
+            or it[ 0 ] == '(' or it[ 0 ] == ')' or it[ 0 ] == '/'
+            )
             first[ left ] += it[ 0 ];
         else {
             getFirst( rules, first, it[ 0 ] );
@@ -23,11 +25,12 @@ void getFirst( map<char, vector<string>>& rules, map<char, string>& first, char 
     first[ left ].erase( unique( first[ left ].begin(), first[ left ].end() ), first[ left ].end() );
 }
 void getFollow( map<char, vector<string>>& rules, map<char, string>& first, map<char, string>& follow ) {
-    follow[ 'S' ] = "$";
+    follow[ 'E' ] = "$";
     for (auto& it : rules) {
         for (auto& it2 : it.second) {
             for (int i = it2.length() - 1;i > 0;i--) {
-                if (islower( it2[ i ] ) and isupper( it2[ i - 1 ] )) {
+                if ((it2[ 0 ] == '+' or it2[ 0 ] == '*' or it2[ 0 ] == '-'
+                    or it2[ 0 ] == '(' or it2[ 0 ] == ')' or it2[ 0 ] == '/' or islower( it2[ i ] )) and isupper( it2[ i - 1 ] )) {
                     follow[ it2[ i - 1 ] ] += it2[ i ];
                 }
                 else if (isupper( it2[ i ] ) and isupper( it2[ i - 1 ] )) {
@@ -48,7 +51,8 @@ void getFollow( map<char, vector<string>>& rules, map<char, string>& first, map<
     for (auto& it : rules) {
         for (auto& it2 : it.second) {
             for (int i = it2.length() - 1;i > 0;i--) {
-                if (islower( it2[ i ] ) and isupper( it2[ i - 1 ] )) {
+                if ((it2[ 0 ] == '+' or it2[ 0 ] == '*' or it2[ 0 ] == '-'
+                    or it2[ 0 ] == '(' or it2[ 0 ] == ')' or it2[ 0 ] == '/' or islower( it2[ i ] )) and isupper( it2[ i - 1 ] )) {
                     follow[ it2[ i - 1 ] ] += it2[ i ];
                 }
                 else if (isupper( it2[ i ] ) and isupper( it2[ i - 1 ] )) {
@@ -111,7 +115,7 @@ test case 2
 6
 S=Bb
 S=Cd
-B=ab
+B=aB
 B=b
 C=cC
 C=c
